@@ -1,9 +1,14 @@
 # Meeting Minutes
 
 **Date:** [Date of the meeting]
+
 **Time:** [Start Time] - [End Time]
+
 **Location:** [Location, if applicable]
+
 **Attendees:** [List of attendees]
+
+**Absent:** [List of absences]
 
 ## Agenda Items:
 
@@ -12,6 +17,10 @@
 3. [Agenda item 3]
    - Sub-item
    - Sub-item
+
+## Previously Unresolved:
+- [Point 1]
+- [Point 2]
 
 ## Discussion Points:
 
@@ -30,6 +39,10 @@
 - [Summary of discussion point 1]
   - Sub-point details
 - [Summary of discussion point 2]
+
+## For Future Discussion:
+- [Discussion item 1]
+- [Discussion item 2]
 
 ## Action Items:
 
