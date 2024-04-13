@@ -13,14 +13,13 @@
 ## Agenda Items:
 
 1. Meetings Structure
-2. General Team Expectations
-3. Team Roles
-   - Members' backgrounds/experience
-   - Finalizing roles (open to change)
-4. GitHub Organization and Repository
+2. Team Expectations (Team Contract)
+   - Team Roles
+     - Members' backgrounds/experience
+3. GitHub Organization and Repository
    - Familiarity with Git/GitHub
    - Guidelines for collaborative development
-5. Team Branding
+4. Team Branding
    - Team Name
    - Values
    - Visual Elements
@@ -37,7 +36,8 @@
 - Identify and assign actions items, future discussion items
 - Open discussion
 
-### General Team Expectations
+### General Team Expectations (Team Contract)
+
 - Communication
   - Regularly check communication on Slack for updates and respond promptly
   - Communicate openly, respectfully, and transparently with team members
@@ -74,8 +74,17 @@
 
 ### GitHub Organization & Repository
 - [Repository Link](https://github.com/cse110-sp24-group33/cse110-sp24-group33)
-- Usernames:
-- Previous Experience:
+- Usernames
+  - Kailey: @kaileywong
+  - Ryan:
+  - Anna:
+  - Piao:
+  - Johnny:
+  - Kabir:
+  - Jackson:
+  - Hartej:
+  - Siddharth:
+- Previous Experience
 - Guidelines
   - Working on separate branches
   - Keeping the repository organized
@@ -89,22 +98,14 @@
 - Team Video
 
 ## Action Items:
-
-- [Responsible Person]: [Task]
-- [Responsible Person]: [Task]
-- [Responsible Person]: [Task]
+- 
 
 ## Decisions Made:
+- 
 
-- [Decision 1]
-- [Decision 2]
-- [Decision 3]
+## For Future Discussion:
 
-## Next Steps:
-
-- [Next steps or follow-up actions]
+- 
 
 ## Notes:
-
-- [Any additional notes or comments]
 

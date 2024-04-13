@@ -40,10 +40,6 @@
   - Sub-point details
 - [Summary of discussion point 2]
 
-## For Future Discussion:
-- [Discussion item 1]
-- [Discussion item 2]
-
 ## Action Items:
 
 - [Responsible Person]: [Task]
@@ -56,9 +52,10 @@
 - [Decision 2]
 - [Decision 3]
 
-## Next Steps:
+## For Future Discussion:
 
-- [Next steps or follow-up actions]
+- [Discussion item 1]
+- [Discussion item 2]
 
 ## Notes:
 
