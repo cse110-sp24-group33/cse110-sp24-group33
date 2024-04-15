@@ -2,7 +2,7 @@
 
 **Date:** April 14, 2024
 
-**Time:** 5-6 PM
+**Time:** 5-6:30 PM
 
 **Location:** CSE Basement
 
@@ -84,7 +84,7 @@
   - Jackson: @JacksonYangUCSD
   - Hartej: @hartejsin
   - Sid: @SiddharthMundra
-- Previous Experience
+- Previous Experience: not much, mostly 15L
 - Guidelines
   - Working on separate branches
   - Keeping the repository organized
@@ -98,14 +98,9 @@
 - Team Video
 
 ## Action Items:
-- 
-
-## Decisions Made:
-- 
-
-## For Future Discussion:
-
-- 
+- Sid will edit and upload the team video
+- Everyone will fill out their bio for the team page
+- We will upload branding materials (logo, color scheme, fonts, etc.)
 
 ## Notes:
-
+None
