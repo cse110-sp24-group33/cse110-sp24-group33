@@ -29,14 +29,14 @@ This contract outlines the expectations, responsibilities, and commitments of ou
 
 ### Roles and Responsibilities
 - **Kailey Wong**: Lead
-- Ryandeep Shelopal
-- Anna Lee
-- Piao Xie
-- Jianing (Johnny) Yue
-- Kabir Shergill
-- Jackson Yang
-- Hartej Singh
-- Siddharth Mundra
+- **Ryandeep Shelopal**: Developer
+- **Anna Lee**: Developer
+- **Piao Xie**: Developer
+- **Jianing (Johnny) Yue**: Developer
+- **Kabir Shergill**: Designer
+- **Jackson Yang**: Developer
+- **Hartej Singh**: Developer
+- **Siddharth Mundra**: Planner
 
 
 ### Accountability

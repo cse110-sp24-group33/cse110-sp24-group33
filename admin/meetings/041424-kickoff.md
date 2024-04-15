@@ -6,9 +6,9 @@
 
 **Location:** CSE Basement
 
-**Attendees:** [List of attendees]
+**Attendees:** Kailey, Anna, Johnny, Sid, Kabir, Hartej, Piao, Ryan, Jackson
 
-**Absent:** [List of absences]
+**Absent:** None
 
 ## Agenda Items:
 
@@ -62,28 +62,28 @@
   - Focus on finding mutually acceptable solutions that prioritize the team's goals
 
 ### Team Roles
-- Designer?
-- Developer, Ryandeep Shelopal
-- Developer, Anna Lee
-- Developer, Piao Xie
-- Developer, Jianing Yue
-- Developer, Kabir Shergill
-- Developer, Jackson Yang
-- Developer, Hartej Singh
-- Planner, Siddharth Mundra
+- **Kailey Wong**: Lead
+- **Ryandeep Shelopal**: Developer
+- **Anna Lee**: Developer
+- **Piao Xie**: Developer
+- **Jianing (Johnny) Yue**: Developer
+- **Kabir Shergill**: Designer
+- **Jackson Yang**: Developer
+- **Hartej Singh**: Developer
+- **Siddharth Mundra**: Planner
 
 ### GitHub Organization & Repository
 - [Repository Link](https://github.com/cse110-sp24-group33/cse110-sp24-group33)
 - Usernames
   - Kailey: @kaileywong
-  - Ryan:
-  - Anna:
+  - Ryan: @rdshelopal
+  - Anna: @annamlee
   - Piao: @PiaoX
-  - Johnny:
-  - Kabir:
-  - Jackson:
-  - Hartej:
-  - Siddharth:
+  - Johnny: @JianingYUE
+  - Kabir: @fighterkabir
+  - Jackson: @JacksonYangUCSD
+  - Hartej: @hartejsin
+  - Sid: @SiddharthMundra
 - Previous Experience
 - Guidelines
   - Working on separate branches
