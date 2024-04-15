@@ -70,4 +70,3 @@ Any changes to this contract must be agreed upon by all team members and documen
 - *I understand that if I do not abide by these terms and conditions, I will suffer the consequences as stated in this contract.*
 
 **Agreed and Accepted by:**
-Jackson Yang
