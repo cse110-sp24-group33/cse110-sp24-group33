@@ -90,17 +90,12 @@
   - Keeping the repository organized
 
 ### Team Branding
-- Team Name: Digital Dr3am T3am
+- Team Name
 - Team Values
-  - Collaboration, Quality, Adaptability, Learning, Respect, etc.
-  - see team page
+  - Ideas: Collaboration, Quality, Adaptability, Learning, Respect, etc.
 - Visual Elements
-  - Sunset vibes
-  - Palm trees, waves, etc.
 - Team Wiki
-  - In progress on Google Doc
 - Team Video
-  - filmed!
 
 ## Action Items:
 - Sid will edit and upload the team video
