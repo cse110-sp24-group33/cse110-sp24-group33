@@ -11,7 +11,7 @@ This contract outlines the expectations, responsibilities, and commitments of ou
 - Anna Lee
 - Piao Xie
 - Jianing (Johnny) Yue
-- Kabir Shergill
+- Kabir Shergill 
 - Jackson Yang
 - Hartej Singh
 - Siddharth Mundra
