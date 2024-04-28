@@ -1,4 +1,4 @@
-# Retrospective
+# Warmup Retrospective
 **Date**: April 27, 2024  
 **Time**: 3:00-3:30 PM  
 **Location**: Zoom  
@@ -6,12 +6,16 @@
 **Absent**: Johnny  
 
 ## Agenda
+1. **Introduction** (meeting purpose)
+2. **Team Reflections**
+    
+## Discussion Points
+
 ### Introduction
-- **Meeting Purpose**: Assess our work as a team over the warmup period.
-  - What went well
-  - Opportunities for improvement
+- Meeting purpose: ssess our work as a team over the warmup period: what went well, opportunities for improvement
 
 ### Team Reflections
+
 #### What Went Well
 - Everyone did a good job taking on responsibility.
 - Great job with well-organized CSS (team effort).
@@ -26,4 +30,6 @@
 - Start planning earlier so development doesn’t feel as rushed.
 - Getting more feedback on how the team feels about the project to make decisions.
 - Incorporating everyone into planning and ideation.
+
+## Notes
 - Using AI/LLMs requires good prompting and understanding of why it works and if it’s good quality.
