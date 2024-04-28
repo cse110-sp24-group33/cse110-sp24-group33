@@ -12,7 +12,7 @@
 ## Discussion Points
 
 ### Introduction
-- Meeting purpose: ssess our work as a team over the warmup period: what went well, opportunities for improvement
+- Meeting purpose: assess our work as a team over the warmup period: what went well, opportunities for improvement
 
 ### Team Reflections
 
