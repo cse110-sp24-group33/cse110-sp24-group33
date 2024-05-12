@@ -11,6 +11,9 @@ jobs:
   eslint:
     name: Run eslint scanning
     runs-on: ubuntu-latest
+    defaults:
+      run:
+          working-directory: source
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
