@@ -15,12 +15,10 @@ Describe the context and problem statement using 2-3 sentences/questions
 
 Chosen option and brief explanation
 
-## Decision Outcome
-
-Chosen option: "Plain JUnit5", because comes out best (see below).
-
-### Positive Consquences
+### Positive Consequences
+- consequence 1
+- consequence 2
 
 ### Negative Consequences
-
-
+- consequence 1
+- consequence 2
