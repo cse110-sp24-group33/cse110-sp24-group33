@@ -9,6 +9,9 @@ jobs:
   test:
     name: Jest
     runs-on: ubuntu-latest
+    defaults:
+      run:
+          working-directory: source
     steps:
       - uses: actions/checkout@v4
       - name: Install Dependencies
