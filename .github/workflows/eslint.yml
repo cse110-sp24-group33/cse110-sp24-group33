@@ -1,0 +1,23 @@
+name: ESLint
+
+# On pushes with changes to JS files
+on:
+    push:
+        paths:
+            - '.github/workflows/eslint.yml'
+            - 'source/**.js'
+
+jobs:
+  eslint:
+    name: Run eslint scanning
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+          working-directory: source
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: npm install
+      - name: Run ESLint
+        run: npm run lint
