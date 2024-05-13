@@ -22,11 +22,11 @@ Unit tests are automatically run as part of the build process. Tests are defined
 
 Every pull request requires at least one code review from a project team member not involved in writing the original code. Alongside code review, documentation is also planned to be reviewed to ensure clarity and completeness
 
-### E2E Testing (Ryandeep)
+### E2E Testing 
 
 End to end testing ensures proper integration and functionality of all components used to build the web app. Therefore as part of the pipeline, we plan to use tools such as Cypress to simulate the app and write tests that represent realistic user interactions. Tests may simulate clicking specific UI elements, inputting data such as projects, and validating the accuracy of calculations, storage, and display processes. This will ensure an error-free experience for the end-user.
 
-### Documentation (Piao)
+### Documentation 
 
 Appropriate documentation ensures that everyone involved in the project, right from developers (to understand how the system works) to the end user (a manual/guide as to how to use the program) are guided well. For developers, it will be easier to modify/change the functionality if needed. It will also increase development speed as if a change is needed, the developer does not have to try and figure out what the code does; he can simply just read the documentation and proceed. Well-documented code also significantly speeds up the onboarding process for new team members. For end users, it will improve the overall experience as after reading the guide, they can use the program up to its full potential.
 
