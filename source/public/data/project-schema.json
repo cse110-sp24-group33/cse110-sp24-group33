@@ -1,0 +1,18 @@
+{
+    "type": "object",
+    "properties": {
+        "project_name": {
+            "type": "string",
+            "description": "Name of the project"
+        },
+        "deadline": {
+            "type": "string",
+            "format": "date",
+            "description": "Deadline of the project"
+        },
+        "priority_tag": {
+            "type": "string",
+            "description": "Priority tag of the project (e.g., high, medium, low)"
+        }
+    }
+}

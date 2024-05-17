@@ -1,0 +1,28 @@
+{
+    "journalEntries": [
+        {
+            "date": "2024-05-17",
+            "text_entry": "Today was a productive day.",
+            "tasks": [
+                {
+                    "name": "Complete frontend documentation",
+                    "type_tag": "documentation",
+                    "project_tag": "Project X"
+                },
+                {
+                    "name": "Finish feature A",
+                    "type_tag": "programming",
+                    "project_tag": "Project X"
+                }
+            ],
+            "sentiment": "happy"
+        }
+    ],
+    "projects": [
+        {
+            "project_name": "Project X",
+            "deadline": "2024-06-30",
+            "priority": "high"
+        }
+    ]
+}
