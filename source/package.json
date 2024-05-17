@@ -1,13 +1,11 @@
 {
   "devDependencies": {
     "jest": "^29.7.0",
-    "eslint": "^9.2.0",
-    "jsdocs": "1.0.0"
+    "eslint": "^9.2.0"
   },
   "scripts": {
     "test": "jest",
-    "lint": "eslint --fix public/**/*.js",
-    "doc": "jsdoc public -r -d docs"
+    "lint": "eslint --fix public/**/*.js"
   },
   "type": "module",
   "jest": {
