@@ -36,6 +36,10 @@
                 "project_tag": {
                     "type": "string",
                     "description": "Project tag of the task (e.g., project name)"
+                },
+                "completed": {
+                    "type": "boolean",
+                    "description": "Tracks if task has been completed (New tasks are not completed by default)"
                 }
             }
         }
