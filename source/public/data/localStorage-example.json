@@ -1,7 +1,7 @@
 {
-    "journalEntries": [
+    "entry-20240517": [
         {
-            "date": "2024-05-17",
+            "date": "20240517",
             "text_entry": "Today was a productive day.",
             "tasks": [
                 {
@@ -21,7 +21,7 @@
     "projects": [
         {
             "project_name": "Project X",
-            "deadline": "2024-06-30",
+            "deadline": "20240630",
             "priority": "high"
         }
     ]
