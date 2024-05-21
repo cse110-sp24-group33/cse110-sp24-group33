@@ -115,14 +115,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     dateDisplay.textContent = newDateString;
     entryDate = formatDateToYYYYMMDD(newDateString);
-    checkDisableNextDay();
+    updateNextDayBtn();
     displayTasks();
   }
 
   // Function to disable the "Next Day" button if the displayed date is the current day
-  function checkDisableNextDay() {
+  function updateNextDayBtn() {
     if (dateDisplay.textContent === getCurrentDate()) {
       nextDayBtn.disabled = true;
+    } else {
+      nextDayBtn.disabled = false;
     }
   }
 
@@ -203,7 +205,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Default display to the current date and check if next day should be disabled
   dateDisplay.textContent = getCurrentDate();
   entryDate = formatDateToYYYYMMDD(getCurrentDate());
-  checkDisableNextDay();
+  updateNextDayBtn();
 
   // Initial display of tasks when the page loads
   displayTasks();
