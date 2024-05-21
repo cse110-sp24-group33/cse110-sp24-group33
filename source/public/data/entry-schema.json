@@ -3,9 +3,8 @@
     "properties": {
         "date": {
             "type": "string",
-            "format": "date",
-            "description": "Date of the journal entry"
-        },
+            "description": "Date in the format YYYYMMDD"
+          },
         "text_entry": {
             "type": "string",
             "description": "Text content of the journal entry"
