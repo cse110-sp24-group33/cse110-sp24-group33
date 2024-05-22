@@ -1,6 +1,8 @@
+// main.journal.js
+
 import { getCurrentDate, formatDateToYYYYMMDD } from './date.util.js';
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
   // Initialize markdown editor
   const entryTxt = new SimpleMDE(
@@ -30,17 +32,17 @@ document.addEventListener("DOMContentLoaded", function () {
   let entryDate = null;
 
   // Event listeners for the previous and next day buttons
-  prevDayBtn.addEventListener("click", function () {
+  prevDayBtn.addEventListener("click", () => {
     changeDate(-1);
   });
 
-  nextDayBtn.addEventListener("click", function () {
+  nextDayBtn.addEventListener("click", () => {
     changeDate(1);
   });
 
   // Detect changes to text editor and update localStorage
-  entryTxt.codemirror.on("change", function () {
-    let text = entryTxt.value();
+  entryTxt.codemirror.on("change", () => {
+    const text = entryTxt.value();
     const entry = JSON.parse(localStorage.getItem(`entry-${entryDate}`)) || { date: entryDate, text_entry: "", tasks: [], sentiment: "" };
     entry.text_entry = text;
     localStorage.setItem(`entry-${entryDate}`, JSON.stringify(entry));
@@ -48,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Clear entry data on button click and confirmation
   clearBtn.addEventListener("click", () => {
-    let clear = confirm("Are you sure you want to clear this entry? This action will delete all data for this date.");
+    const clear = confirm("Are you sure you want to clear this entry? This action will delete all data for this date.");
     if (clear) {
       const entry = { date: entryDate, text_entry: "", tasks: [], sentiment: "" };
       localStorage.setItem(`entry-${entryDate}`, JSON.stringify(entry));
@@ -60,21 +62,21 @@ document.addEventListener("DOMContentLoaded", function () {
   let editingIndex = -1;
 
   // Show the modal when the "New Task" button is clicked
-  newTaskBtn.onclick = function () {
+  newTaskBtn.onclick = () => {
     editingIndex = -1; // Reset editing index when adding a new task
     taskModal.style.display = "block"; // Show the modal
     clearModalFields(); // Clear any existing data in the modal fields
   }
 
   // Hide the modal if the user clicks outside of it
-  window.onclick = function (event) {
+  window.onclick = (event) => {
     if (event.target === taskModal) {
       taskModal.style.display = "none";
     }
   }
 
   // Save the task when the "Save" button is clicked
-  saveTaskBtn.onclick = function () {
+  saveTaskBtn.onclick = () => {
     // Get task details from modal input fields
     const taskDesc = document.getElementById("task-desc").value;
     const taskType = document.getElementById("task-type").value;
@@ -115,12 +117,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Hide the modal when the "Cancel" button is clicked
-  cancelTaskBtn.onclick = function () {
+  cancelTaskBtn.onclick = () => {
     taskModal.style.display = "none";
   }
 
   // Delete the current task when the "Delete" button in the modal is clicked
-  deleteTaskBtn.onclick = function () {
+  deleteTaskBtn.onclick = () => {
     const entry = JSON.parse(localStorage.getItem(`entry-${entryDate}`)) || { date: entryDate, text_entry: "", tasks: [], sentiment: "" };
     const tasks = entry.tasks || [];
     if (editingIndex >= 0) {
@@ -166,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const tasks = entry.tasks || [];
     taskContainer.innerHTML = ""; // Clear the current task display
 
-    tasks.forEach(function (task, index) {
+    tasks.forEach((task, index) => {
       // Create a new task item element
       const taskElement = document.createElement("div");
       taskElement.className = "task-item";
@@ -217,7 +219,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Add event listener to the edit button to edit the task
       editButton.addEventListener('click', function () {
-        editingIndex = parseInt(this.getAttribute('data-index')); // Set editing index to the task's index
+        editingIndex = Number.parseInt(this.getAttribute('data-index')); // Set editing index to the task's index
         const task = tasks[editingIndex]; // Retrieve task details
         document.getElementById("task-desc").value = task.name;
         document.getElementById("task-type").value = task.type_tag;
@@ -234,20 +236,23 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("task-project").value = "project-tag1";
   }
 
+  // Function to display the text for the editor from localStorage
   function displayEntryText() {
     const entry = JSON.parse(localStorage.getItem(`entry-${entryDate}`)) || { date: entryDate, text_entry: "", tasks: [], sentiment: "" };
     entryTxt.value(entry.text_entry);
   }
 
+
+  // Updates page display for next day button, text entries, tasks, projects
   function updateDisplay() {
+    updateNextDayBtn();
     displayEntryText();
     displayTasks();
   }
 
-  // Default display to the current date and check if next day should be disabled
+  // Default display to the current date
   dateDisplay.textContent = getCurrentDate();
   entryDate = formatDateToYYYYMMDD(getCurrentDate());
-  updateNextDayBtn();
 
   // Initial display when the page loads
   updateDisplay();
