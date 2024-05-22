@@ -2,10 +2,19 @@ import { getCurrentDate, formatDateToYYYYMMDD } from './date.util.js';
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  // Select elements from the DOM
-  const entryTxt = document.getElementById("entry-text");
-  const clearBtn = document.getElementById("clear-entry");
+  // Initialize markdown editor
+  const entryTxt = new SimpleMDE(
+    {
+      element: document.getElementById("entry-text"),
+      placeholder: "Write a bit about your day here.",
+      showIcons: ["code"],
+      status: ["lines", "words"]
 
+    }
+  );
+
+  // Select elements from the DOM
+  const clearBtn = document.getElementById("clear-entry");
   const taskModal = document.getElementById("task-modal");
   const newTaskBtn = document.querySelector(".new-task");
   const saveTaskBtn = document.querySelector(".save-task");
@@ -28,15 +37,13 @@ document.addEventListener("DOMContentLoaded", function () {
     changeDate(1);
   });
 
-  // Detect changes to text entry and update localStorage
-  entryTxt.addEventListener("change", () => {
-    let text = entryTxt.value;
+  // Detect changes to text editor and update localStorage
+  entryTxt.codemirror.on("change", function () {
+    let text = entryTxt.value();
     const entry = JSON.parse(localStorage.getItem(`entry-${entryDate}`)) || { date: entryDate, text_entry: "", tasks: [], sentiment: "" };
     entry.text_entry = text;
     localStorage.setItem(`entry-${entryDate}`, JSON.stringify(entry));
-    displayEntryText();
-
-  });
+  })
 
   // Clear entry data on button click and confirmation
   clearBtn.addEventListener("click", () => {
@@ -228,7 +235,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function displayEntryText() {
     const entry = JSON.parse(localStorage.getItem(`entry-${entryDate}`)) || { date: entryDate, text_entry: "", tasks: [], sentiment: "" };
-    entryTxt.value = entry.text_entry;
+    entryTxt.value(entry.text_entry);
   }
 
   function updateDisplay() {
