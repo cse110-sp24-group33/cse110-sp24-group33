@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
       element: document.getElementById("entry-text"),
       placeholder: "Write a bit about your day here.",
       showIcons: ["code"],
+      spellChecker: false,
       status: ["lines", "words"]
 
     }
