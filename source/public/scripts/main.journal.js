@@ -1,7 +1,11 @@
 import { getCurrentDate, formatDateToYYYYMMDD } from './date.util.js';
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Select the modal and various buttons
+
+  // Select elements from the DOM
+  const entryTxt = document.getElementById("entry-text");
+  const clearBtn = document.getElementById("clear-entry");
+
   const taskModal = document.getElementById("task-modal");
   const newTaskBtn = document.querySelector(".new-task");
   const saveTaskBtn = document.querySelector(".save-task");
@@ -22,6 +26,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
   nextDayBtn.addEventListener("click", function () {
     changeDate(1);
+  });
+
+  // Detect changes to text entry and update localStorage
+  entryTxt.addEventListener("change", () => {
+    let text = entryTxt.value;
+    const entry = JSON.parse(localStorage.getItem(`entry-${entryDate}`)) || { date: entryDate, text_entry: "", tasks: [], sentiment: "" };
+    entry.text_entry = text;
+    localStorage.setItem(`entry-${entryDate}`, JSON.stringify(entry));
+    displayEntryText();
+
+  });
+
+  // Clear entry data on button click and confirmation
+  clearBtn.addEventListener("click", () => {
+    let clear = confirm("Are you sure you want to clear this entry? This action will delete all data for this date.");
+    if (clear) {
+      const entry = { date: entryDate, text_entry: "", tasks: [], sentiment: "" };
+      localStorage.setItem(`entry-${entryDate}`, JSON.stringify(entry));
+      updateDisplay();
+    }
   });
 
   // Initialize editingIndex to -1 to indicate no task is being edited
@@ -116,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
     dateDisplay.textContent = newDateString;
     entryDate = formatDateToYYYYMMDD(newDateString);
     updateNextDayBtn();
-    displayTasks();
+    updateDisplay();
   }
 
   // Function to disable the "Next Day" button if the displayed date is the current day
@@ -202,11 +226,21 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("task-project").value = "project-tag1";
   }
 
+  function displayEntryText() {
+    const entry = JSON.parse(localStorage.getItem(`entry-${entryDate}`)) || { date: entryDate, text_entry: "", tasks: [], sentiment: "" };
+    entryTxt.value = entry.text_entry;
+  }
+
+  function updateDisplay() {
+    displayEntryText();
+    displayTasks();
+  }
+
   // Default display to the current date and check if next day should be disabled
   dateDisplay.textContent = getCurrentDate();
   entryDate = formatDateToYYYYMMDD(getCurrentDate());
   updateNextDayBtn();
 
-  // Initial display of tasks when the page loads
-  displayTasks();
+  // Initial display when the page loads
+  updateDisplay();
 });
