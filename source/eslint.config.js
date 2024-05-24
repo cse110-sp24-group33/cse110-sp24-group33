@@ -6,14 +6,14 @@ export default [
     {
         ignores: ["/*.js", "/docs/**/*.js"],
 
-        env: {
-            browser: true,
-            node: true,
-            es6: true,
-        },
-        parserOptions: {
+        languageOptions: {
             ecmaVersion: "latest",
             sourceType: "module",
+            globals: {
+                browser: true,
+                node: true,
+                es6: true,
+            }
         },
 
         rules: {
