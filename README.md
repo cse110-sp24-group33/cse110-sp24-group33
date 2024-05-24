@@ -1,5 +1,5 @@
 # CSE 110 [SP 24]: Digital Dr3am T3am (Team 33)
-
+[![CodeFactor](https://www.codefactor.io/repository/github/cse110-sp24-group33/cse110-sp24-group33/badge)](https://www.codefactor.io/repository/github/cse110-sp24-group33/cse110-sp24-group33)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8eb2e860-d862-45ff-9f48-6e970354c312/deploy-status)](https://app.netlify.com/sites/digitaldr3amt3am-journal/deploys)
 
 ## Summary/Abstract
