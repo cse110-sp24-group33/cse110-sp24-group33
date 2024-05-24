@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const clearBtn = document.getElementById("clear-entry");
   const taskModal = document.getElementById("task-modal");
   const newTaskBtn = document.querySelector(".new-task");
-  const saveTaskBtn = document.querySelector(".save-task");
   const taskForm = document.getElementById("task-form");
   const cancelTaskBtn = document.querySelector(".cancel-task");
   const deleteTaskBtn = document.querySelector(".delete-task");
