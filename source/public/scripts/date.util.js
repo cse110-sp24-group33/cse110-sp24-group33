@@ -1,6 +1,10 @@
 // date.util.js
 
-// Function to get the current date in "Month Day, Year" format
+/**
+ * Gets the current date in the format "Month Day, Year".
+ *
+ * @returns {string} The current date formatted as "Month Day, Year".
+ */
 function getCurrentDate() {
     const today = new Date();
     return today.toLocaleDateString("en-US", {
@@ -10,7 +14,13 @@ function getCurrentDate() {
     });
 }
 
-// Function to format a date string to YYYYMMDD
+
+/**
+ * Formats a date string to "YYYYMMDD".
+ *
+ * @param {string} dateString - The date string to format.
+ * @returns {string} The formatted date string in "YYYYMMDD" format.
+ */
 function formatDateToYYYYMMDD(dateString) {
     const date = new Date(dateString);
     const year = date.getFullYear();
