@@ -1,5 +1,264 @@
-/* Hide the modal by default */
-.modal {
+/* page layout */
+body {
+    font-family: "Work Sans", sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Set body height to full viewport height */
+    display: flex;
+    flex-direction: column; 
+    background-color: #f2f2f2; 
+}
+
+main {
+    flex: 1; /* Allow main content to take remaining height */
+    display: flex; 
+    background-color: #f2f2f2; 
+    padding-top: 60px; 
+    box-sizing: border-box; 
+}
+
+
+/* Date Section */
+#date,
+#home {
+    position: fixed; /* Fix position relative to viewport */
+    top: 20px; /* Adjust top position */
+    display: flex;
+    align-items: center;
+    z-index: 1; /* Ensure the date section is on top */
+    font-size: 11px;
+}
+
+#date {
+  left:20px;
+}
+
+#home {
+  right: 20px;
+}
+
+#date button,
+#home button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#date h2 {
+    margin: 0 15px; /* Add some spacing between buttons and date */
+}
+
+/* Left box (Journal Entry) */
+#entry-text-editor {
+    position: relative;
+    flex: 2; 
+    padding: 10px 20px; 
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 10px 20px 70px 20px;
+    display: flex; 
+    flex-direction: column; 
+}
+
+#entry-text-editor h2{
+  display: none;
+}
+
+#entry-text {
+    width: 100%; 
+    height: 100%; 
+    resize: none; 
+    border: none;
+    border-radius: 5px; 
+}
+
+
+/* Right Box (Tasks and Sentiment Rating) */
+#tasks-sentiment-rating {
+    flex: 1; 
+    padding: 10px 20px; 
+    box-sizing: border-box; 
+    background-color: #fff; 
+    border-radius: 10px; 
+    margin: 10px 20px 70px 20px;
+    display: flex; 
+    flex-direction: column;
+}
+
+
+/* Tasks Section */
+#task-list {
+    margin-bottom: 10px; /* Add some space below the section title */
+}
+
+.new-task {
+    display: block; 
+    margin: 0 auto;
+    width: 100%; 
+    padding: 10px 10px; 
+    font-size: 11px; 
+    border-radius: 5px; 
+    background-color: rgb(240, 100, 121); 
+    border: none;
+}
+
+/* Task container styles */
+#task-container {
+    margin-top: 5px; /* Space above the task container */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Task item styles */
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  background-color: rgb(240, 118, 118);
+  font-size: 10px;
+  padding: 5px;
+  position: relative;
+}
+
+/* Checkbox styles in task items */
+.task-item input[type="checkbox"] {
+  margin-right: 100px; /* Space to the right of the checkbox */
+}
+.task-item input[type="checkbox"]:checked {
+  background-color: gray;
+}
+
+/* Label styles in task items */
+.task-item label {
+  margin: 0; /* Remove default margin */
+
+}
+
+.task-item input[type="text"],
+.task-item input[type="checkbox"],
+.task-item input[type="radio"],
+.task-item select {
+  display: inline-block;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.edit-task {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #080219;
+}
+
+
+
+/* Sentiment Rating Section */
+#meter-section {
+    margin-top: auto; /* Push the section to the bottom */
+    padding-bottom: 15px;
+}
+
+#meter-section h2 {
+    width: 100%; 
+    text-align: center;
+    font-size: 1.8vw;
+    margin-bottom: -5px;
+}
+
+#sentiments-wrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+.face-icon {
+    display: flex;
+    width: 5vw;
+    height: 5vw;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    fill: currentColor;
+    padding-bottom: 4px;
+  }
+
+.face-icon:hover {
+    transform: scale(1.2);
+  }
+
+.label {
+    text-align: center; 
+    font-size: 1vw;
+}
+
+/* Make radio button visually invisible */
+input[name="feeling"] {
+    opacity: 0;
+    height: 0;
+    width: 0;
+  }
+
+/* Set background colors */
+:root {
+    --red: #ff0000;
+    --orange: #ffa500;
+    --green: #008000;
+    --blue: #0000ff;
+    --purple: #800080;
+  }
+
+
+  input[type="radio"][value="upset"]+.face-icon path {
+    fill: var(--red);
+  }
+  
+  /* Unhappy emoji color on form */
+  input[type="radio"][value="unhappy"]+.face-icon path {
+    fill: var(--orange);
+  }
+  
+  /* Neutral emoji color on form */
+  input[type="radio"][value="neutral"]+.face-icon path {
+    fill: var(--green);
+  }
+  
+  /* happy emoji color on form */
+  input[type="radio"][value="happy"]+.face-icon path {
+    fill: var(--blue);
+  }
+  
+  /* Joyful emoji color on form */
+  input[type="radio"][value="joyful"]+.face-icon path {
+    fill: var(--purple);
+  }
+
+  input[type="radio"]:checked+.face-icon {
+    transform: scale(1.2);
+  }
+  
+  input[type="radio"]:checked+.face-icon+#upset-label {
+    color: var(--red);
+  }
+  
+  input[type="radio"]:checked+.face-icon+#unhappy-label {
+    color: var(--orange);
+  }
+  
+  input[type="radio"]:checked+.face-icon+#neutral-label {
+    color: var(--green);
+  }
+  
+  input[type="radio"]:checked+.face-icon+#happy-label {
+    color: var(--blue);
+  }
+  
+  input[type="radio"]:checked+.face-icon+#joyful-label {
+    color: var(--purple);
+  }
+
+  
+  /* Hide the modal by default */
+  .modal {
     display: none; /* Modal is hidden */
     position: fixed; /* Fix position relative to viewport */
     z-index: 1; /* Set stacking order */
@@ -9,6 +268,9 @@
     height: 100%; /* Full height */
     overflow: auto; /* Add scrollbars if needed */
     background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+    font-size: 10px;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Style the modal content */
@@ -17,27 +279,108 @@
     margin: 15% auto; /* Center the modal */
     padding: 20px; /* Inner spacing */
     border: 1px solid #888; /* Border around modal */
+    border-radius: 5px;
     width: 80%; /* 80% width */
 }
 
-/* Task container styles */
-#task-container {
-    margin-top: 10px; /* Space above the task container */
+.input-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
 }
 
-/* Task item styles */
-.task-item {
-    display: flex; /* Flexbox layout */
-    align-items: center; /* Center items vertically */
-    margin-bottom: 5px; /* Space below each task item */
+.input-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  margin-right: 10px;
 }
 
-/* Checkbox styles in task items */
-.task-item input[type="checkbox"] {
-    margin-right: 10px; /* Space to the right of the checkbox */
+.input-group label[for="task-desc"] {
+  width: 100px;
+  order: 0;
 }
 
-/* Label styles in task items */
-.task-item label {
-    margin: 0; /* Remove default margin */
+.input-group #task-desc {
+  width: calc(100% - 110px);
+  order: 1;
+}
+
+.input-group label[for="task-type"],
+.input-group label[for="task-project"] {
+  width: 20%; 
+  order: 2;
+}
+
+
+.input-group #task-type,
+.input-group #task-project {
+  width: 40%; 
+  order: 3;
+  margin-right: 20px;
+}
+
+.input-group input,
+.input-group select {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+
+
+
+
+.save-task,
+.cancel-task,
+.delete-task {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.save-task {
+  background-color: green;
+  color: white;
+}
+
+.cancel-task {
+  background-color: gray;
+  color: white;
+  margin-left: 30px;
+}
+
+.delete-task {
+  background-color: red;
+  color: white;
+  margin-left: auto; 
+}
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+#clear-entry {
+  position: absolute;
+  bottom: -80px; 
+  left: 3px;
+  width: 150px;
+  padding: 10px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px; 
+}
+
+#clear-entry:hover {
+  background-color: rgb(226, 47, 47);
+}
+
+footer {
+    text-align: center;
 }
