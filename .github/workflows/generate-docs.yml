@@ -2,10 +2,8 @@ name: Generate Documentation
 
 on:
     push:
-        branches:
-            - main
         paths:
-            - '.github/workflows/generate-documentation.yml'
+            - '.github/workflows/generate-docs.yml'
             - 'source/**.js'
 
 jobs:
@@ -15,20 +13,17 @@ jobs:
         steps:
             - name: Checkout Code
               uses: actions/checkout@v2
-              with:
-                  token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
+            - name: Install Dependencies
+              run: npm install
+        
             - name: Compile Docs
-              uses: andstor/jsdoc-action@v1
-              with:
-                  source_dir: ./source/public/scripts
-                  output_dir: ./source/docs
-                  template: minami
-                  front_page: ./source/README.md
-                  recurse: true
+              run: npm run doc
 
             - name: Commit and Push
               uses: EndBug/add-and-commit@v7
               with:
-                  default_author: github_actions
-                  message: 'Update JSDoc from Github Actions (Documentation Generation)'
+                default_author: github_actions
+                message: 'Update JSDoc from Github Actions (Documentation Generation)'
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
