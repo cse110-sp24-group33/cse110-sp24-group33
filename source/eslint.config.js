@@ -4,9 +4,9 @@ export default [
     js.configs.recommended,
 
     {
-        "extends": "eslint:recommended",
+        extends: "eslint:recommended",
 
-        "ignorePatterns": ["/*.js", "/docs/**/*.js"],
+        ignorePatterns: ["/*.js", "/docs/**/*.js"],
 
         env: {
             browser: true,
