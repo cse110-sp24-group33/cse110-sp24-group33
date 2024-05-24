@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const taskModal = document.getElementById("task-modal");
   const newTaskBtn = document.querySelector(".new-task");
   const saveTaskBtn = document.querySelector(".save-task");
+  const taskForm = document.getElementById("task-form");
   const cancelTaskBtn = document.querySelector(".cancel-task");
   const deleteTaskBtn = document.querySelector(".delete-task");
   const taskContainer = document.getElementById("task-container");
@@ -76,7 +77,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Save the task when the "Save" button is clicked
-  saveTaskBtn.onclick = () => {
+  taskForm.addEventListener('submit', (event) => {
+    event.preventDefault();
     // Get task details from modal input fields
     const taskDesc = document.getElementById("task-desc").value;
     const taskType = document.getElementById("task-type").value;
@@ -114,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Refresh the displayed tasks and hide the modal
     displayTasks();
     taskModal.style.display = "none";
-  }
+  });
 
   // Hide the modal when the "Cancel" button is clicked
   cancelTaskBtn.onclick = () => {
@@ -232,8 +234,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Function to clear the input fields in the modal
   function clearModalFields() {
     document.getElementById("task-desc").value = "";
-    document.getElementById("task-type").value = "type-tag1";
-    document.getElementById("task-project").value = "project-tag1";
+    document.getElementById("task-type").value = "";
+    document.getElementById("task-project").value = "";
   }
 
   // Function to display the text for the editor from localStorage
@@ -241,7 +243,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const entry = JSON.parse(localStorage.getItem(`entry-${entryDate}`)) || { date: entryDate, text_entry: "", tasks: [], sentiment: "" };
     entryTxt.value(entry.text_entry);
   }
-
 
   // Updates page display for next day button, text entries, tasks, projects
   function updateDisplay() {

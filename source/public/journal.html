@@ -187,27 +187,33 @@
         <!-- Hidden until user adds/edits a task-->
         <section id="task-modal" class="modal">
             <div class="modal-content">
-                <form class="task">
+                <form class="task" id="task-form">
                     <div class="input-group">
                         <label for="task-desc">Task Description</label>
-                        <input type="text" id="task-desc" name="task-desc">
+                        <input type="text" id="task-desc" name="task-desc" required>
                     </div>
                     <div class="input-group">
                         <label for="task-type">Task Type</label>
                         <select name="task-type" id="task-type">
-                            <option value="type-tag1">task type 1</option>
-                            <option value="type-tag2">task type 2</option>
+                            <option value="" disabled selected>Select a task type</option>
+                            <option value="Development">Development</option>
+                            <option value="Documentation">Documentation</option>
+                            <option value="Communication">Communication</option>
+                            <option value="Testing">Testing</option>
+                            <option value="Research">Research</option>
+                            <option value="Debugging">Debugging</option>
                         </select>
                     </div>
                     <div class="input-group">
                         <label for="task-project">Project</label>
                         <select name="task-project" id="task-project">
+                            <option value="" disabled selected>Select a project</option>
                             <option value="project-tag1">project 1</option>
                             <option value="project-tag2">project 2</option>
                         </select>
                     </div>
                     <div class="button-group">
-                        <button class="save-task" type="button">Save</button>
+                        <button class="save-task" type="submit">Save</button>
                         <button class="cancel-task" type="button">Cancel</button>
                         <button class="delete-task" type="button">Delete</button>
                     </div>
