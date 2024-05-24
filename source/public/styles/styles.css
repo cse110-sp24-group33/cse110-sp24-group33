@@ -1,0 +1,43 @@
+/* Hide the modal by default */
+.modal {
+    display: none; /* Modal is hidden */
+    position: fixed; /* Fix position relative to viewport */
+    z-index: 1; /* Set stacking order */
+    left: 0; /* Align to the left */
+    top: 0; /* Align to the top */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Add scrollbars if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+}
+
+/* Style the modal content */
+.modal-content {
+    background-color: #fefefe; /* White background */
+    margin: 15% auto; /* Center the modal */
+    padding: 20px; /* Inner spacing */
+    border: 1px solid #888; /* Border around modal */
+    width: 80%; /* 80% width */
+}
+
+/* Task container styles */
+#task-container {
+    margin-top: 10px; /* Space above the task container */
+}
+
+/* Task item styles */
+.task-item {
+    display: flex; /* Flexbox layout */
+    align-items: center; /* Center items vertically */
+    margin-bottom: 5px; /* Space below each task item */
+}
+
+/* Checkbox styles in task items */
+.task-item input[type="checkbox"] {
+    margin-right: 10px; /* Space to the right of the checkbox */
+}
+
+/* Label styles in task items */
+.task-item label {
+    margin: 0; /* Remove default margin */
+}

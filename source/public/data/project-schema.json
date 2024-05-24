@@ -3,7 +3,7 @@
     "properties": {
         "project_name": {
             "type": "string",
-            "description": "Name of the project"
+            "description": "Date in the format YYYYMMDD"
         },
         "deadline": {
             "type": "string",
