@@ -4,8 +4,6 @@ export default [
     js.configs.recommended,
 
     {
-        extends: "eslint:recommended",
-
         ignorePatterns: ["/*.js", "/docs/**/*.js"],
 
         env: {
