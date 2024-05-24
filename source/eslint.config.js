@@ -4,7 +4,7 @@ export default [
     js.configs.recommended,
 
     {
-        ignorePatterns: ["/*.js", "/docs/**/*.js"],
+        ignores: ["/*.js", "/docs/**/*.js"],
 
         env: {
             browser: true,
