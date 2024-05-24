@@ -16,6 +16,8 @@ jobs:
         steps:
             - name: Checkout Code
               uses: actions/checkout@v2
+              with:
+                  token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
             - name: Install Dependencies
               run: npm install
@@ -24,9 +26,7 @@ jobs:
               run: npm run doc
 
             - name: Commit and Push
-              uses: EndBug/add-and-commit@v7
+              uses: EndBug/add-and-commit@v9
               with:
                 default_author: github_actions
                 message: 'Update JSDoc from Github Actions (Documentation Generation)'
-              env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
