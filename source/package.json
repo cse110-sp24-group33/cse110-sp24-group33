@@ -8,7 +8,7 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint --fix public/**/*.js",
-    "doc": "jsdoc public -r -d public/docs"
+    "doc": "jsdoc public -r -d docs"
   },
   "type": "module",
   "jest": {
