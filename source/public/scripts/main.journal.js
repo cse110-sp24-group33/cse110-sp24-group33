@@ -62,18 +62,18 @@ document.addEventListener("DOMContentLoaded", () => {
   let editingIndex = -1;
 
   // Show the modal when the "New Task" button is clicked
-  newTaskBtn.onclick = () => {
+  newTaskBtn.addEventListener('click', () => {
     editingIndex = -1; // Reset editing index when adding a new task
     taskModal.style.display = "block"; // Show the modal
     clearModalFields(); // Clear any existing data in the modal fields
-  }
+  });
 
   // Hide the modal if the user clicks outside of it
-  window.onclick = (event) => {
+  window.addEventListener('click', (event) => {
     if (event.target === taskModal) {
       taskModal.style.display = "none";
     }
-  }
+  });
 
   // Save the task when the "Save" button is clicked
   taskForm.addEventListener('submit', (event) => {
@@ -118,12 +118,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Hide the modal when the "Cancel" button is clicked
-  cancelTaskBtn.onclick = () => {
+  cancelTaskBtn.addEventListener('click', () => {
     taskModal.style.display = "none";
-  }
+  });
 
   // Delete the current task when the "Delete" button in the modal is clicked
-  deleteTaskBtn.onclick = () => {
+  deleteTaskBtn.addEventListener('click', () => {
     const entry = JSON.parse(localStorage.getItem(`entry-${entryDate}`)) || { date: entryDate, text_entry: "", tasks: [], sentiment: "" };
     const tasks = entry.tasks || [];
     if (editingIndex >= 0) {
@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
       displayTasks();
       taskModal.style.display = "none";
     }
-  }
+  });
 
   // Function to change the date and update tasks
   function changeDate(offset) {
