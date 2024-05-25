@@ -227,7 +227,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 			// Add event listener to the checkbox to update the task's completed status
 			checkbox.addEventListener("change", function () {
-				// Update styling
 				const item = this.closest(".task-item");
 				const description = this.closest(".task-details").querySelector(".task-description");
 				if (this.checked) {
@@ -254,12 +253,23 @@ document.addEventListener("DOMContentLoaded", () => {
 				taskModal.style.display = "block"; // Show the modal for editing
 			});
 
+			// Update styling based on whether task is completed and tags are selected
 			if (checkbox.checked) {
 				taskElement.style.backgroundColor = "lightgray";
 				nameLabel.style.textDecoration = "line-through";
 			} else {
 				taskElement.style.backgroundColor = "var(--task-bg-color)";
 				nameLabel.style.textDecoration = "none";
+			}
+			if (task.type_tag === "") {
+				typeTagLabel.style.display = "none";
+			} else {
+				typeTagLabel.style.display = "";
+			}
+			if (task.project_tag === "") {
+				projTagLabel.style.display = "none";
+			} else {
+				projTagLabel.style.display = "";
 			}
 		});
 	}

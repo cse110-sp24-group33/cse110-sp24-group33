@@ -40,9 +40,9 @@ header {
   font-size: large;
 }
 
- button {
+button {
   cursor: pointer;
- }
+}
 
 /* Date and Home Sections */
 #date,
@@ -64,7 +64,9 @@ header {
   color: black;
 }
 
-#home button a:hover {
+#date button:hover,
+#home button a:hover,
+.edit-task:hover {
   color: #976393;
 }
 
@@ -131,6 +133,10 @@ header {
   border-radius: 5px;
   background-color: #FF9B82;
   border: none;
+}
+
+.new-task:hover {
+  background-color: #fe8567;
 }
 
 /* Task container styles */
