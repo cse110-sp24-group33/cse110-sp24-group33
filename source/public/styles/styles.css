@@ -19,7 +19,6 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  /* Set body height to full viewport height */
   display: flex;
   flex-direction: column;
   background-color: #f2f2f2;
@@ -27,7 +26,6 @@ body {
 
 main {
   flex: 1;
-  /* Allow main content to take remaining height */
   display: flex;
   background-color: #f2f2f2;
   box-sizing: border-box;
@@ -61,7 +59,6 @@ header {
 
 #date h2 {
   margin: 0 15px;
-  /* Add some spacing between buttons and date */
 }
 
 /* Left box (Journal Entry) */
@@ -83,10 +80,15 @@ header {
 
 #entry-text {
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  height: fit-content;
   resize: none;
   border: none;
   border-radius: 5px;
+}
+
+.CodeMirror {
+  height: 100% !important;
 }
 
 
@@ -106,7 +108,6 @@ header {
 /* Tasks Section */
 #task-list {
   margin-bottom: 10px;
-  /* Add some space below the section title */
 }
 
 .new-task {
@@ -114,7 +115,8 @@ header {
   margin: 0 auto;
   width: 100%;
   padding: 10px 10px;
-  font-size: 11px;
+  font-size: medium;
+  font-weight: bold;
   border-radius: 5px;
   background-color: #FF9B82;
   border: none;
@@ -129,11 +131,11 @@ header {
 }
 
 .scrollable {
-  max-height: 300px;
+  max-height: 250px;
   overflow-y: auto;
 }
 
-/* Task item styles */
+/* Task item layout and styling */
 .task-item {
   display: flex;
   justify-content: space-between;
@@ -141,31 +143,46 @@ header {
   border-radius: 5px;
   background-color: var(--task-bg-color);
   font-size: 10px;
-  padding: 5px;
+  padding: 15px 10px;
   margin: 10px 0px;
   position: relative;
 }
 
-/* Checkbox styles in task items */
-.task-item input[type="checkbox"] {
-  margin-right: 100px;
-  /* Space to the right of the checkbox */
+.task-details {
+  display: flex;
 }
 
-/* Label styles in task items */
+.task-details input[type="checkbox"] {
+  margin-right: 20px;
+}
+
+.task-text>label {
+  display: flex;
+  flex-direction: column;
+  font-size: medium;
+}
+
 .task-item label {
-  margin: 0;
-  /* Remove default margin */
-
+  margin-bottom: 5px;
 }
 
-.task-item input[type="text"],
-.task-item input[type="checkbox"],
-.task-item input[type="radio"],
-.task-item select {
-  display: inline-block;
-  font-weight: bold;
+.task-tags {
+  margin-top: 20px;
+}
+
+.task-tags label {
+  border-radius: 50px;
   margin-right: 5px;
+  padding: 5px 10px;
+}
+
+.type-label {
+  background-color: #FEB800;
+}
+
+.project-label {
+  background-color: #976293;
+  color: white;
 }
 
 .edit-task {
@@ -174,7 +191,6 @@ header {
   cursor: pointer;
   color: #080219;
 }
-
 
 
 /* Sentiment Rating Section */
@@ -270,26 +286,16 @@ input[type="radio"]:checked+.face-icon+#joyful-label {
 }
 
 
-/* Hide the modal by default */
+/* Modal styling (hidden by default) */
 .modal {
   display: none;
-  /* Modal is hidden */
   position: fixed;
-  /* Fix position relative to viewport */
   z-index: 1;
-  /* Set stacking order */
   left: 0;
-  /* Align to the left */
   top: 0;
-  /* Align to the top */
   width: 100%;
-  /* Full width */
   height: 100%;
-  /* Full height */
-  overflow: auto;
-  /* Add scrollbars if needed */
   background-color: rgba(0, 0, 0, 0.4);
-  /* Semi-transparent background */
   font-size: 10px;
   align-items: center;
   justify-content: center;
@@ -298,16 +304,12 @@ input[type="radio"]:checked+.face-icon+#joyful-label {
 /* Style the modal content */
 .modal-content {
   background-color: #fefefe;
-  /* White background */
   margin: 15% auto;
-  /* Center the modal */
-  padding: 20px;
-  /* Inner spacing */
+  padding: 50px;
   border: 1px solid #888;
-  /* Border around modal */
-  border-radius: 5px;
-  width: 80%;
-  /* 80% width */
+  border-radius: 10px;
+  width: 30%;
+  font-size: large;
 }
 
 .input-group {
@@ -323,44 +325,32 @@ input[type="radio"]:checked+.face-icon+#joyful-label {
   margin-right: 10px;
 }
 
-.input-group label[for="task-desc"] {
-  width: 100px;
-  order: 0;
-}
-
 .input-group #task-desc {
-  width: calc(100% - 110px);
-  order: 1;
+  width: 100%;
 }
 
-.input-group label[for="task-type"],
-.input-group label[for="task-project"] {
-  width: 20%;
-  order: 2;
+#tag-select {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10%;
 }
 
-
-.input-group #task-type,
-.input-group #task-project {
-  width: 40%;
-  order: 3;
-  margin-right: 20px;
+#tag-select .input-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .input-group input,
 .input-group select {
-  padding: 5px;
+  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 3px;
+  border-radius: 5px;
 }
 
-
-
-
-
-.save-task,
-.cancel-task,
-.delete-task {
+/* Modal button styling */
+.button-group button {
+  margin-top: 40px;
   padding: 10px 20px;
   border: none;
   border-radius: 10px;

@@ -192,19 +192,21 @@
                         <label for="task-desc">Task Description</label>
                         <input type="text" id="task-desc" name="task-desc">
                     </div>
-                    <div class="input-group">
-                        <label for="task-type">Task Type</label>
-                        <select name="task-type" id="task-type">
-                            <option value="type-tag1">task type 1</option>
-                            <option value="type-tag2">task type 2</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label for="task-project">Project</label>
-                        <select name="task-project" id="task-project">
-                            <option value="project-tag1">project 1</option>
-                            <option value="project-tag2">project 2</option>
-                        </select>
+                    <div id="tag-select">
+                        <div class="input-group">
+                            <label for="task-type">Task Type</label>
+                            <select name="task-type" id="task-type">
+                                <option value="type-tag1">task type 1</option>
+                                <option value="type-tag2">task type 2</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="task-project">Project</label>
+                            <select name="task-project" id="task-project">
+                                <option value="project-tag1">project 1</option>
+                                <option value="project-tag2">project 2</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="button-group">
                         <button class="save-task" type="button">Save</button>
@@ -225,6 +227,9 @@
     <script src="https://kit.fontawesome.com/2ac8e23908.js" crossorigin="anonymous"></script>
     <!-- SimpleMDE Script -->
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <!-- JSConfetti Script -->
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+    <!-- Custom JS -->
     <script type="module" src="scripts/date.util.js"></script>
     <script type="module" src="scripts/main.journal.js"></script>
 </body>
