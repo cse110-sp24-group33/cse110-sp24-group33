@@ -40,13 +40,13 @@ document.addEventListener("DOMContentLoaded", () => {
 		changeDate(1);
 	});
 
-  // Detect changes to text editor and update localStorage
-  entryTxt.codemirror.on("change", () => {
-    const text = entryTxt.value();
-    const entry = JSON.parse(localStorage.getItem(`entry-${entryDate}`)) || { date: entryDate, text_entry: "", tasks: [], sentiment: "" };
-    entry.text_entry = text;
-    localStorage.setItem(`entry-${entryDate}`, JSON.stringify(entry));
-  });
+	// Detect changes to text editor and update localStorage
+	entryTxt.codemirror.on("change", () => {
+		const text = entryTxt.value();
+		const entry = JSON.parse(localStorage.getItem(`entry-${entryDate}`)) || { date: entryDate, text_entry: "", tasks: [], sentiment: "" };
+		entry.text_entry = text;
+		localStorage.setItem(`entry-${entryDate}`, JSON.stringify(entry));
+	});
 
 	// Clear entry data on button click and confirmation
 	clearBtn.addEventListener("click", () => {
@@ -61,19 +61,19 @@ document.addEventListener("DOMContentLoaded", () => {
 	// Initialize editingIndex to -1 to indicate no task is being edited
 	let editingIndex = -1;
 
-  // Show the modal when the "New Task" button is clicked
-  newTaskBtn.onclick = () => {
-    editingIndex = -1; // Reset editing index when adding a new task
-    taskModal.style.display = "block"; // Show the modal
-    clearModalFields(); // Clear any existing data in the modal fields
-  };
+	// Show the modal when the "New Task" button is clicked
+	newTaskBtn.onclick = () => {
+		editingIndex = -1; // Reset editing index when adding a new task
+		taskModal.style.display = "block"; // Show the modal
+		clearModalFields(); // Clear any existing data in the modal fields
+	};
 
-  // Hide the modal if the user clicks outside of it
-  window.onclick = (event) => {
-    if (event.target === taskModal) {
-      taskModal.style.display = "none";
-    }
-  };
+	// Hide the modal if the user clicks outside of it
+	window.onclick = (event) => {
+		if (event.target === taskModal) {
+			taskModal.style.display = "none";
+		}
+	};
 
 	// Save the task when the "Save" button is clicked
 	saveTaskBtn.onclick = () => {
@@ -111,32 +111,32 @@ document.addEventListener("DOMContentLoaded", () => {
 		// Save the updated entry to local storage
 		localStorage.setItem(`entry-${entryDate}`, JSON.stringify(entry));
 
-    // Refresh the displayed tasks and hide the modal
-    displayTasks();
-    taskModal.style.display = "none";
-  };
+		// Refresh the displayed tasks and hide the modal
+		displayTasks();
+		taskModal.style.display = "none";
+	};
 
-  // Hide the modal when the "Cancel" button is clicked
-  cancelTaskBtn.onclick = () => {
-    taskModal.style.display = "none";
-  };
+	// Hide the modal when the "Cancel" button is clicked
+	cancelTaskBtn.onclick = () => {
+		taskModal.style.display = "none";
+	};
 
-  // Delete the current task when the "Delete" button in the modal is clicked
-  deleteTaskBtn.onclick = () => {
-    const entry = JSON.parse(localStorage.getItem(`entry-${entryDate}`)) || { date: entryDate, text_entry: "", tasks: [], sentiment: "" };
-    const tasks = entry.tasks || [];
-    if (editingIndex >= 0) {
-      // Remove the task at the editingIndex from the tasks array
-      tasks.splice(editingIndex, 1);
-      // Update the tasks array in the entry
-      entry.tasks = tasks;
-      // Save the updated entry to local storage
-      localStorage.setItem(`entry-${entryDate}`, JSON.stringify(entry));
-      // Refresh the displayed tasks and hide the modal
-      displayTasks();
-      taskModal.style.display = "none";
-    }
-  };
+	// Delete the current task when the "Delete" button in the modal is clicked
+	deleteTaskBtn.onclick = () => {
+		const entry = JSON.parse(localStorage.getItem(`entry-${entryDate}`)) || { date: entryDate, text_entry: "", tasks: [], sentiment: "" };
+		const tasks = entry.tasks || [];
+		if (editingIndex >= 0) {
+			// Remove the task at the editingIndex from the tasks array
+			tasks.splice(editingIndex, 1);
+			// Update the tasks array in the entry
+			entry.tasks = tasks;
+			// Save the updated entry to local storage
+			localStorage.setItem(`entry-${entryDate}`, JSON.stringify(entry));
+			// Refresh the displayed tasks and hide the modal
+			displayTasks();
+			taskModal.style.display = "none";
+		}
+	};
 
 	// Function to change the date and update tasks
 	function changeDate(offset) {
@@ -173,95 +173,95 @@ document.addEventListener("DOMContentLoaded", () => {
 			const taskElement = document.createElement("div");
 			taskElement.className = "task-item";
 
-      // Create a new task details element
-      const taskDetails = document.createElement("div");
-      taskDetails.className = "task-details";
+			// Create a new task details element
+			const taskDetails = document.createElement("div");
+			taskDetails.className = "task-details";
 
-      // Create the checkbox element
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.id = `task-${index}`;
-      checkbox.checked = task.completed;
+			// Create the checkbox element
+			const checkbox = document.createElement("input");
+			checkbox.type = "checkbox";
+			checkbox.id = `task-${index}`;
+			checkbox.checked = task.completed;
 
-      // Create a new task text container element
-      const taskText = document.createElement("div");
-      taskText.className = "task-text";
+			// Create a new task text container element
+			const taskText = document.createElement("div");
+			taskText.className = "task-text";
 
-      // Create a new task tags container element
-      const tagsContainer = document.createElement("div");
-      tagsContainer.className = "task-tags";
+			// Create a new task tags container element
+			const tagsContainer = document.createElement("div");
+			tagsContainer.className = "task-tags";
 
-      // Create the task name label
-      const nameLabel = document.createElement("label");
-      nameLabel.id = `taskDesc-${index}`;
-      nameLabel.textContent = `${task.name}`;
-      nameLabel.className = "task-description";
+			// Create the task name label
+			const nameLabel = document.createElement("label");
+			nameLabel.id = `taskDesc-${index}`;
+			nameLabel.textContent = `${task.name}`;
+			nameLabel.className = "task-description";
 
-      // Create the task type tag label
-      const typeTagLabel = document.createElement("label");
-      typeTagLabel.id = `taskTypeTag-${index}`;
-      typeTagLabel.textContent = `${task.type_tag}`;
-      typeTagLabel.className = "type-label";
+			// Create the task type tag label
+			const typeTagLabel = document.createElement("label");
+			typeTagLabel.id = `taskTypeTag-${index}`;
+			typeTagLabel.textContent = `${task.type_tag}`;
+			typeTagLabel.className = "type-label";
 
-      // Create the task project tag label
-      const projTagLabel = document.createElement("label");
-      projTagLabel.id = `taskProjTag-${index}`;
-      projTagLabel.textContent = `${task.project_tag}`;
-      projTagLabel.className = "project-label";
+			// Create the task project tag label
+			const projTagLabel = document.createElement("label");
+			projTagLabel.id = `taskProjTag-${index}`;
+			projTagLabel.textContent = `${task.project_tag}`;
+			projTagLabel.className = "project-label";
 
-      // Create the edit button
-      const editButton = document.createElement("button");
-      editButton.className = "edit-task";
-      editButton.innerHTML = "<i class=\"fa-solid fa-pencil\"></i>";
-      editButton.setAttribute("data-index", index);
+			// Create the edit button
+			const editButton = document.createElement("button");
+			editButton.className = "edit-task";
+			editButton.innerHTML = "<i class=\"fa-solid fa-pencil\"></i>";
+			editButton.setAttribute("data-index", index);
 
-      // Append the elements to the task item
-      tagsContainer.append(typeTagLabel, projTagLabel);
-      taskText.append(nameLabel, tagsContainer);
-      taskDetails.append(checkbox, taskText);
-      taskElement.append(taskDetails, editButton);
+			// Append the elements to the task item
+			tagsContainer.append(typeTagLabel, projTagLabel);
+			taskText.append(nameLabel, tagsContainer);
+			taskDetails.append(checkbox, taskText);
+			taskElement.append(taskDetails, editButton);
 
 			// Append the task item to the task container
 			taskContainer.appendChild(taskElement);
 
-      // Add event listener to the checkbox to update the task's completed status
-      checkbox.addEventListener("change", function () {
-        // Update styling
-        const item = this.closest(".task-item");
-        const description = this.closest(".task-details").querySelector(".task-description");
-        if (this.checked) {
-          const jsConfetti = new JSConfetti();
-          jsConfetti.addConfetti();
-          item.style.backgroundColor = "lightgray";
-          description.style.textDecoration = "line-through";
-        } else {
-          item.style.backgroundColor = "var(--task-bg-color)";
-          description.style.textDecoration = "none";
-        }
-        tasks[index].completed = this.checked; // Update completed status
-        entry.tasks = tasks; // Update the tasks array in the entry
-        localStorage.setItem(`entry-${entryDate}`, JSON.stringify(entry)); // Save updated entry to local storage
-      });
+			// Add event listener to the checkbox to update the task's completed status
+			checkbox.addEventListener("change", function () {
+				// Update styling
+				const item = this.closest(".task-item");
+				const description = this.closest(".task-details").querySelector(".task-description");
+				if (this.checked) {
+					const jsConfetti = new JSConfetti();
+					jsConfetti.addConfetti();
+					item.style.backgroundColor = "lightgray";
+					description.style.textDecoration = "line-through";
+				} else {
+					item.style.backgroundColor = "var(--task-bg-color)";
+					description.style.textDecoration = "none";
+				}
+				tasks[index].completed = this.checked; // Update completed status
+				entry.tasks = tasks; // Update the tasks array in the entry
+				localStorage.setItem(`entry-${entryDate}`, JSON.stringify(entry)); // Save updated entry to local storage
+			});
 
-      // Add event listener to the edit button to edit the task
-      editButton.addEventListener("click", function () {
-        editingIndex = Number.parseInt(this.getAttribute("data-index")); // Set editing index to the task's index
-        const task = tasks[editingIndex]; // Retrieve task details
-        document.getElementById("task-desc").value = task.name;
-        document.getElementById("task-type").value = task.type_tag;
-        document.getElementById("task-project").value = task.project_tag;
-        taskModal.style.display = "block"; // Show the modal for editing
-      });
+			// Add event listener to the edit button to edit the task
+			editButton.addEventListener("click", function () {
+				editingIndex = Number.parseInt(this.getAttribute("data-index")); // Set editing index to the task's index
+				const task = tasks[editingIndex]; // Retrieve task details
+				document.getElementById("task-desc").value = task.name;
+				document.getElementById("task-type").value = task.type_tag;
+				document.getElementById("task-project").value = task.project_tag;
+				taskModal.style.display = "block"; // Show the modal for editing
+			});
 
-      if (checkbox.checked) {
-        taskElement.style.backgroundColor = "lightgray";
-        nameLabel.style.textDecoration = "line-through";
-      } else {
-        taskElement.style.backgroundColor = "var(--task-bg-color)";
-        nameLabel.style.textDecoration = "none";
-      }
-    });
-  }
+			if (checkbox.checked) {
+				taskElement.style.backgroundColor = "lightgray";
+				nameLabel.style.textDecoration = "line-through";
+			} else {
+				taskElement.style.backgroundColor = "var(--task-bg-color)";
+				nameLabel.style.textDecoration = "none";
+			}
+		});
+	}
 
 	// Function to clear the input fields in the modal
 	function clearModalFields() {
