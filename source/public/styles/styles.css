@@ -52,11 +52,25 @@ button {
   padding: 0px 20px;
 }
 
-#date button,
+.date-nav,
 #home button {
   background: none;
   border: none;
   font-size: larger;
+}
+
+#today {
+  background: fixed;
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 5px;
+  color: black;
+  margin-left: 20px;
+  padding: 10px 20px;
+}
+
+#today:hover {
+  background-color: ghostwhite;
 }
 
 #home button a,
@@ -64,7 +78,7 @@ button {
   color: black;
 }
 
-#date button:hover,
+.date-nav:hover,
 #home button a:hover,
 .edit-task:hover {
   color: #976393;
@@ -202,10 +216,18 @@ button {
   color: white;
 }
 
-.edit-task {
+.edit-task, #task-item-delete {
   background-color: transparent;
   border: none;
-  color: #080219;
+}
+
+#task-item-delete {
+  color: red;
+  margin-left: 5px;
+}
+
+#task-item-delete:hover {
+  color: darkred;
 }
 
 

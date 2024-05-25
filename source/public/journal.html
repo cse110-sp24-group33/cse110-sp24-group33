@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Dr3am T3am - Journal Entry Page</title>
+    <link rel="shortcut icon" href="images/favicon.ico">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles/styles.css">
     <!-- SimpleMDE Styling -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+
+    <title>Journal Entry</title>
 </head>
 
 <body>
@@ -18,12 +20,16 @@
     <header>
         <!-- Date -->
         <section id="date">
-            <button type="button" title="Previous day">
+            <button type="button" id="prev-day" class="date-nav" title="Previous day">
                 <i class="fa-solid fa-chevron-left"></i>
             </button>
             <h2>Loading...</h2>
-            <button type="button" title="Next day">
+            <button type="button" id="next-day" class="date-nav" title="Next day">
                 <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+            <button type="button" id="today" title="Today">
+                Today
             </button>
         </section>
 

@@ -32,9 +32,10 @@ function initEntry() {
 	const cancelTaskBtn = document.querySelector(".cancel-task");
 	const deleteTaskBtn = document.querySelector(".delete-task");
 	const taskContainer = document.getElementById("task-container");
-	const prevDayBtn = document.querySelector("#date button:first-child");
-	const nextDayBtn = document.querySelector("#date button:last-child");
+	const prevDayBtn = document.getElementById("prev-day");
+	const nextDayBtn = document.getElementById("next-day");
 	const dateDisplay = document.querySelector("#date h2");
+	const todayBtn = document.getElementById("today");
 
 	// Event listeners for the previous and next day buttons
 	prevDayBtn.addEventListener("click", () => {
@@ -44,6 +45,10 @@ function initEntry() {
 	nextDayBtn.addEventListener("click", () => {
 		changeDate(1, dateDisplay, nextDayBtn);
 		updateDisplay();
+	});
+
+	todayBtn.addEventListener("click", () => {
+		displayToday();
 	});
 
 	// Detect changes to text editor and update entry
@@ -135,11 +140,13 @@ function initEntry() {
 	});
 
 	// Default display to the current date
-	dateDisplay.textContent = getCurrentDate();
-	entryDate = formatDateToYYYYMMDD(getCurrentDate());
+	displayToday();
 
-	// Initial display when the page loads
-	updateDisplay();
+	function displayToday() {
+		dateDisplay.textContent = getCurrentDate();
+		entryDate = formatDateToYYYYMMDD(getCurrentDate());
+		updateDisplay();
+	}
 
 	/**
    * Updates the page display for "Next Day" button, text entry, tasks, projects
@@ -229,6 +236,10 @@ function displayTasks(taskContainer, taskModal) {
 		projTagLabel.textContent = ` ${task.project_tag}`;
 		projTagLabel.className = "project-label";
 
+		// Create a new task tags container element
+		const btnContainer = document.createElement("div");
+		btnContainer.className = "task-btns";
+
 		// Create the edit button
 		const editButton = document.createElement("button");
 		editButton.className = "edit-task";
@@ -236,11 +247,19 @@ function displayTasks(taskContainer, taskModal) {
 		editButton.setAttribute("data-index", index);
 		editButton.setAttribute("title", "Edit task");
 
+		// Create the delete button
+		const deleteButton = document.createElement("button");
+		deleteButton.id = "task-item-delete";
+		deleteButton.innerHTML = "<i class=\"fa-solid fa-trash\"></i>";
+		deleteButton.setAttribute("data-index", index);
+		deleteButton.setAttribute("title", "Delete task");
+
 		// Append the elements to the task item
 		tagsContainer.append(typeTagLabel, projTagLabel);
 		taskText.append(nameLabel, tagsContainer);
 		taskDetails.append(checkbox, taskText);
-		taskElement.append(taskDetails, editButton);
+		btnContainer.append(editButton, deleteButton);
+		taskElement.append(taskDetails, btnContainer);
 
 		// Append the task item to the task container
 		taskContainer.appendChild(taskElement);
@@ -274,7 +293,14 @@ function displayTasks(taskContainer, taskModal) {
 			document.getElementById("task-project").value = task.project_tag;
 			taskModal.style.display = "block"; // Show the modal for editing
 		});
-		// Update styling based on whether task is completed and tags are selected
+
+		deleteButton.addEventListener("click", function () {
+			editingIndex = Number.parseInt(this.getAttribute("data-index"));
+			tasks.splice(editingIndex, 1);
+			updateTasks(entry, tasks);
+			displayTasks(taskContainer, taskModal);
+		});
+
 		if (checkbox.checked) {
 			taskElement.style.backgroundColor = "lightgray";
 			nameLabel.style.textDecoration = "line-through";
