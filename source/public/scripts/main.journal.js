@@ -17,7 +17,7 @@ function initEntry() {
 	const entryTxt = new SimpleMDE(
 		{
 			element: document.getElementById("entry-text"),
-			placeholder: "Write a bit about your day here.",
+			placeholder: "Write aboutt about your day here.",
 			showIcons: ["code"],
 			spellChecker: false,
 			status: ["lines", "words"]
