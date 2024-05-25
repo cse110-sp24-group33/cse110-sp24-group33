@@ -15,14 +15,14 @@
 <body>
     <!-- Page Navigation -->
 
-    <head>
+    <header>
         <!-- Date -->
         <section id="date">
-            <button type="button">
+            <button type="button" title="Previous day">
                 <i class="fa-solid fa-chevron-left"></i>
             </button>
             <h2>Loading...</h2>
-            <button type="button">
+            <button type="button" title="Next day">
                 <i class="fa-solid fa-chevron-right"></i>
             </button>
         </section>
@@ -30,17 +30,17 @@
         <!-- Return to Home -->
         <section id="home">
             <button type="button">
-                <a href="./index.html"><i class="fa-solid fa-house"></i></a></i>
+                <a href="./index.html" title="Home"><i class="fa-solid fa-house"></i></a></i>
             </button>
         </section>
-    </head>
+    </header>
 
     <main>
         <!-- Entry Text Editor -->
         <section id="entry-text-editor">
             <h2>Journal Entry Title</h2>
             <textarea id="entry-text" rows="30" cols="50"></textarea>
-            <button id="clear-entry" class="danger">
+            <button id="clear-entry" class="danger" title="Clear entry data">
                 Clear entry
                 <i class="fa-solid fa-trash"></i>
             </button>
@@ -51,13 +51,13 @@
             <!-- Tasks -->
             <h2>Tasks</h2>
             <section id="task-list">
-                <button class="new-task" type="button">
+                <button class="new-task" type="button" title="Add a new task">
                     <i class="fa-solid fa-plus"></i>
                     New Task
                 </button>
             </section>
             <!-- This is where we can store task inputs-->
-            <div id="task-container"></div>
+            <div id="task-container" class="scrollable"></div>
 
             <!-- Sentiment Rating -->
             <section id="meter-section">
@@ -192,25 +192,27 @@
                         <label for="task-desc">Task Description</label>
                         <input type="text" id="task-desc" name="task-desc" required>
                     </div>
-                    <div class="input-group">
-                        <label for="task-type">Task Type</label>
-                        <select name="task-type" id="task-type">
-                            <option value="" disabled selected>Select a task type</option>
-                            <option value="Development">Development</option>
-                            <option value="Documentation">Documentation</option>
-                            <option value="Communication">Communication</option>
-                            <option value="Testing">Testing</option>
-                            <option value="Research">Research</option>
-                            <option value="Debugging">Debugging</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label for="task-project">Project</label>
-                        <select name="task-project" id="task-project">
-                            <option value="" disabled selected>Select a project</option>
-                            <option value="project-tag1">project 1</option>
-                            <option value="project-tag2">project 2</option>
-                        </select>
+                    <div id="tag-select">
+                        <div class="input-group">
+                            <label for="task-type">Task Type</label>
+                            <select name="task-type" id="task-type">
+                                <option value="" disabled selected>Select a task type</option>
+                                <option value="Development">Development</option>
+                                <option value="Documentation">Documentation</option>
+                                <option value="Communication">Communication</option>
+                                <option value="Testing">Testing</option>
+                                <option value="Research">Research</option>
+                                <option value="Debugging">Debugging</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="task-project">Project</label>
+                            <select name="task-project" id="task-project">
+                                <option value="" disabled selected>Select a project</option>
+                                <option value="project-tag1">project 1</option>
+                                <option value="project-tag2">project 2</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="button-group">
                         <button class="save-task" type="submit">Save</button>
@@ -231,6 +233,9 @@
     <script src="https://kit.fontawesome.com/2ac8e23908.js" crossorigin="anonymous"></script>
     <!-- SimpleMDE Script -->
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <!-- JSConfetti Script -->
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+    <!-- Custom JS -->
     <script type="module" src="scripts/date.util.js"></script>
     <script type="module" src="scripts/main.journal.js"></script>
 </body>
