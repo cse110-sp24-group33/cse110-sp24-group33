@@ -214,6 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			editButton.className = "edit-task";
 			editButton.innerHTML = "<i class=\"fa-solid fa-pencil\"></i>";
 			editButton.setAttribute("data-index", index);
+			editButton.setAttribute("title", "Edit task");
 
 			// Append the elements to the task item
 			tagsContainer.append(typeTagLabel, projTagLabel);

@@ -40,6 +40,10 @@ header {
   font-size: large;
 }
 
+ button {
+  cursor: pointer;
+ }
+
 /* Date and Home Sections */
 #date,
 #home {
@@ -48,13 +52,20 @@ header {
   padding: 0px 20px;
 }
 
-
 #date button,
 #home button {
   background: none;
   border: none;
-  cursor: pointer;
   font-size: larger;
+}
+
+#home button a,
+#home button a:visited {
+  color: black;
+}
+
+#home button a:hover {
+  color: #976393;
 }
 
 #date h2 {
@@ -188,7 +199,6 @@ header {
 .edit-task {
   background-color: transparent;
   border: none;
-  cursor: pointer;
   color: #080219;
 }
 
@@ -354,7 +364,6 @@ input[type="radio"]:checked+.face-icon+#joyful-label {
   padding: 10px 20px;
   border: none;
   border-radius: 10px;
-  cursor: pointer;
 }
 
 .save-task {
@@ -380,7 +389,6 @@ input[type="radio"]:checked+.face-icon+#joyful-label {
 }
 
 
-
 #clear-entry {
   position: absolute;
   bottom: -80px;
@@ -391,7 +399,6 @@ input[type="radio"]:checked+.face-icon+#joyful-label {
   color: white;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
   margin-bottom: 20px;
 }
 

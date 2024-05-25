@@ -18,11 +18,11 @@
     <header>
         <!-- Date -->
         <section id="date">
-            <button type="button">
+            <button type="button" title="Previous day">
                 <i class="fa-solid fa-chevron-left"></i>
             </button>
             <h2>Loading...</h2>
-            <button type="button">
+            <button type="button" title="Next day">
                 <i class="fa-solid fa-chevron-right"></i>
             </button>
         </section>
@@ -30,7 +30,7 @@
         <!-- Return to Home -->
         <section id="home">
             <button type="button">
-                <a href="./index.html"><i class="fa-solid fa-house"></i></a></i>
+                <a href="./index.html" title="Home"><i class="fa-solid fa-house"></i></a></i>
             </button>
         </section>
     </header>
@@ -40,7 +40,7 @@
         <section id="entry-text-editor">
             <h2>Journal Entry Title</h2>
             <textarea id="entry-text" rows="30" cols="50"></textarea>
-            <button id="clear-entry" class="danger">
+            <button id="clear-entry" class="danger" title="Clear entry data">
                 Clear entry
                 <i class="fa-solid fa-trash"></i>
             </button>
@@ -51,7 +51,7 @@
             <!-- Tasks -->
             <h2>Tasks</h2>
             <section id="task-list">
-                <button class="new-task" type="button">
+                <button class="new-task" type="button" title="Add a new task">
                     <i class="fa-solid fa-plus"></i>
                     New Task
                 </button>
