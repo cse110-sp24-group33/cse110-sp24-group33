@@ -182,22 +182,22 @@ document.addEventListener("DOMContentLoaded", () => {
       // Create the task name label
       const nameLabel = document.createElement("label");
       nameLabel.id = `taskDesc-${index}`;
-      nameLabel.textContent = `Task Description: ${task.name}`;
+      nameLabel.textContent = `${task.name}`;
 
       // Create the task type tag label
       const typeTagLabel = document.createElement("label");
       typeTagLabel.id = `taskTypeTag-${index}`;
-      typeTagLabel.textContent = `Type: ${task.type_tag}`;
+      typeTagLabel.textContent = `${task.type_tag}`;
 
       // Create the task project tag label
       const projTagLabel = document.createElement("label");
       projTagLabel.id = `taskProjTag-${index}`;
-      projTagLabel.textContent = `Project: ${task.project_tag}`;
+      projTagLabel.textContent = `${task.project_tag}`;
 
       // Create the edit button
       const editButton = document.createElement("button");
       editButton.className = "edit-task";
-      editButton.textContent = "Edit";
+      editButton.innerHTML = `<i class="fa-solid fa-pencil"></i>`;
       editButton.setAttribute("data-index", index);
 
       // Append the elements to the task item
@@ -212,6 +212,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Add event listener to the checkbox to update the task's completed status
       checkbox.addEventListener('change', function () {
+        // Update styling
+        const parent = this.closest('.task-item');
+        if (this.checked) {
+          parent.style.backgroundColor = 'lightgray';
+        } else {
+          parent.style.backgroundColor = 'var(--task-bg-color)';
+        }
         tasks[index].completed = this.checked; // Update completed status
         entry.tasks = tasks; // Update the tasks array in the entry
         localStorage.setItem(`entry-${entryDate}`, JSON.stringify(entry)); // Save updated entry to local storage
