@@ -5,8 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Dr3am T3am - Journal Entry Page</title>
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="styles/styles.css">
-    <script src="https://kit.fontawesome.com/2ac8e23908.js" crossorigin="anonymous"></script>
+    <!-- SimpleMDE Styling -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 </head>
 
 <body>
@@ -37,6 +40,10 @@
         <section id="entry-text-editor">
             <h2>Journal Entry Title</h2>
             <textarea id="entry-text" rows="30" cols="50"></textarea>
+            <button id="clear-entry" class="danger">
+                Clear entry
+                <i class="fa-solid fa-trash"></i>
+            </button>
         </section>
 
         <!-- Tasks & Sentiment Rating -->
@@ -214,6 +221,10 @@
         <hr>
         <p>Created by the <b>Digital Dr3am T3am</b></p>
     </footer>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/2ac8e23908.js" crossorigin="anonymous"></script>
+    <!-- SimpleMDE Script -->
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
     <script type="module" src="scripts/date.util.js"></script>
     <script type="module" src="scripts/main.journal.js"></script>
 </body>
