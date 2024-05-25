@@ -142,6 +142,9 @@ function initEntry() {
 	// Default display to the current date
 	displayToday();
 
+	/**
+   * Updates the page to display the entry for the current date
+   */
 	function displayToday() {
 		dateDisplay.textContent = getCurrentDate();
 		entryDate = formatDateToYYYYMMDD(getCurrentDate());
@@ -236,7 +239,7 @@ function displayTasks(taskContainer, taskModal) {
 		projTagLabel.textContent = ` ${task.project_tag}`;
 		projTagLabel.className = "project-label";
 
-		// Create a new task tags container element
+		// Create a new task buttons container element
 		const btnContainer = document.createElement("div");
 		btnContainer.className = "task-btns";
 
