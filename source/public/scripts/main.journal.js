@@ -292,24 +292,6 @@ function displayTasks(taskContainer, taskModal) {
 		} else {
 			projTagLabel.style.display = "";
 		}
-		// Update styling based on whether task is completed and tags are selected
-		if (checkbox.checked) {
-			taskElement.style.backgroundColor = "lightgray";
-			nameLabel.style.textDecoration = "line-through";
-		} else {
-			taskElement.style.backgroundColor = "var(--task-bg-color)";
-			nameLabel.style.textDecoration = "none";
-		}
-		if (task.type_tag === "") {
-			typeTagLabel.style.display = "none";
-		} else {
-			typeTagLabel.style.display = "";
-		}
-		if (task.project_tag === "") {
-			projTagLabel.style.display = "none";
-		} else {
-			projTagLabel.style.display = "";
-		}
 	});
 }
 
