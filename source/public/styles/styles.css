@@ -216,7 +216,8 @@ button {
   color: white;
 }
 
-.edit-task, #task-item-delete {
+.edit-task,
+#task-item-delete {
   background-color: transparent;
   border: none;
 }
