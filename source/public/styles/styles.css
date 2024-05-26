@@ -116,6 +116,7 @@ button {
 
 .CodeMirror {
   height: 100% !important;
+  max-height: 400px;
 }
 
 #autosave {
