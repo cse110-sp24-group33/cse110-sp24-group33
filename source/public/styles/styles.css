@@ -92,11 +92,11 @@ button {
 #entry-text-editor {
   position: relative;
   flex: 2;
-  padding: 20px 20px 10px 20px;
+  padding: 20px 20px 10px;
   box-sizing: border-box;
   background-color: #fff;
   border-radius: 10px;
-  margin: 10px 20px 70px 20px;
+  margin: 10px 20px 70px;
   display: flex;
   flex-direction: column;
 }
@@ -118,6 +118,14 @@ button {
   height: 100% !important;
 }
 
+#autosave {
+  display: none;
+  text-align: right;
+  color:green;
+  font-size: small;
+  margin: 0px;
+}
+
 
 /* Right Box (Tasks and Sentiment Rating) */
 #tasks-sentiment-rating {
@@ -126,7 +134,7 @@ button {
   box-sizing: border-box;
   background-color: #fff;
   border-radius: 10px;
-  margin: 10px 20px 70px 20px;
+  margin: 10px 20px 70px;
   display: flex;
   flex-direction: column;
 }
@@ -141,7 +149,7 @@ button {
   display: block;
   margin: 0 auto;
   width: 100%;
-  padding: 10px 10px;
+  padding: 10px;
   font-size: medium;
   font-weight: bold;
   border-radius: 5px;
@@ -162,7 +170,7 @@ button {
 }
 
 .scrollable {
-  max-height: 250px;
+  max-height: 200px;
   overflow-y: auto;
 }
 

@@ -25,6 +25,7 @@ function initEntry() {
 	);
 
 	// Select elements from the DOM
+	const autosave = document.getElementById("autosave");
 	const clearBtn = document.getElementById("clear-entry");
 	const taskModal = document.getElementById("task-modal");
 	const newTaskBtn = document.querySelector(".new-task");
@@ -57,6 +58,12 @@ function initEntry() {
 		const entry = getEntry();
 		entry.text_entry = text;
 		updateEntry(entry);
+		// Indicate autosaved if there is text
+		if (text) {
+			autosave.style.display = "block";
+		} else {
+			autosave.style.display = "none";
+		}
 	});
 
 	// Clear entry data on button click and confirmation
