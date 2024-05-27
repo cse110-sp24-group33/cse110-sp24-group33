@@ -1,43 +1,417 @@
-/* Hide the modal by default */
-.modal {
-    display: none; /* Modal is hidden */
-    position: fixed; /* Fix position relative to viewport */
-    z-index: 1; /* Set stacking order */
-    left: 0; /* Align to the left */
-    top: 0; /* Align to the top */
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Add scrollbars if needed */
-    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+:root {
+  --red: #e74c3c;
+  --orange: #f39c12;
+  --green: #2ecc71;
+  --blue: #3498db;
+  --purple: #9b59b6;
+  --task-bg-color: #FFE5DB;
 }
 
-/* Style the modal content */
-.modal-content {
-    background-color: #fefefe; /* White background */
-    margin: 15% auto; /* Center the modal */
-    padding: 20px; /* Inner spacing */
-    border: 1px solid #888; /* Border around modal */
-    width: 80%; /* 80% width */
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+/* page layout */
+body {
+  font-family: "Work Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f2f2f2;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  background-color: #f2f2f2;
+  box-sizing: border-box;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 20px 0px;
+  font-size: large;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Date and Home Sections */
+#date,
+#home {
+  display: flex;
+  align-items: center;
+  padding: 0px 20px;
+}
+
+#date button,
+#home button {
+  background: none;
+  border: none;
+  font-size: larger;
+}
+
+#home button a,
+#home button a:visited {
+  color: black;
+}
+
+#date button:hover,
+#home button a:hover,
+.edit-task:hover {
+  color: #976393;
+}
+
+#date h2 {
+  margin: 0 15px;
+}
+
+/* Left box (Journal Entry) */
+#entry-text-editor {
+  position: relative;
+  flex: 2;
+  padding: 20px 20px 10px 20px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 10px 20px 70px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+#entry-text-editor h2 {
+  display: none;
+}
+
+#entry-text {
+  width: 100%;
+  height: 100vh;
+  height: fit-content;
+  resize: none;
+  border: none;
+  border-radius: 5px;
+}
+
+.CodeMirror {
+  height: 100% !important;
+}
+
+
+/* Right Box (Tasks and Sentiment Rating) */
+#tasks-sentiment-rating {
+  flex: 1;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 10px 20px 70px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* Tasks Section */
+#task-list {
+  margin-bottom: 10px;
+}
+
+.new-task {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  padding: 10px 10px;
+  font-size: medium;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: #FF9B82;
+  border: none;
+}
+
+.new-task:hover {
+  background-color: #fe8567;
 }
 
 /* Task container styles */
 #task-container {
-    margin-top: 10px; /* Space above the task container */
+  margin-top: 5px;
+  /* Space above the task container */
+  display: flex;
+  flex-direction: column;
 }
 
-/* Task item styles */
+.scrollable {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+/* Task item layout and styling */
 .task-item {
-    display: flex; /* Flexbox layout */
-    align-items: center; /* Center items vertically */
-    margin-bottom: 5px; /* Space below each task item */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  background-color: var(--task-bg-color);
+  font-size: 10px;
+  padding: 15px 10px;
+  margin: 10px 0px;
+  position: relative;
 }
 
-/* Checkbox styles in task items */
-.task-item input[type="checkbox"] {
-    margin-right: 10px; /* Space to the right of the checkbox */
+.task-details {
+  display: flex;
 }
 
-/* Label styles in task items */
+.task-details input[type="checkbox"] {
+  margin-right: 20px;
+}
+
+.task-text>label {
+  display: flex;
+  flex-direction: column;
+  font-size: medium;
+}
+
 .task-item label {
-    margin: 0; /* Remove default margin */
+  margin-bottom: 5px;
+}
+
+.task-tags {
+  margin-top: 20px;
+}
+
+.task-tags label {
+  border-radius: 50px;
+  margin-right: 5px;
+  padding: 5px 10px;
+}
+
+.type-label {
+  background-color: #FEB800;
+}
+
+.project-label {
+  background-color: #976293;
+  color: white;
+}
+
+.edit-task {
+  background-color: transparent;
+  border: none;
+  color: #080219;
+}
+
+
+/* Sentiment Rating Section */
+#meter-section {
+  margin-top: auto;
+  /* Push the section to the bottom */
+  padding-bottom: 15px;
+}
+
+#meter-section h2 {
+  width: 100%;
+  font-size: 1.8vw;
+  margin-bottom: -5px;
+}
+
+#sentiments-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.face-icon {
+  display: flex;
+  width: 4vw;
+  height: 5vw;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  fill: currentColor;
+  padding-bottom: 4px;
+}
+
+.face-icon:hover {
+  transform: scale(1.2);
+}
+
+.label {
+  text-align: center;
+  font-size: 1vw;
+}
+
+/* Make radio button visually invisible */
+input[name="feeling"] {
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+input[type="radio"][value="upset"]+.face-icon path {
+  fill: var(--red);
+}
+
+/* Unhappy emoji color on form */
+input[type="radio"][value="unhappy"]+.face-icon path {
+  fill: var(--orange);
+}
+
+/* Neutral emoji color on form */
+input[type="radio"][value="neutral"]+.face-icon path {
+  fill: var(--green);
+}
+
+/* happy emoji color on form */
+input[type="radio"][value="happy"]+.face-icon path {
+  fill: var(--blue);
+}
+
+/* Joyful emoji color on form */
+input[type="radio"][value="joyful"]+.face-icon path {
+  fill: var(--purple);
+}
+
+input[type="radio"]:checked+.face-icon {
+  transform: scale(1.2);
+}
+
+input[type="radio"]:checked+.face-icon+#upset-label {
+  color: var(--red);
+}
+
+input[type="radio"]:checked+.face-icon+#unhappy-label {
+  color: var(--orange);
+}
+
+input[type="radio"]:checked+.face-icon+#neutral-label {
+  color: var(--green);
+}
+
+input[type="radio"]:checked+.face-icon+#happy-label {
+  color: var(--blue);
+}
+
+input[type="radio"]:checked+.face-icon+#joyful-label {
+  color: var(--purple);
+}
+
+
+/* Modal styling (hidden by default) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  font-size: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style the modal content */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 50px;
+  border: 1px solid #888;
+  border-radius: 10px;
+  width: 30%;
+  font-size: large;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.input-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.input-group #task-desc {
+  width: 100%;
+}
+
+#tag-select {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10%;
+}
+
+#tag-select .input-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.input-group input,
+.input-group select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Modal button styling */
+.button-group button {
+  margin-top: 40px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+}
+
+.save-task {
+  background-color: green;
+  color: white;
+}
+
+.cancel-task {
+  background-color: gray;
+  color: white;
+  margin-left: 30px;
+}
+
+.delete-task {
+  background-color: red;
+  color: white;
+  margin-left: auto;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+#clear-entry {
+  position: absolute;
+  bottom: -80px;
+  left: 3px;
+  width: 150px;
+  padding: 10px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+#clear-entry:hover {
+  background-color: rgb(226, 47, 47);
+}
+
+footer {
+  text-align: center;
 }
