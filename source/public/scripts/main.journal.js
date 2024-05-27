@@ -60,9 +60,9 @@ function initEntry() {
 		updateEntry(entry);
 		// Indicate autosaved if there is text
 		if (text) {
-			autosave.style.display = "block";
+			autosave.classList.remove("hide");
 		} else {
-			autosave.style.display = "none";
+			autosave.classList.add("hide");
 		}
 	});
 
@@ -78,7 +78,7 @@ function initEntry() {
 	// Reset editing index and show the modal when "New Task" button is clicked
 	newTaskBtn.addEventListener("click", () => {
 		editingIndex = -1;
-		taskModal.style.display = "block";
+		taskModal.classList.remove("hide");
 
 		// Clear modal fields
 		document.getElementById("task-desc").value = "";
@@ -89,7 +89,7 @@ function initEntry() {
 	// Hide the modal if the user clicks outside of it
 	window.addEventListener("click", (event) => {
 		if (event.target === taskModal) {
-			taskModal.style.display = "none";
+			taskModal.classList.add("hide");
 		}
 	});
 
@@ -126,12 +126,12 @@ function initEntry() {
 
 		updateTasks(entry, tasks);
 		displayTasks(taskContainer, taskModal);
-		taskModal.style.display = "none";
+		taskModal.classList.add("hide");
 	});
 
 	// Hide the modal when the "Cancel" button is clicked
 	cancelTaskBtn.addEventListener("click", () => {
-		taskModal.style.display = "none";
+		taskModal.classList.add("hide");
 	});
 
 	// Delete the current task when the "Delete" button in the modal is clicked
@@ -142,7 +142,7 @@ function initEntry() {
 			tasks.splice(editingIndex, 1);
 			updateTasks(entry, tasks);
 			displayTasks(taskContainer, taskModal);
-			taskModal.style.display = "none";
+			taskModal.classList.add("hide");
 		}
 	});
 
@@ -282,11 +282,11 @@ function displayTasks(taskContainer, taskModal) {
 			if (this.checked) {
 				const jsConfetti = new JSConfetti();
 				jsConfetti.addConfetti();
-				item.style.backgroundColor = "lightgray";
-				description.style.textDecoration = "line-through";
+				item.classList.add("item-checked");
+				description.classList.add("text-checked");
 			} else {
-				item.style.backgroundColor = "var(--task-bg-color)";
-				description.style.textDecoration = "none";
+				item.classList.remove("item-checked");
+				description.classList.remove("text-checked");
 			}
 			// Update entry
 			tasks[index].completed = this.checked;
@@ -301,7 +301,7 @@ function displayTasks(taskContainer, taskModal) {
 			document.getElementById("task-desc").value = task.name;
 			document.getElementById("task-type").value = task.type_tag;
 			document.getElementById("task-project").value = task.project_tag;
-			taskModal.style.display = "block"; // Show the modal for editing
+			taskModal.classList.remove("hide");
 		});
 
 		deleteButton.addEventListener("click", function () {
@@ -312,21 +312,21 @@ function displayTasks(taskContainer, taskModal) {
 		});
 
 		if (checkbox.checked) {
-			taskElement.style.backgroundColor = "lightgray";
-			nameLabel.style.textDecoration = "line-through";
+			taskElement.classList.add("item-checked");
+			nameLabel.classList.add("text-checked");
 		} else {
-			taskElement.style.backgroundColor = "var(--task-bg-color)";
-			nameLabel.style.textDecoration = "none";
+			taskElement.classList.remove("item-checked");
+			nameLabel.classList.remove("text-checked");
 		}
 		if (task.type_tag === "") {
-			typeTagLabel.style.display = "none";
+			typeTagLabel.classList.add("hide");
 		} else {
-			typeTagLabel.style.display = "";
+			typeTagLabel.classList.remove("hide");
 		}
 		if (task.project_tag === "") {
-			projTagLabel.style.display = "none";
+			projTagLabel.classList.add("hide");
 		} else {
-			projTagLabel.style.display = "";
+			projTagLabel.classList.remove("hide");
 		}
 	});
 }

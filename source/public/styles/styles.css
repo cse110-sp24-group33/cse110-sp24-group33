@@ -119,7 +119,6 @@ button {
 }
 
 #autosave {
-  display: none;
   text-align: right;
   color: green;
   font-size: small;
@@ -185,6 +184,11 @@ button {
   padding: 15px 10px;
   margin: 10px 0px;
   position: relative;
+  text-decoration: none;
+}
+
+.item-checked {
+  background-color: lightgray;
 }
 
 .task-details {
@@ -199,6 +203,10 @@ button {
   display: flex;
   flex-direction: column;
   font-size: medium;
+}
+
+.text-checked {
+  text-decoration: line-through;
 }
 
 .task-item label {
@@ -222,6 +230,10 @@ button {
 .project-label {
   background-color: #976293;
   color: white;
+}
+
+.hide {
+  display: none;
 }
 
 .edit-task,
@@ -335,7 +347,6 @@ input[type="radio"]:checked+.face-icon+#joyful-label {
 
 /* Modal styling (hidden by default) */
 .modal {
-  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
