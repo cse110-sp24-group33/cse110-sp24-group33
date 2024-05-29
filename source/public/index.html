@@ -5,11 +5,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/styles.css">
-    <title>Document</title>
+    <title>Digital Dr3am T3am - Journal Homepage</title>
 </head>
 
 <body>
+    <header>
+        <h1>Welcome back to your developer journal!</h1>
+    </header>
 
+    <main>
+        <!-- Calendar -->
+        <section id="calendar">
+            <div class="calendar">
+                <div class="header">
+                    <button type="button" title="Previous month">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <div class="month-year" id="month-year"></div>
+                    <button type="button" title="Next month">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="days">
+                    <div class="day">Mon</div>
+                    <div class="day">Tue</div>
+                    <div class="day">Wed</div>
+                    <div class="day">Thu</div>
+                    <div class="day">Fri</div>
+                    <div class="day">Sat</div>
+                    <div class="day">Sun</div>
+                </div>
+                <div class="dates" id="dates"></div>
+            </div>
+        </section>
+
+        <!-- Project modal -->
+        <!-- Hidden until user adds/edits a project -->
+        <section id="project-modal" class="modal">
+            <div class="modal-content">
+                <form class="project" id="project-form">
+                    <div class="input-group">
+                        <label for="project-name">Project Name</label>
+                        <input type="text" id="project-name" name="project-name" required>
+                    </div>
+                    <div id="tag-select">
+                        <div class="input-group">
+                            <label for="deadline">Deadline</label>
+                            <input type="date" id="deadline" name="deadline">
+                        </div>
+                        <div class="input-group">
+                            <label for="priority-level">Priority</label>
+                            <select name="priority-level" id="priority-level">
+                                <option value="" disabled selected>Select a priority level</option>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="save-project" type="submit">Save</button>
+                        <button class="cancel-project" type="button">Cancel</button>
+                        <button class="delete-project" type="button">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <hr>
+        <p>Created by the <b>Digital Dr3am T3am</b></p>
+    </footer>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/2ac8e23908.js" crossorigin="anonymous"></script>
+    <!-- Custom JS -->
     <script src="/scripts/main.js"></script>
     <script src="/scripts/main.index.js" type="module"></script>
 </body>
