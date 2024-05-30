@@ -25,6 +25,7 @@ function initEntry() {
 	);
 
 	// Select elements from the DOM
+	const autosave = document.getElementById("autosave");
 	const clearBtn = document.getElementById("clear-entry");
 	const taskModal = document.getElementById("task-modal");
 	const newTaskBtn = document.querySelector(".new-task");
@@ -32,9 +33,10 @@ function initEntry() {
 	const cancelTaskBtn = document.querySelector(".cancel-task");
 	const deleteTaskBtn = document.querySelector(".delete-task");
 	const taskContainer = document.getElementById("task-container");
-	const prevDayBtn = document.querySelector("#date button:first-child");
-	const nextDayBtn = document.querySelector("#date button:last-child");
+	const prevDayBtn = document.getElementById("prev-day");
+	const nextDayBtn = document.getElementById("next-day");
 	const dateDisplay = document.querySelector("#date h2");
+	const todayBtn = document.getElementById("today");
 
 	// Event listeners for the previous and next day buttons
 	prevDayBtn.addEventListener("click", () => {
@@ -46,12 +48,22 @@ function initEntry() {
 		updateDisplay();
 	});
 
+	todayBtn.addEventListener("click", () => {
+		displayToday();
+	});
+
 	// Detect changes to text editor and update entry
 	entryTxt.codemirror.on("change", () => {
 		const text = entryTxt.value();
 		const entry = getEntry();
 		entry.text_entry = text;
 		updateEntry(entry);
+		// Indicate autosaved if there is text
+		if (text) {
+			autosave.classList.remove("hide");
+		} else {
+			autosave.classList.add("hide");
+		}
 	});
 
 	// Clear entry data on button click and confirmation
@@ -66,7 +78,7 @@ function initEntry() {
 	// Reset editing index and show the modal when "New Task" button is clicked
 	newTaskBtn.addEventListener("click", () => {
 		editingIndex = -1;
-		taskModal.style.display = "block";
+		taskModal.classList.remove("hide");
 
 		// Clear modal fields
 		document.getElementById("task-desc").value = "";
@@ -77,7 +89,7 @@ function initEntry() {
 	// Hide the modal if the user clicks outside of it
 	window.addEventListener("click", (event) => {
 		if (event.target === taskModal) {
-			taskModal.style.display = "none";
+			taskModal.classList.add("hide");
 		}
 	});
 
@@ -114,12 +126,12 @@ function initEntry() {
 
 		updateTasks(entry, tasks);
 		displayTasks(taskContainer, taskModal);
-		taskModal.style.display = "none";
+		taskModal.classList.add("hide");
 	});
 
 	// Hide the modal when the "Cancel" button is clicked
 	cancelTaskBtn.addEventListener("click", () => {
-		taskModal.style.display = "none";
+		taskModal.classList.add("hide");
 	});
 
 	// Delete the current task when the "Delete" button in the modal is clicked
@@ -130,16 +142,21 @@ function initEntry() {
 			tasks.splice(editingIndex, 1);
 			updateTasks(entry, tasks);
 			displayTasks(taskContainer, taskModal);
-			taskModal.style.display = "none";
+			taskModal.classList.add("hide");
 		}
 	});
 
 	// Default display to the current date
-	dateDisplay.textContent = getCurrentDate();
-	entryDate = formatDateToYYYYMMDD(getCurrentDate());
+	displayToday();
 
-	// Initial display when the page loads
-	updateDisplay();
+	/**
+   * Updates the page to display the entry for the current date
+   */
+	function displayToday() {
+		dateDisplay.textContent = getCurrentDate();
+		entryDate = formatDateToYYYYMMDD(getCurrentDate());
+		updateDisplay();
+	}
 
 	/**
    * Updates the page display for "Next Day" button, text entry, tasks, projects
@@ -229,6 +246,10 @@ function displayTasks(taskContainer, taskModal) {
 		projTagLabel.textContent = ` ${task.project_tag}`;
 		projTagLabel.className = "project-label";
 
+		// Create a new task buttons container element
+		const btnContainer = document.createElement("div");
+		btnContainer.className = "task-btns";
+
 		// Create the edit button
 		const editButton = document.createElement("button");
 		editButton.className = "edit-task";
@@ -236,11 +257,19 @@ function displayTasks(taskContainer, taskModal) {
 		editButton.setAttribute("data-index", index);
 		editButton.setAttribute("title", "Edit task");
 
+		// Create the delete button
+		const deleteButton = document.createElement("button");
+		deleteButton.id = "task-item-delete";
+		deleteButton.innerHTML = "<i class=\"fa-solid fa-trash\"></i>";
+		deleteButton.setAttribute("data-index", index);
+		deleteButton.setAttribute("title", "Delete task");
+
 		// Append the elements to the task item
 		tagsContainer.append(typeTagLabel, projTagLabel);
 		taskText.append(nameLabel, tagsContainer);
 		taskDetails.append(checkbox, taskText);
-		taskElement.append(taskDetails, editButton);
+		btnContainer.append(editButton, deleteButton);
+		taskElement.append(taskDetails, btnContainer);
 
 		// Append the task item to the task container
 		taskContainer.appendChild(taskElement);
@@ -253,11 +282,11 @@ function displayTasks(taskContainer, taskModal) {
 			if (this.checked) {
 				const jsConfetti = new JSConfetti();
 				jsConfetti.addConfetti();
-				item.style.backgroundColor = "lightgray";
-				description.style.textDecoration = "line-through";
+				item.classList.add("item-checked");
+				description.classList.add("text-checked");
 			} else {
-				item.style.backgroundColor = "var(--task-bg-color)";
-				description.style.textDecoration = "none";
+				item.classList.remove("item-checked");
+				description.classList.remove("text-checked");
 			}
 			// Update entry
 			tasks[index].completed = this.checked;
@@ -272,25 +301,32 @@ function displayTasks(taskContainer, taskModal) {
 			document.getElementById("task-desc").value = task.name;
 			document.getElementById("task-type").value = task.type_tag;
 			document.getElementById("task-project").value = task.project_tag;
-			taskModal.style.display = "block"; // Show the modal for editing
+			taskModal.classList.remove("hide");
 		});
-		// Update styling based on whether task is completed and tags are selected
+
+		deleteButton.addEventListener("click", function () {
+			editingIndex = Number.parseInt(this.getAttribute("data-index"));
+			tasks.splice(editingIndex, 1);
+			updateTasks(entry, tasks);
+			displayTasks(taskContainer, taskModal);
+		});
+
 		if (checkbox.checked) {
-			taskElement.style.backgroundColor = "lightgray";
-			nameLabel.style.textDecoration = "line-through";
+			taskElement.classList.add("item-checked");
+			nameLabel.classList.add("text-checked");
 		} else {
-			taskElement.style.backgroundColor = "var(--task-bg-color)";
-			nameLabel.style.textDecoration = "none";
+			taskElement.classList.remove("item-checked");
+			nameLabel.classList.remove("text-checked");
 		}
 		if (task.type_tag === "") {
-			typeTagLabel.style.display = "none";
+			typeTagLabel.classList.add("hide");
 		} else {
-			typeTagLabel.style.display = "";
+			typeTagLabel.classList.remove("hide");
 		}
 		if (task.project_tag === "") {
-			projTagLabel.style.display = "none";
+			projTagLabel.classList.add("hide");
 		} else {
-			projTagLabel.style.display = "";
+			projTagLabel.classList.remove("hide");
 		}
 	});
 }
