@@ -21,13 +21,12 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #f2f2f2;
+  background-color: #FFF7EC;
 }
 
 main {
   flex: 1;
   display: flex;
-  background-color: #f2f2f2;
   box-sizing: border-box;
 }
 
@@ -52,11 +51,25 @@ button {
   padding: 0px 20px;
 }
 
-#date button,
+.date-nav,
 #home button {
   background: none;
   border: none;
   font-size: larger;
+}
+
+#today {
+  background: fixed;
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 5px;
+  color: black;
+  margin-left: 20px;
+  padding: 10px 20px;
+}
+
+#today:hover {
+  background-color: ghostwhite;
 }
 
 #home button a,
@@ -64,7 +77,7 @@ button {
   color: black;
 }
 
-#date button:hover,
+.date-nav:hover,
 #home button a:hover,
 .edit-task:hover {
   color: #976393;
@@ -78,11 +91,11 @@ button {
 #entry-text-editor {
   position: relative;
   flex: 2;
-  padding: 20px 20px 10px 20px;
+  padding: 20px 20px 10px;
   box-sizing: border-box;
   background-color: #fff;
   border-radius: 10px;
-  margin: 10px 20px 70px 20px;
+  margin: 10px 20px 70px;
   display: flex;
   flex-direction: column;
 }
@@ -102,6 +115,14 @@ button {
 
 .CodeMirror {
   height: 100% !important;
+  max-height: 400px;
+}
+
+#autosave {
+  text-align: right;
+  color: green;
+  font-size: small;
+  margin: 0px;
 }
 
 
@@ -112,7 +133,7 @@ button {
   box-sizing: border-box;
   background-color: #fff;
   border-radius: 10px;
-  margin: 10px 20px 70px 20px;
+  margin: 10px 20px 70px;
   display: flex;
   flex-direction: column;
 }
@@ -127,7 +148,7 @@ button {
   display: block;
   margin: 0 auto;
   width: 100%;
-  padding: 10px 10px;
+  padding: 10px;
   font-size: medium;
   font-weight: bold;
   border-radius: 5px;
@@ -148,7 +169,7 @@ button {
 }
 
 .scrollable {
-  max-height: 250px;
+  max-height: 200px;
   overflow-y: auto;
 }
 
@@ -163,6 +184,11 @@ button {
   padding: 15px 10px;
   margin: 10px 0px;
   position: relative;
+  text-decoration: none;
+}
+
+.item-checked {
+  background-color: lightgray;
 }
 
 .task-details {
@@ -177,6 +203,10 @@ button {
   display: flex;
   flex-direction: column;
   font-size: medium;
+}
+
+.text-checked {
+  text-decoration: line-through;
 }
 
 .task-item label {
@@ -202,10 +232,23 @@ button {
   color: white;
 }
 
-.edit-task {
+.hide {
+  display: none;
+}
+
+.edit-task,
+#task-item-delete {
   background-color: transparent;
   border: none;
-  color: #080219;
+}
+
+#task-item-delete {
+  color: red;
+  margin-left: 5px;
+}
+
+#task-item-delete:hover {
+  color: darkred;
 }
 
 
@@ -304,7 +347,6 @@ input[type="radio"]:checked+.face-icon+#joyful-label {
 
 /* Modal styling (hidden by default) */
 .modal {
-  display: none;
   position: fixed;
   z-index: 1;
   left: 0;

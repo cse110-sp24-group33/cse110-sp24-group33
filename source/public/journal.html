@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Dr3am T3am - Journal Entry Page</title>
+    <link rel="shortcut icon" href="images/favicon.ico">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles/styles.css">
     <!-- SimpleMDE Styling -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+
+    <title>Journal Entry</title>
 </head>
 
 <body>
@@ -18,20 +20,26 @@
     <header>
         <!-- Date -->
         <section id="date">
-            <button type="button" title="Previous day">
+            <button type="button" id="prev-day" class="date-nav" title="Previous day">
                 <i class="fa-solid fa-chevron-left"></i>
             </button>
             <h2>Loading...</h2>
-            <button type="button" title="Next day">
+            <button type="button" id="next-day" class="date-nav" title="Next day">
                 <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+            <button type="button" id="today" title="Today">
+                Today
             </button>
         </section>
 
         <!-- Return to Home -->
         <section id="home">
-            <button type="button">
-                <a href="./index.html" title="Home"><i class="fa-solid fa-house"></i></a></i>
-            </button>
+            <a href="./index.html" title="Home">
+                <button type="button">
+                    <i class="fa-solid fa-house"></i>
+                </button>
+            </a>
         </section>
     </header>
 
@@ -40,6 +48,9 @@
         <section id="entry-text-editor">
             <h2>Journal Entry Title</h2>
             <textarea id="entry-text" rows="30" cols="50"></textarea>
+            <p id="autosave" class="hide">Autosaved
+                <i class="fa-solid fa-check"></i>
+            </p>
             <button id="clear-entry" class="danger" title="Clear entry data">
                 Clear entry
                 <i class="fa-solid fa-trash"></i>
@@ -88,7 +99,7 @@
                                     d="M20.8 38.4667C18.5333 40.3333 17.0667 42.4667 17.4667 43.2667C17.8667 43.9333 19.7333 43.2667 21.6 41.4C26 37.2667 34.6667 37.2667 38 41.4C40.4 44.3333 43.3333 45.2667 43.3333 43.1333C43.3333 42.4667 41.4667 40.3333 39.2 38.4667C33.6 33.8 26.4 33.8 20.8 38.4667Z"
                                     fill="black" />
                             </svg>
-                            <div class="label" id="upset-label">Upset</div>
+                            <p class="label" id="upset-label">Upset</p>
                         </label>
                     </div>
                     <div>
@@ -110,7 +121,7 @@
                                     fill="black" />
                             </svg>
 
-                            <div class="label" id="unhappy-label">Unhappy</div>
+                            <p class="label" id="unhappy-label">Unhappy</p>
                         </label>
 
                     </div>
@@ -132,7 +143,7 @@
                                     d="M16.3 3.50303C-5.43333 14.5697 -5.43333 45.2364 16.3 56.1697C26.0333 61.103 33.7667 61.103 43.2333 56.1697C65.2333 44.703 64.8333 13.503 42.5667 3.10303C33.3667 -1.16364 25.5 -1.0303 16.3 3.50303ZM41.5 6.70303C59.7667 15.6364 59.7667 44.1697 41.5 53.103C17.9 64.4364 -5.83333 38.4364 7.9 16.303C15.1 4.70303 29.1 0.703032 41.5 6.70303Z"
                                     fill="black" />
                             </svg>
-                            <div class="label" id="neutral-label">Neutral</div>
+                            <p class="label" id="neutral-label">Neutral</p>
                         </label>
                     </div>
                     <div>
@@ -153,7 +164,7 @@
                                     d="M16.3 3.50303C-5.43333 14.5697 -5.43333 45.2364 16.3 56.1697C26.0333 61.103 33.7667 61.103 43.2333 56.1697C65.2333 44.703 64.8333 13.503 42.5667 3.10303C33.3667 -1.16364 25.5 -1.0303 16.3 3.50303ZM41.5 6.70303C59.7667 15.6364 59.7667 44.1697 41.5 53.103C17.9 64.4364 -5.83333 38.4364 7.9 16.303C15.1 4.70303 29.1 0.703032 41.5 6.70303Z"
                                     fill="black" />
                             </svg>
-                            <div class="label" id="happy-label">Happy</div>
+                            <p class="label" id="happy-label">Happy</p>
                         </label>
                     </div>
                     <div>
@@ -175,7 +186,7 @@
                                     fill="black" />
                             </svg>
 
-                            <div class="label" id="joyful-label">Joyful</div>
+                            <p class="label" id="joyful-label">Joyful</p>
                         </label>
                     </div>
                 </div>
@@ -185,7 +196,7 @@
 
         <!-- Task Modal -->
         <!-- Hidden until user adds/edits a task-->
-        <section id="task-modal" class="modal">
+        <section id="task-modal" class="modal hide">
             <div class="modal-content">
                 <form class="task" id="task-form">
                     <div class="input-group">
