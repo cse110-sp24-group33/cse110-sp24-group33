@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="images/favicon.ico">
 
-    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="styles/styles.css">
     <title> Home</title>
 </head>
 
@@ -23,7 +23,7 @@
                     <button type="button" title="Previous month">
                         <i class="fa-solid fa-chevron-left"></i>
                     </button>
-                    <div class="month-year" id="month-year"></div>
+                    <div class="month-year" id="month-year">May 2024</div>
                     <button type="button" title="Next month">
                         <i class="fa-solid fa-chevron-right"></i>
                     </button>
@@ -37,16 +37,79 @@
                     <div class="day">Sat</div>
                     <div class="day">Sun</div>
                 </div>
-                <div class="dates" id="dates"></div>
+                <div class="dates" id="dates">
+                    <div class="row">
+                        <div class="day light">28</div>
+                        <div class="day light">29</div>
+                        <div class="day light">30</div>
+                        <div class="day">1</div>
+                        <div class="day">2</div>
+                        <div class="day">3</div>
+                        <div class="day">4</div>
+                    </div>
+                    <div class="row">
+                        <div class="day">5</div>
+                        <div class="day">6</div>
+                        <div class="day">7</div>
+                        <div class="day">8</div>
+                        <div class="day">9</div>
+                        <div class="day">10</div>
+                        <div class="day">11</div>
+                    </div>
+                    <div class="row">
+                        <div class="day">12</div>
+                        <div class="day">13</div>
+                        <div class="day">14</div>
+                        <div class="day">15</div>
+                        <div class="day">16</div>
+                        <div class="day">17</div>
+                        <div class="day">18</div>
+                    </div>
+                    <div class="row">
+                        <div class="day">19</div>
+                        <div class="day">20</div>
+                        <div class="day">21</div>
+                        <div class="day">22</div>
+                        <div class="day">23</div>
+                        <div class="day">24</div>
+                        <div class="day">25</div>
+                    </div>
+                    <div class="row">
+                        <div class="day">26</div>
+                        <div class="day">27</div>
+                        <div class="day">28</div>
+                        <div class="day">29</div>
+                        <div class="day">30</div>
+                        <div class="day">31</div>
+                        <div class="day light">1</div>
+                    </div>
+                </div>
+            </div>
             </div>
         </section>
 
         <section id="projects">
             <h2>Ongoing Projects</h2>
-            <ul id="project-list"></ul>
+            <ul id="project-list">
+                <li class="project-item">
+                    <div class="project-details">
+                        <label class="project-name">Project Name</label>
+                        <p class="project-date">Deadline: May 30, 2024</p>
+                        <label class="project-priority">High</label>
+                    </div>
+                    <div class="project-btns">
+                        <button class="edit-project">
+                            <i class="fa-solid fa-pencil"></i>
+                        </button>
+                        <button class="project-item-delete" title="Delete project">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                </li>
+            </ul>
         </section>
 
-         <!-- Project modal -->
+        <!-- Project modal -->
         <!-- Hidden until user adds/edits a project -->
         <section id="project-modal" class="modal hide">
             <div class="modal-content">
@@ -78,7 +141,7 @@
                 </form>
             </div>
         </section>
-        
+
     </main>
 
     <footer>
