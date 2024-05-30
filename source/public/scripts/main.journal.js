@@ -30,8 +30,8 @@ function initEntry() {
 	const taskModal = document.getElementById("task-modal");
 	const newTaskBtn = document.querySelector(".new-task");
 	const taskForm = document.getElementById("task-form");
-	const cancelTaskBtn = document.querySelector(".cancel-task");
-	const deleteTaskBtn = document.querySelector(".delete-task");
+	const cancelTaskBtn = document.getElementById("cancel-task");
+	const deleteTaskBtn = document.getElementById("delete-task");
 	const taskContainer = document.getElementById("task-container");
 	const prevDayBtn = document.getElementById("prev-day");
 	const nextDayBtn = document.getElementById("next-day");

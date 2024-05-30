@@ -414,18 +414,18 @@ input[type="radio"]:checked+.face-icon+#joyful-label {
   border-radius: 10px;
 }
 
-.save-task {
+.save {
   background-color: green;
   color: white;
 }
 
-.cancel-task {
+.cancel {
   background-color: gray;
   color: white;
   margin-left: 30px;
 }
 
-.delete-task {
+.delete {
   background-color: red;
   color: white;
   margin-left: auto;
