@@ -11,33 +11,13 @@ document.addEventListener("DOMContentLoaded", initEntry());
 
 function initEntry() {
 	// Initialize markdown editor
-		const entryTxt = new SimpleMDE({
-			element: document.getElementById("entry-text"),
-			placeholder: "Write a bit about your day here.",
-			showIcons: ["code"],
-			spellChecker: false,
-			status: ["lines", "words"]
-		});
-	
-		// Code to initialize and listen to sentiment radio buttons
-		const sentimentRadios = document.querySelectorAll('input[name="feeling"]');
-		const entry = getEntry();  // Retrieve existing entry from local storage
-	
-		// Set up the initial sentiment value from local storage
-		if (entry.sentiment) {
-			let selectedSentiment = document.querySelector(`input[name="feeling"][value="${entry.sentiment}"]`);
-			if (selectedSentiment) {
-				selectedSentiment.checked = true;
-			}
-		}
-	
-		// Listener for changes in sentiment
-		sentimentRadios.forEach(radio => {
-			radio.addEventListener('change', function () {
-				entry.sentiment = this.value;
-				updateEntry(entry);
-			});
-		});
+	const entryTxt = new SimpleMDE({
+		element: document.getElementById("entry-text"),
+		placeholder: "Write a bit about your day here.",
+		showIcons: ["code"],
+		spellChecker: false,
+		status: ["lines", "words"]
+	});
 
 	// Select elements from the DOM
 	const autosave = document.getElementById("autosave");
@@ -52,6 +32,7 @@ function initEntry() {
 	const nextDayBtn = document.getElementById("next-day");
 	const dateDisplay = document.querySelector("#date h2");
 	const todayBtn = document.getElementById("today");
+	const sentimentRadios = document.querySelectorAll("input[name=\"feeling\"]");
 
 	// Event listeners for the previous and next day buttons
 	prevDayBtn.addEventListener("click", () => {
@@ -161,12 +142,23 @@ function initEntry() {
 		}
 	});
 
+	// Updates sentiment in storage when changed
+	sentimentRadios.forEach((radio) => {
+		radio.addEventListener("change", function () {
+			const entry = getEntry();
+			if (radio.checked) {
+				entry.sentiment = radio.value;
+			}
+			updateEntry(entry);
+		});
+	});
+
 	// Default display to the current date
 	displayToday();
 
 	/**
-   * Updates the page to display the entry for the current date
-   */
+	 * Updates the page to display the entry for the current date
+	 */
 	function displayToday() {
 		dateDisplay.textContent = getCurrentDate();
 		entryDate = formatDateToYYYYMMDD(getCurrentDate());
@@ -174,17 +166,29 @@ function initEntry() {
 	}
 
 	/**
-   * Updates the page display for "Next Day" button, text entry, tasks, projects
-   */
+	 * Updates the page display for "Next Day" button, text entry, tasks, projects
+	 */
 	function updateDisplay() {
+		const entry = getEntry();
 		// Disable "next day" button if the entry date is the current date
 		if (dateDisplay.textContent === getCurrentDate()) {
 			nextDayBtn.disabled = true;
 		} else {
 			nextDayBtn.disabled = false;
 		}
-		entryTxt.value(getEntry().text_entry);
+		entryTxt.value(entry.text_entry);
 		displayTasks(taskContainer, taskModal);
+
+		// Reset sentiment display
+		sentimentRadios.forEach((radio) => {
+			console.log(radio.value);
+			console.log(entry.sentiment);
+			if (entry.sentiment === radio.value) {
+				radio.checked = true;
+			} else {
+				radio.checked = false;
+			}
+		});
 	}
 }
 
