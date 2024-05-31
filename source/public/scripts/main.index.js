@@ -42,8 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
 	});
 
 	/**
-     * Updates the page display for "Next Day" button and calendar
-     */
+	 * Updates the page display for "Next Day" button and calendar
+	 */
 	function updateDisplay() {
 		// Disable "next month" button if the currently displayed month/year is of the current date
 		if (isCurrentMonth(currentYear, currentMonth)) {
@@ -77,11 +77,12 @@ function createRow() {
 function createDay(year, month, day) {
 	const link = document.createElement("a");
 	const dateBtn = document.createElement("button");
-	dateBtn.classList.add("day");
+	dateBtn.classList.add("date");
 	dateBtn.innerText = day;
 	// Disable buttons for the future, otherwise link to journal
 	if (isInFuture(year, month, day)) {
 		dateBtn.disabled = true;
+		return dateBtn;
 	} else {
 		link.href = "./journal.html";
 	}
@@ -146,8 +147,8 @@ function renderCalendar(month, year, datesContainer, monthYear) {
 	// Fill in days from previous month
 	for (let i = numPrevDays; i > 0; i--) {
 		const prevDate = new Date(year, month, 0 - i + 1).getDate();
-		const day = createDay(year, month-1, prevDate);
-		day.classList.add("light"); // Styling to indicate not this month
+		const day = createDay(year, month - 1, prevDate);
+		day.firstChild.classList.add("light"); // Styling to indicate not this month
 		row.append(day);
 		dateCounter++;
 	}
@@ -167,7 +168,12 @@ function renderCalendar(month, year, datesContainer, monthYear) {
 	const nextDays = NUM_DATES - dateCounter;
 	for (let date = 1; date <= nextDays; date++) {
 		const day = createDay(year, month + 1, date);
-		day.classList.add("light"); // Styling to indicate not this month
+		// Styling to indicate not this month
+		if (isInFuture(year, month + 1, date)) {
+			day.classList.add("light");
+		} else {
+			day.firstChild.classList.add("light"); 
+		}
 		row.append(day);
 		dateCounter++;
 		if (dateCounter % 7 === 0) {
