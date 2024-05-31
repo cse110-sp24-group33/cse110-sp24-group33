@@ -36,7 +36,7 @@ function initEntry() {
 	const prevDayBtn = document.getElementById("prev-day");
 	const nextDayBtn = document.getElementById("next-day");
 	const dateDisplay = document.querySelector("#date h2");
-	const todayBtn = document.getElementById("today");
+	const todayBtn = document.getElementById("entry-today");
 
 	// Event listeners for the previous and next day buttons
 	prevDayBtn.addEventListener("click", () => {
@@ -49,7 +49,8 @@ function initEntry() {
 	});
 
 	todayBtn.addEventListener("click", () => {
-		displayToday();
+		localStorage.setItem("entry-display", getCurrentDate());
+		displayDate();
 	});
 
 	// Detect changes to text editor and update entry
@@ -146,21 +147,21 @@ function initEntry() {
 		}
 	});
 
-	// Default display to the current date
-	displayToday();
+	displayDate();
 
 	/**
-   * Updates the page to display the entry for the current date
-   */
-	function displayToday() {
-		dateDisplay.textContent = getCurrentDate();
-		entryDate = formatDateToYYYYMMDD(getCurrentDate());
+	 * Updates the page to display the entry for the display date in localStorage
+	 */
+	function displayDate() {
+		const date = localStorage.getItem("entry-display");
+		dateDisplay.textContent = date;
+		entryDate = formatDateToYYYYMMDD(date);
 		updateDisplay();
 	}
 
 	/**
-   * Updates the page display for "Next Day" button, text entry, tasks, projects
-   */
+	 * Updates the page display for "Next Day" button, text entry, tasks, projects
+	 */
 	function updateDisplay() {
 		// Disable "next day" button if the entry date is the current date
 		if (dateDisplay.textContent === getCurrentDate()) {
