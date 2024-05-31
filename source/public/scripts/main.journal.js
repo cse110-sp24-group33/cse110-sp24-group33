@@ -34,7 +34,7 @@ function initEntry() {
 	const prevDayBtn = document.getElementById("prev-day");
 	const nextDayBtn = document.getElementById("next-day");
 	const dateDisplay = document.querySelector("#date h2");
-	const todayBtn = document.getElementById("today");
+	const todayBtn = document.getElementById("entry-today");
 	const sentimentRadios = document.querySelectorAll("input[name=\"feeling\"]");
 
 	// Event listeners for the previous and next day buttons
@@ -48,7 +48,8 @@ function initEntry() {
 	});
 
 	todayBtn.addEventListener("click", () => {
-		displayToday();
+		localStorage.setItem("entry-display", getCurrentDate());
+		displayDate();
 	});
 
 	// Detect changes to text editor and update entry
@@ -145,26 +146,25 @@ function initEntry() {
 		}
 	});
 
-	// Updates sentiment in storage when changed
-	sentimentRadios.forEach((radio) => {
-		radio.addEventListener("change", function () {
-			const entry = getEntry();
-			if (radio.checked) {
-				entry.sentiment = radio.value;
-			}
-			updateEntry(entry);
-		});
-	});
-
-	// Default display to the current date
-	displayToday();
+	displayDate();
 
 	/**
-	 * Updates the page to display the entry for the current date
+	 * Updates the page to display the entry for the display date in localStorage
 	 */
-	function displayToday() {
-		dateDisplay.textContent = getCurrentDate();
-		entryDate = formatDateToYYYYMMDD(getCurrentDate());
+	function displayDate() {
+		const date = localStorage.getItem("entry-display");
+		dateDisplay.textContent = date;
+		entryDate = formatDateToYYYYMMDD(date);
+		// Updates sentiment in storage when changed
+		sentimentRadios.forEach((radio) => {
+			radio.addEventListener("change", function () {
+				const entry = getEntry();
+				if (radio.checked) {
+					entry.sentiment = radio.value;
+				}
+				updateEntry(entry);
+			});
+		});
 		updateDisplay();
 	}
 
