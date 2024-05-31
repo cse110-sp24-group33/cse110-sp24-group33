@@ -9,6 +9,9 @@ let editingIndex = -1;
 
 document.addEventListener("DOMContentLoaded", initEntry());
 
+/**
+ * Initializes the page for the day's journal entry.
+ */
 function initEntry() {
 	// Initialize markdown editor
 	const entryTxt = new SimpleMDE({
