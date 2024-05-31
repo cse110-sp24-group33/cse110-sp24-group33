@@ -14,15 +14,13 @@ document.addEventListener("DOMContentLoaded", initEntry());
  */
 function initEntry() {
 	// Initialize markdown editor
-	const entryTxt = new SimpleMDE(
-		{
-			element: document.getElementById("entry-text"),
-			placeholder: "Write a bit about your day here.",
-			showIcons: ["code"],
-			spellChecker: false,
-			status: ["lines", "words"]
-		}
-	);
+	const entryTxt = new SimpleMDE({
+		element: document.getElementById("entry-text"),
+		placeholder: "Write a bit about your day here.",
+		showIcons: ["code"],
+		spellChecker: false,
+		status: ["lines", "words"]
+	});
 
 	// Select elements from the DOM
 	const autosave = document.getElementById("autosave");
@@ -37,6 +35,7 @@ function initEntry() {
 	const nextDayBtn = document.getElementById("next-day");
 	const dateDisplay = document.querySelector("#date h2");
 	const todayBtn = document.getElementById("entry-today");
+	const sentimentRadios = document.querySelectorAll("input[name=\"feeling\"]");
 
 	// Event listeners for the previous and next day buttons
 	prevDayBtn.addEventListener("click", () => {
@@ -156,6 +155,16 @@ function initEntry() {
 		const date = localStorage.getItem("entry-display");
 		dateDisplay.textContent = date;
 		entryDate = formatDateToYYYYMMDD(date);
+		// Updates sentiment in storage when changed
+		sentimentRadios.forEach((radio) => {
+			radio.addEventListener("change", function () {
+				const entry = getEntry();
+				if (radio.checked) {
+					entry.sentiment = radio.value;
+				}
+				updateEntry(entry);
+			});
+		});
 		updateDisplay();
 	}
 
@@ -163,14 +172,26 @@ function initEntry() {
 	 * Updates the page display for "Next Day" button, text entry, tasks, projects
 	 */
 	function updateDisplay() {
+		const entry = getEntry();
 		// Disable "next day" button if the entry date is the current date
 		if (dateDisplay.textContent === getCurrentDate()) {
 			nextDayBtn.disabled = true;
 		} else {
 			nextDayBtn.disabled = false;
 		}
-		entryTxt.value(getEntry().text_entry);
+		entryTxt.value(entry.text_entry);
 		displayTasks(taskContainer, taskModal);
+
+		// Reset sentiment display
+		sentimentRadios.forEach((radio) => {
+			console.log(radio.value);
+			console.log(entry.sentiment);
+			if (entry.sentiment === radio.value) {
+				radio.checked = true;
+			} else {
+				radio.checked = false;
+			}
+		});
 	}
 }
 
