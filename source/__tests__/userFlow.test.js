@@ -1,17 +1,13 @@
-// const puppeteer = require('puppeteer');
-
 describe('Basic user flow for Website', () => {
 
     beforeAll(async () => {
-        // browser = await puppeteer.launch({ headless: false });
-        // page = await browser.newPage();
         await page.goto('https://digitaldr3amt3am-journal.netlify.app');
     });
 
     /**
-     * 
-     * @param {takes a string in format of Month Day, Year} dateString 
-     * @returns YearMonthDay (in numbers i.e. May 24, 2024 gives 20240524)
+     * Converts a date string from "Month Day, Year" format to "YearMonthDay" format
+     * @param {string} dateString - Date string in "Month Day, Year" format
+     * @returns {string} - Date string in "YearMonthDay" format (e.g., "May 24, 2024" -> "20240524")
      */
     const convertDateString = (dateString) => {
         const date = new Date(dateString);
@@ -21,6 +17,7 @@ describe('Basic user flow for Website', () => {
         return `${year}${month}${day}`;
     };
 
+    // Test case to check if the home page displays today's date
     it('Initial Home Page - Check it is on today', async () => {
         console.log('Checking home date is on today...');
         const today = new Date();
@@ -32,11 +29,13 @@ describe('Basic user flow for Website', () => {
         expect(highlightedDate).toBe(currentDate);
     });
 
+    // Test case to navigate from the home page to the journal page
     it('Gets to the journal page from home', async () => {
         await page.click('#dates a'); 
         expect(page.url()).toBe("https://digitaldr3amt3am-journal.netlify.app/journal.html");
     });
 
+    // Test case to create a new journal entry
     it('Create a new journal entry', async () => {
         await page.waitForSelector('#entry-today');
         await page.click('#entry-today');
@@ -67,6 +66,7 @@ describe('Basic user flow for Website', () => {
         expect(journalEntry.text_entry).toBe('Today was a great day! I wrote some tests.');
     });
 
+    // Test case to navigate to another date and back to verify the journal entry is saved
     it('Navigate to another date and back to verify save (Journal)', async () => {
         await page.waitForSelector('#prev-day'); 
         await page.click('#prev-day');
@@ -81,6 +81,7 @@ describe('Basic user flow for Website', () => {
         expect(textAreaValue).toContain('Today was a great day! I wrote some tests.');
     });
 
+    // Test case to reload the page and verify the journal entry is still present
     it('Reload and verify an old journal entry', async () => {
         await page.reload();
         await page.waitForSelector('.CodeMirror');
@@ -90,8 +91,7 @@ describe('Basic user flow for Website', () => {
         expect(textAreaValue).toContain('Today was a great day! I wrote some tests.');
     });
 
-    
-    
+    // Test case to clear a journal entry
     it('Clear journal entry', async () => {
         
         await page.click('#entry-today'); 
@@ -125,6 +125,7 @@ describe('Basic user flow for Website', () => {
         expect(journalEntry.text_entry).toBe("");
     });
 
+    // Test case to add a new task
     it('Add a new task', async () => {
         await page.click('.new-task');
         await page.waitForSelector('#task-desc');
@@ -156,6 +157,7 @@ describe('Basic user flow for Website', () => {
         expect(tasks.some(task => task.name === 'Write unit tests')).toBe(true);
     });
 
+    // Test case to navigate to another date and back to verify the task is saved
     it('Navigate to another date and back to verify save (task)', async () => {
         await page.waitForSelector('#prev-day'); 
         await page.click('#prev-day');
@@ -168,11 +170,13 @@ describe('Basic user flow for Website', () => {
         expect(taskDesc).toBe('Write unit tests');
     });
 
+    // Test case to reload the page and verify the new task is still present
     it('Reload and verify new task', async() => {
         const taskDesc = await page.$eval('.task-item .task-description', el => el.textContent);
         expect(taskDesc).toBe('Write unit tests');
     });
 
+    // Test case to edit a task
     it('Edit a task', async () => {
         await page.click('.edit-task');
         await page.waitForSelector('#task-desc');
@@ -184,11 +188,13 @@ describe('Basic user flow for Website', () => {
         expect(taskDesc).toBe('Write more unit tests');
     });
 
+    // Test case to reload the page and verify the edited task is still present
     it('Reloading and verify an edited task', async() => {
         const taskDesc = await page.$eval('.task-item .task-description', el => el.textContent);
         expect(taskDesc).toBe('Write more unit tests');
     });
 
+    // Test case to delete a task
     it('Delete a task', async () => {
         await page.click('.edit-task');
         await page.waitForSelector('#delete-task');
@@ -216,6 +222,7 @@ describe('Basic user flow for Website', () => {
         expect(tasks.length).toBe(0);
     });
     
+    // Test case to select and verify the sentiment
     it('Select and verify sentiment', async () => {
         const sentiments = ['upset', 'unhappy', 'neutral', 'happy', 'joyful'];
 
@@ -248,6 +255,7 @@ describe('Basic user flow for Website', () => {
         }
     });
 
+    // Test case to navigate to another date and back to verify the sentiment is saved
     it('Navigate to another date and back to verify save (Journal)', async () => {
         await page.waitForSelector('#prev-day'); 
         await page.click('#prev-day');
@@ -265,6 +273,7 @@ describe('Basic user flow for Website', () => {
         expect(selectedSentiment).toBe('joyful');
     });
 
+    // Test case to reload the page and verify the selected sentiment is still present
     it('Reload and verify selected sentiment', async () => {
         await page.reload();
         await page.waitForSelector('.CodeMirror');
