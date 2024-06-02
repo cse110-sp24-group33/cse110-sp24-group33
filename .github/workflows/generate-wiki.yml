@@ -2,8 +2,8 @@ name: Generate Wiki
 
 on:
     push:
-    #     branches:
-    #         - main
+        branches:
+            - main
         paths:
             - '.github/workflows/generate-wiki.yml'
             - 'admin/team.md'
@@ -15,9 +15,6 @@ jobs:
     generate:
         name: Wiki Generation
         runs-on: ubuntu-latest
-        # defaults:
-        #   run:
-        #     working-directory: source
         steps:
             - name: Checkout Code
               uses: actions/checkout@v4
