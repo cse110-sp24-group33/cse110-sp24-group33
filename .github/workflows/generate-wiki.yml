@@ -25,9 +25,9 @@ jobs:
             - name: Compile Markdown Files
               run: |
                   mkdir wiki
-                  cp admin/team.md wiki-pages/Team.md
-                  cp admin/cipipeline/phase1.md wiki-pages/Pipeline.md
-                  cp README.md wiki-pages/Home.md
+                  cp admin/team.md wiki/Team.md
+                  cp admin/cipipeline/phase1.md wiki/Pipeline.md
+                  cp README.md wiki/Home.md
 
             - name: Use Node.js
               uses: actions/setup-node@v4
@@ -38,9 +38,9 @@ jobs:
               run: |
                   npm init -y
                   npm install --save-dev jsdoc-to-markdown
-                  npx -c 'jsdoc2md source/public/scripts/date.util.js' > wiki-pages/JSDoc:-date.util.js.md
-                  npx -c 'jsdoc2md source/public/scripts/main.index.js' > wiki-pages/JSDoc:-main.index.js.md
-                  npx -c 'jsdoc2md source/public/scripts/main.journal.js' > wiki-pages/JSDoc:-main.journal.js.md
+                  npx -c 'jsdoc2md source/public/scripts/date.util.js' > wiki/JSDoc:-date.util.js.md
+                  npx -c 'jsdoc2md source/public/scripts/main.index.js' > wiki/JSDoc:-main.index.js.md
+                  npx -c 'jsdoc2md source/public/scripts/main.journal.js' > wiki/JSDoc:-main.journal.js.md
 
             - name: Upload Docs to Wiki
               uses: SwiftDocOrg/github-wiki-publish-action@v1
