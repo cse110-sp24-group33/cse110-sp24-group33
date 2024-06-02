@@ -1,35 +1,34 @@
-# Pipelining Assignment
+# Pipeline Overview
 
-## Diagram
+## Current Components
+- Linting via ESLint
+- Automated unit tests w/ Jest running via GitHub actions
+- Automated E2E tests w/ Puppeteer running via GitHub actions
+- Code Quality via Code Factor
+- Code Quality via Human PR Review
+  - Required pull request reviewer + approval
+  - Required passing status checks (linting, tests, static analysis)
+  - Netlify staging app preview
+  - Lighthouse audit
+- Documentation generation (repo + wiki) w/ JSDoc via GitHub actions
 
-![Phase 1 Pipeline Diagram](/admin/cipipeline/phase1.png)
+![Phase 1 Pipeline Diagram](https://raw.githubusercontent.com/cse110-sp24-group33/cse110-sp24-group33/main/admin/cipipeline/phase1.drawio.png)
 
-## Documentation
+## Breakdown
 
-### Git Push
+### Development - Code Quality
 
-Developers can push their code to the repository on their specific branches. Once they have finished writing their code, they can create a pull request to merge with the main branch. Another team member will then take a look at the code quality and efficiency and then provide feedback (if needed). After that, a group leader will also take a look at the code and if all is good to go, the pull request will be approved. The branch also will require status checks to pass before merging.
+Our pipeline begins with developers, who will push their code to the repository on their specific branches. At this stage, code styling is enforced via linting with ESLint (see configurations at `/source/.eslintrc.config.js`). To enforce style, we have a GitHub workflow (`eslint.yml`) which runs whenever changes are made to any JavaScript source code files. If any errors are detected according to the linter's configurations, the workflow log will indicate what areas of styling need to be updated. Once developers have finished their code, they can create a pull request to merge with the main branch. Another team member will review the code for quality, consistency, and efficiency, and then provide feedback (if needed). The pull request will be approved once any requested changes have been made. The branch also will require status checks on testing, linting, and static analysis to pass before merging.
 
-### Build
+### Testing - Unit and E2E
 
-The build process is automated using github actions. Builds are run in a clean and isolated environment to ensure that they are reproducible
+Any push containing changes to JavaScript source files will trigger automatic unit and end-to-end (E2E) tests. GitHub actions will trigger to run unit tests using Jest and E2E tests using Puppeteer. Unit tests are defined for each module to ensure module-specific functionality, and E2E tests are defined by page to ensure interface-specific functionality.
 
-### Unit Tests
+### Review & Automation - Code Quality
 
-Unit tests are automatically run as part of the build process. Tests are defined for each module to ensure module-specific functionality. Unit tests are more efficient for tasks that can have isolated logic
-
-### Human Review
-
-Every pull request requires at least one code review from a project team member not involved in writing the original code. Alongside code review, documentation is also planned to be reviewed to ensure clarity and completeness
-
-### E2E Testing 
-
-End to end testing ensures proper integration and functionality of all components used to build the web app. Therefore as part of the pipeline, we plan to use tools such as Cypress to simulate the app and write tests that represent realistic user interactions. Tests may simulate clicking specific UI elements, inputting data such as projects, and validating the accuracy of calculations, storage, and display processes. This will ensure an error-free experience for the end-user.
+To maintain code quality, every pull request requires at least one code review with approval and status checks on testing, linting, and static analysis to pass.
+For code reviews, they must be from a project team member not involved in writing the original code to avoid bias. This provides an extra layer of accountability to follow code quality and styling practices and protects the main branch from low quality code. To help with the review process, CodeFactor has been set up to evaluate changes for any styling issues were detected. Additionally, a Netlify staging preview will be generated for all branches and pull requests, which also provides a Lighthouse audit. This preview provides an opportunity to review the changes in a more interactive manner.
 
 ### Documentation 
 
-Appropriate documentation ensures that everyone involved in the project, right from developers (to understand how the system works) to the end user (a manual/guide as to how to use the program) are guided well. For developers, it will be easier to modify/change the functionality if needed. It will also increase development speed as if a change is needed, the developer does not have to try and figure out what the code does; he can simply just read the documentation and proceed. Well-documented code also significantly speeds up the onboarding process for new team members. For end users, it will improve the overall experience as after reading the guide, they can use the program up to its full potential.
-
-## Note
-
-This is just the first stage of our pipeline. As time passes by, we decided to add more steps to our pipeline to help improve the software development process by improving consistency, reliability, and risk mitigation. A lot of stages in our pipeline are planned. Since we have not started the development of our project, we cannot implement a lot of the pipeline features.
+Whenever a push is made to the main branch, GitHub actions are initiated to generate code documentation via JSDoc. This documentation is added to the branch in the folder `/source/docs/`. This ensures that all pull request merged will include updated code documentation. Additionally, a GitHub action has been set up to generate Markdown from JSDoc, which will be uploaded to the wiki alongside information about the project, team, and pipeline. Appropriate documentation ensures that developers will have sufficient guidance to modify the functionality if needed. Well-documented code also significantly speeds up the onboarding process for new team members. Our team also will write user documentation to improve the overall experience for end users. Our user documentation will serve as a guide to use our software to its full potential.

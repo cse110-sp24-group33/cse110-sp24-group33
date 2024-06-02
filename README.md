@@ -6,7 +6,7 @@
 
 Software developers often face challenges in effectively documenting their daily work activities, reflections, and insights. Existing solutions lack the tailored features and flexibility needed to meet the specific needs of developers. They need a dedicated platform designed specifically for developers to record their tasks, challenges, solutions, and learnings over time in a centralized and organized manner. **Our project aims to develop a streamlined and user-friendly journaling tool tailored for developers, enabling them to efficiently manage deadlines and daily tasks. Through a simple and intuitive design, developers will be empowered to improve their productivity and time management for professional growth and success.**
 
-## This repository is our SSOT (single source of truth)!
+## This repository is our SSoT (single source of truth)!
 - Meet our team [here](admin/team.md)!
 -   `/.github/workflows`: workflows for GitHub Actions
 -   `/admin`: Administrative materials
@@ -16,7 +16,7 @@ Software developers often face challenges in effectively documenting their daily
     -   `/admin/misc`: Miscellaneous materials like team rules
     -   `/admin/videos`: Videos (team intro, etc.)
 -   `/source`: Source code
-    -   `/source/__tests__`: Unit tests
+    -   `/source/__tests__`: Unit and E2E tests
     -   `/source/public`: Client-side code accessible to the public
 -   `/specs`: Project specs
     -   `/specs/adrs`: Architectural Decision Records
