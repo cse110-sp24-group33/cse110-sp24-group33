@@ -200,6 +200,28 @@ describe('Basic user flow for Website', () => {
         expect(taskDesc).toBe('Write more unit tests');
     });
 
+    it('Test to see if edited task is in localStorage', async() =>{
+        // Check localStorage for task
+        console.log('Checking if the task is in localStorage');
+        let entryDate = await page.evaluate(() => {
+            return localStorage.getItem('entry-display');
+        });
+
+        entryDate = convertDateString(entryDate);
+
+        const journalEntry = await page.evaluate((entryDate) => {
+            const entry = JSON.parse(localStorage.getItem(`entry-${entryDate}`));
+            if (!entry) {
+                throw new Error(`Journal entry for ${entryDate} is not found`);
+            }
+            return entry;
+        }, entryDate);
+
+        const tasks = journalEntry.tasks || [];
+        expect(tasks.length).toBeGreaterThan(0);
+        expect(tasks.some(task => task.name === 'Write more unit tests')).toBe(true);
+    });
+
     // Test case to reload the page and verify the edited task is still present
     it('Reloading and verify an edited task', async() => {
         console.log('Reloading page and seeing if edited task is valid...');
