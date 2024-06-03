@@ -8,7 +8,7 @@ module.exports = {
         // `jest-puppeteer` global configuration
         'jest-puppeteer': {
             launch: {
-                headless: true, // Ensure tests run in headless mode
+                headless: false, // Ensure tests run in headless mode
                 slowMo: 50,
                 args: ['--no-sandbox', '--disable-setuid-sandbox']
             },
