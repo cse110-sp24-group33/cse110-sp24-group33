@@ -3,5 +3,15 @@ module.exports = {
         "^.+\\.[t|j]sx?$": "babel-jest"
     },
     preset: 'jest-puppeteer',
-    verbose: true
+    verbose: true,
+    globals: {
+        'jest-puppeteer': {
+            launch: {
+                headless: true, // Ensure tests run in headless mode
+                slowMo: 50,
+                args: ['--no-sandbox', '--disable-setuid-sandbox']
+            },
+            browserContext: 'default'
+        }
+    }
 };
