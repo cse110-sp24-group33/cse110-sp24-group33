@@ -9,19 +9,6 @@ describe('Basic user flow for Website', () => {
         await page.goto('https://digitaldr3amt3am-journal.netlify.app');
     });
 
-    // /**
-    //  * Converts a date string from "Month Day, Year" format to "YearMonthDay" format
-    //  * @param {string} dateString - Date string in "Month Day, Year" format
-    //  * @returns {string} - Date string in "YearMonthDay" format (e.g., "May 24, 2024" -> "20240524")
-    //  */
-    // const formatDateToYYYYMMDD = (dateString) => {
-    //     const date = new Date(dateString);
-    //     const year = date.getFullYear();
-    //     const month = String(date.getMonth() + 1).padStart(2, '0'); 
-    //     const day = String(date.getDate()).padStart(2, '0');
-    //     return `${year}${month}${day}`;
-    // };
-
     // Test case to check if the home page displays today's date
     it('Initial Home Page - Check it is on today', async () => {
         console.log('Checking home date is on today...');
@@ -30,14 +17,14 @@ describe('Basic user flow for Website', () => {
         const highlightedDate = await page.$eval('.highlight', el => el.textContent);
         const currentDate = today.getDate().toString();
         expect(highlightedDate).toBe(currentDate);
-    });
+    },10000);
 
     // Test case to navigate from the home page to the journal page
     it('Gets to the journal page from home', async () => {
         console.log('Going to the journal page...');
         await page.click('#dates a'); 
         expect(page.url()).toBe("https://digitaldr3amt3am-journal.netlify.app/journal.html");
-    });
+    },10000);
 
     // Test case to create a new journal entry
     it('Create a new journal entry', async () => {
@@ -88,7 +75,7 @@ describe('Basic user flow for Website', () => {
             return document.querySelector('.CodeMirror').CodeMirror.getValue();
         });
         expect(textAreaValue).toContain('Today was a great day! I wrote some tests.');
-    });
+    },10000);
 
     // Test case to reload the page and verify the journal entry is still present
     it('Reload and verify an old journal entry', async () => {
@@ -99,7 +86,7 @@ describe('Basic user flow for Website', () => {
             return document.querySelector('.CodeMirror').CodeMirror.getValue();
         });
         expect(textAreaValue).toContain('Today was a great day! I wrote some tests.');
-    });
+    },10000);
 
     // Test case to clear a journal entry
     it('Clear journal entry', async () => {
@@ -133,7 +120,7 @@ describe('Basic user flow for Website', () => {
         }, entryDate);
 
         expect(journalEntry.text_entry).toBe("");
-    });
+    },10000);
 
     // Test case to add a new task
     it('Add a new task', async () => {
@@ -167,7 +154,7 @@ describe('Basic user flow for Website', () => {
         const tasks = journalEntry.tasks || [];
         expect(tasks.length).toBeGreaterThan(0);
         expect(tasks.some(task => task.name === 'Write unit tests')).toBe(true);
-    });
+    },10000);
 
     // Test case to navigate to another date and back to verify the task is saved
     it('Navigate to another date and back to verify save (task)', async () => {
@@ -183,14 +170,14 @@ describe('Basic user flow for Website', () => {
         await page.waitForSelector('.task-item');
         const taskDesc = await page.$eval('.task-item .task-description', el => el.textContent);
         expect(taskDesc).toBe('Write unit tests');
-    });
+    },10000);
 
     // Test case to reload the page and verify the new task is still present
     it('Reload and verify new task', async() => {
         console.log('Reloading and verifying task...');
         const taskDesc = await page.$eval('.task-item .task-description', el => el.textContent);
         expect(taskDesc).toBe('Write unit tests');
-    });
+    },10000);
 
     // Test case to edit a task
     it('Edit a task', async () => {
@@ -203,7 +190,7 @@ describe('Basic user flow for Website', () => {
 
         const taskDesc = await page.$eval('.task-item .task-description', el => el.textContent);
         expect(taskDesc).toBe('Write more unit tests');
-    });
+    },10000);
 
     it('Test to see if edited task is in localStorage', async() =>{
         // Check localStorage for task
@@ -225,14 +212,14 @@ describe('Basic user flow for Website', () => {
         const tasks = journalEntry.tasks || [];
         expect(tasks.length).toBeGreaterThan(0);
         expect(tasks.some(task => task.name === 'Write more unit tests')).toBe(true);
-    });
+    },10000);
 
     // Test case to reload the page and verify the edited task is still present
     it('Reloading and verify an edited task', async() => {
         console.log('Reloading page and seeing if edited task is valid...');
         const taskDesc = await page.$eval('.task-item .task-description', el => el.textContent);
         expect(taskDesc).toBe('Write more unit tests');
-    });
+    },10000);
 
     // Test case to delete a task
     it('Delete a task', async () => {
@@ -318,7 +305,7 @@ describe('Basic user flow for Website', () => {
         });
 
         expect(selectedSentiment).toBe('joyful');
-    });
+    },10000);
 
     // Test case to reload the page and verify the selected sentiment is still present
     it('Reload and verify selected sentiment', async () => {
@@ -332,6 +319,6 @@ describe('Basic user flow for Website', () => {
         });
 
         expect(selectedSentiment).toBe('joyful');
-    });
+    },10000);
 
 });
