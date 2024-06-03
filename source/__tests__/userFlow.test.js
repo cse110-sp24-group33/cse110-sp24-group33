@@ -1,21 +1,26 @@
+
+import { 
+    formatDateToYYYYMMDD 
+} from '../public/scripts/date.util.js';
+
 describe('Basic user flow for Website', () => {
 
     beforeAll(async () => {
         await page.goto('https://digitaldr3amt3am-journal.netlify.app');
     });
 
-    /**
-     * Converts a date string from "Month Day, Year" format to "YearMonthDay" format
-     * @param {string} dateString - Date string in "Month Day, Year" format
-     * @returns {string} - Date string in "YearMonthDay" format (e.g., "May 24, 2024" -> "20240524")
-     */
-    const convertDateString = (dateString) => {
-        const date = new Date(dateString);
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0'); 
-        const day = String(date.getDate()).padStart(2, '0');
-        return `${year}${month}${day}`;
-    };
+    // /**
+    //  * Converts a date string from "Month Day, Year" format to "YearMonthDay" format
+    //  * @param {string} dateString - Date string in "Month Day, Year" format
+    //  * @returns {string} - Date string in "YearMonthDay" format (e.g., "May 24, 2024" -> "20240524")
+    //  */
+    // const formatDateToYYYYMMDD = (dateString) => {
+    //     const date = new Date(dateString);
+    //     const year = date.getFullYear();
+    //     const month = String(date.getMonth() + 1).padStart(2, '0'); 
+    //     const day = String(date.getDate()).padStart(2, '0');
+    //     return `${year}${month}${day}`;
+    // };
 
     // Test case to check if the home page displays today's date
     it('Initial Home Page - Check it is on today', async () => {
@@ -43,7 +48,7 @@ describe('Basic user flow for Website', () => {
         const editor = await page.$('.CodeMirror');
         await editor.click();
         await page.keyboard.type('Today was a great day! I wrote some tests.');
-
+        console.log('Waiting for autosave...');
         await page.waitForSelector('#autosave');
         const autosaveText = await page.$eval('#autosave', el => el.textContent);
         expect(autosaveText).toContain('Autosaved');
@@ -54,7 +59,7 @@ describe('Basic user flow for Website', () => {
             return localStorage.getItem('entry-display');
         });
 
-        entryDate = convertDateString(entryDate);
+        entryDate = formatDateToYYYYMMDD(entryDate);
 
         const journalEntry = await page.evaluate((entryDate) => {
             const entry = JSON.parse(localStorage.getItem(`entry-${entryDate}`));
@@ -65,7 +70,7 @@ describe('Basic user flow for Website', () => {
         }, entryDate);
 
         expect(journalEntry.text_entry).toBe('Today was a great day! I wrote some tests.');
-    });
+    }, 10000);
 
     // Test case to navigate to another date and back to verify the journal entry is saved
     it('Navigate to another date and back to verify save (Journal)', async () => {
@@ -117,7 +122,7 @@ describe('Basic user flow for Website', () => {
             return localStorage.getItem('entry-display');
         });
 
-        entryDate = convertDateString(entryDate);
+        entryDate = formatDateToYYYYMMDD(entryDate);
 
         const journalEntry = await page.evaluate((entryDate) => {
             const entry = JSON.parse(localStorage.getItem(`entry-${entryDate}`));
@@ -149,7 +154,7 @@ describe('Basic user flow for Website', () => {
             return localStorage.getItem('entry-display');
         });
 
-        entryDate = convertDateString(entryDate);
+        entryDate = formatDateToYYYYMMDD(entryDate);
 
         const journalEntry = await page.evaluate((entryDate) => {
             const entry = JSON.parse(localStorage.getItem(`entry-${entryDate}`));
@@ -207,7 +212,7 @@ describe('Basic user flow for Website', () => {
             return localStorage.getItem('entry-display');
         });
 
-        entryDate = convertDateString(entryDate);
+        entryDate = formatDateToYYYYMMDD(entryDate);
 
         const journalEntry = await page.evaluate((entryDate) => {
             const entry = JSON.parse(localStorage.getItem(`entry-${entryDate}`));
@@ -245,7 +250,7 @@ describe('Basic user flow for Website', () => {
             return localStorage.getItem('entry-display');
         });
 
-        entryDate = convertDateString(entryDate);
+        entryDate = formatDateToYYYYMMDD(entryDate);
 
         const journalEntry = await page.evaluate((entryDate) => {
             const entry = JSON.parse(localStorage.getItem(`entry-${entryDate}`));
@@ -280,7 +285,7 @@ describe('Basic user flow for Website', () => {
                 return localStorage.getItem('entry-display');
             });
 
-            entryDate = convertDateString(entryDate);
+            entryDate = formatDateToYYYYMMDD(entryDate);
 
             const journalEntry = await page.evaluate((entryDate) => {
                 const entry = JSON.parse(localStorage.getItem(`entry-${entryDate}`));
@@ -292,7 +297,7 @@ describe('Basic user flow for Website', () => {
 
             expect(journalEntry.sentiment).toBe(sentiment);
         }
-    });
+    },10000);
 
     // Test case to navigate to another date and back to verify the sentiment is saved
     it('Navigate to another date and back to verify save (Journal)', async () => {

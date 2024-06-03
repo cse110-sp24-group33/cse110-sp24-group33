@@ -22,9 +22,5 @@
     "puppeteer": "^22.10.0",
     "jsdoc": "^4.0.3"
   },
-  "jest": {
-    "preset": "jest-puppeteer",
-    "verbose": true
-  },
   "type": "module"
 }
