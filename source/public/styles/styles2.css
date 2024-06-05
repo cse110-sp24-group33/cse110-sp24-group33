@@ -72,9 +72,10 @@ main{
     height:100%;
     
 }
+
 .highlight{
     background-color: #FFC700 !important;
-    border-radius: 33px;
+    border-radius: 100%;
 
 }
 
@@ -219,8 +220,8 @@ body{
 }
 
 #project-modal{
-   display:none;
-   /*display:flex;*/ 
+   display:none; /*comment this to see modal*/
+   /*display:flex;*/ /*uncomment to see modal*/
    position:fixed;
    top:0;
    left:0;
@@ -257,7 +258,6 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 100%;
 
     .input-group{
         display:flex;
@@ -303,7 +303,6 @@ body{
     display:flex;
     gap:20px;
 
-
 }
 
 .save{
@@ -338,6 +337,7 @@ body{
 #deadline{
     height:100%;
     border-radius: 10px;
+    padding:10%;
 }
 
 .newProjectButton{
@@ -368,6 +368,7 @@ h2{
 #priority-level{
     height: 100%;
     border-radius: 10px;
+    padding:10%;
 }
 
 
