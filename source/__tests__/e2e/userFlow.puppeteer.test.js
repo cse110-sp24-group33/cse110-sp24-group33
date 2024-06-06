@@ -1,4 +1,4 @@
-//userFlow.puppeteer.test.js
+// userFlow.puppeteer.test.js
 
 import {
     formatDateToYYYYMMDD
