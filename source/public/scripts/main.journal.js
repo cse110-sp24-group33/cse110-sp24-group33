@@ -78,6 +78,7 @@ function initEntry() {
 	// Reset editing index and show the modal when "New Task" button is clicked
 	newTaskBtn.addEventListener("click", () => {
 		editingIndex = -1;
+		deleteTaskBtn.classList.add("hide");
 		taskModal.classList.remove("hide");
 
 		// Clear modal fields
@@ -278,6 +279,7 @@ function displayTasks(taskContainer, taskModal) {
 		editButton.innerHTML = "<i class=\"fa-solid fa-pencil\"></i>";
 		editButton.setAttribute("data-index", index);
 		editButton.setAttribute("title", "Edit task");
+		
 
 		// Create the delete button
 		const deleteButton = document.createElement("button");
@@ -324,6 +326,7 @@ function displayTasks(taskContainer, taskModal) {
 			document.getElementById("task-type").value = task.type_tag;
 			document.getElementById("task-project").value = task.project_tag;
 			taskModal.classList.remove("hide");
+			deleteTaskBtn.classList.remove("hide");
 		});
 
 		deleteButton.addEventListener("click", function () {
