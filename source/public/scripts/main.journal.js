@@ -91,6 +91,7 @@ function initEntry() {
 	window.addEventListener("click", (event) => {
 		if (event.target === taskModal) {
 			taskModal.classList.add("hide");
+			deleteTaskBtn.classList.remove("hide");
 		}
 	});
 
@@ -128,11 +129,13 @@ function initEntry() {
 		updateTasks(entry, tasks);
 		displayTasks(taskContainer, taskModal);
 		taskModal.classList.add("hide");
+		deleteTaskBtn.classList.remove("hide");
 	});
 
 	// Hide the modal when the "Cancel" button is clicked
 	cancelTaskBtn.addEventListener("click", () => {
 		taskModal.classList.add("hide");
+		deleteTaskBtn.classList.remove("hide");
 	});
 
 	// Delete the current task when the "Delete" button in the modal is clicked
@@ -279,7 +282,7 @@ function displayTasks(taskContainer, taskModal) {
 		editButton.innerHTML = "<i class=\"fa-solid fa-pencil\"></i>";
 		editButton.setAttribute("data-index", index);
 		editButton.setAttribute("title", "Edit task");
-		
+
 
 		// Create the delete button
 		const deleteButton = document.createElement("button");
@@ -326,7 +329,6 @@ function displayTasks(taskContainer, taskModal) {
 			document.getElementById("task-type").value = task.type_tag;
 			document.getElementById("task-project").value = task.project_tag;
 			taskModal.classList.remove("hide");
-			deleteTaskBtn.classList.remove("hide");
 		});
 
 		deleteButton.addEventListener("click", function () {
