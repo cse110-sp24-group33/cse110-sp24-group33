@@ -1,8 +1,5 @@
 // date.util.test.js
 
-/**
- * @jest-environment jsdom
- */
 import { 
     getCurrentDate, 
     formatDateToYYYYMMDD 

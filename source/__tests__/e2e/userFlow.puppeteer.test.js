@@ -4,9 +4,6 @@ import {
     formatDateToYYYYMMDD
 } from '../../public/scripts/date.util.js';
 
-/**
- * @jest-environment puppeteer
- */
 describe('Basic user flow for Website', () => {
 
     beforeAll(async () => {

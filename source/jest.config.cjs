@@ -6,13 +6,13 @@ module.exports = {
     projects: [
         {
             displayName: "unit",
-            testEnvironment: "jest-environment-jsdom",
-            testMatch: ["**/*.*.test.js"],
+            testEnvironment: "jsdom",
+            testMatch: ["**/unit/*.*.test.js"],
         },
         {
             displayName: "e2e",
             preset: "jest-puppeteer",
-            testMatch: ["**/*.puppeteer.test.js"],
+            testMatch: ["**/e2e/*.puppeteer.test.js"],
         },
     ],
 };
