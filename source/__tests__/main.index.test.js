@@ -1,106 +1,99 @@
-//main.index.test.js
+import {
+  getCurrentDate,
+  formatDateToMonthDayYear,
+  getMonthYear,
+  formatDateToYYYYMMDD,
+  isCurrentDate,
+  isCurrentMonth,
+  isInFuture
+} from "./date.util.js";
+import { createRow, createDay, changeMonth, renderCalendar } from "./main.index.js";
 
-import { getCurrentDate, formatDateToMonthDayYear, getMonthYear, formatDateToYYYYMMDD, isCurrentDate, isCurrentMonth, isInFuture } from "./main.index.js";
-import "./main.index.js";
+describe("Calendar Functions", () => {
+  let currentMonth;
+  let currentYear;
+  let datesContainer;
+  let monthYear;
 
-beforeEach(() => {
-  document.body.innerHTML = `
-    <div class="calendar">
-      <header>
-        <button title="Previous month">Previous</button>
+  beforeEach(() => {
+    document.body.innerHTML = `
+      <div id="calendar">
         <div id="month-year"></div>
-        <button title="Next month">Next</button>
-      </header>
-      <div id="dates" class="dates"></div>
-      <button id="home-today">Today</button>
-    </div>
-  `;
-  localStorage.clear();
-});
-
-describe("Calendar functionality", () => {
-  test("Initializes with the current date", () => {
-    const monthYear = document.getElementById("month-year");
+        <div id="dates"></div>
+      </div>
+    `;
+    datesContainer = document.getElementById("dates");
+    monthYear = document.getElementById("month-year");
     const today = new Date();
-    const expectedMonthYear = getMonthYear(today.getMonth(), today.getFullYear());
-
-    expect(monthYear.innerText).toBe(expectedMonthYear);
+    currentMonth = today.getMonth();
+    currentYear = today.getFullYear();
   });
 
-  test("Next month button should be disabled for the current month", () => {
-    const nextMonthBtn = document.querySelector("button[title='Next month']");
-    const today = new Date();
+  test("createRow creates a new row element", () => {
+    const row = createRow();
+    expect(row.tagName).toBe("DIV");
+    expect(row.classList.contains("row")).toBe(true);
+  });
 
-    if (isCurrentMonth(today.getFullYear(), today.getMonth())) {
-      expect(nextMonthBtn.disabled).toBe(true);
+  test("createDay creates a day button element", () => {
+    const year = 2023;
+    const month = 5;
+    const day = 15;
+    const dayElement = createDay(year, month, day);
+
+    expect(dayElement.tagName).toBe("A");
+    expect(dayElement.firstChild.tagName).toBe("BUTTON");
+    expect(dayElement.firstChild.innerText).toBe(day.toString());
+
+    // Check if the date is in the future
+    if (isInFuture(year, month, day)) {
+      expect(dayElement.firstChild.disabled).toBe(true);
     } else {
-      expect(nextMonthBtn.disabled).toBe(false);
+      expect(dayElement.href).toContain("journal.html");
+    }
+
+    // Check if the date is the current date
+    if (isCurrentDate(year, month, day)) {
+      expect(dayElement.firstChild.classList.contains("highlight")).toBe(true);
     }
   });
 
-  test("Previous month button click changes the month", () => {
-    const prevMonthBtn = document.querySelector("button[title='Previous month']");
-    const monthYear = document.getElementById("month-year");
-    const initialMonthYear = monthYear.innerText;
+  test("changeMonth updates the current month and year", () => {
+    changeMonth(1);
+    expect(currentMonth).toBe((new Date().getMonth() + 1) % 12);
+    expect(currentYear).toBe(new Date().getFullYear() + (currentMonth === 11 ? 1 : 0));
 
-    prevMonthBtn.click();
-    const newMonthYear = monthYear.innerText;
-
-    expect(newMonthYear).not.toBe(initialMonthYear);
+    changeMonth(-2);
+    expect(currentMonth).toBe(new Date().getMonth() - 1);
+    expect(currentYear).toBe(new Date().getFullYear() - (currentMonth === 0 ? 1 : 0));
   });
 
-  test("Today button resets to the current month and year", () => {
-    const todayBtn = document.getElementById("home-today");
-    const monthYear = document.getElementById("month-year");
-    const today = new Date();
-
-    todayBtn.click();
-    const expectedMonthYear = getMonthYear(today.getMonth(), today.getFullYear());
-
+  test("renderCalendar correctly renders the calendar", () => {
+    renderCalendar(currentMonth, currentYear, datesContainer, monthYear);
+    const expectedMonthYear = getMonthYear(currentMonth, currentYear);
     expect(monthYear.innerText).toBe(expectedMonthYear);
-  });
 
-  test("Clicking on a day button stores the correct date in localStorage", () => {
-    const dayButton = document.createElement("button");
-    dayButton.classList.add("date");
-    dayButton.innerText = "15";
-    document.body.append(dayButton);
-
-    const link = document.createElement("a");
-    link.append(dayButton);
-    document.body.append(link);
-
-    const today = new Date();
-    const dateString = formatDateToMonthDayYear(today.getFullYear(), today.getMonth(), 15);
-
-    dayButton.click();
-    expect(localStorage.getItem("entry-display")).toBe(dateString);
-  });
-
-  test("Dates from the previous month are displayed correctly", () => {
-    const datesContainer = document.getElementById("dates");
-    const today = new Date();
-    const firstDay = new Date(today.getFullYear(), today.getMonth(), 1).getDay();
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
     const numPrevDays = (firstDay === 0) ? 6 : firstDay - 1;
+    const lastDate = new Date(currentYear, currentMonth + 1, 0).getDate();
 
-    expect(datesContainer.children.length).toBeGreaterThan(0);
-    for (let i = 0; i < numPrevDays; i++) {
-      expect(datesContainer.children[i].firstChild.classList).toContain("light");
+    let dateCounter = 0;
+
+    for (let i = numPrevDays; i > 0; i--) {
+      const prevDate = new Date(currentYear, currentMonth, 0 - i + 1).getDate();
+      expect(datesContainer.children[dateCounter].firstChild.innerText).toBe(prevDate.toString());
+      dateCounter++;
     }
-  });
 
-  test("Dates from the next month are displayed correctly", () => {
-    const datesContainer = document.getElementById("dates");
-    const today = new Date();
-    const firstDay = new Date(today.getFullYear(), today.getMonth(), 1).getDay();
-    const lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
-    const numPrevDays = (firstDay === 0) ? 6 : firstDay - 1;
-    const totalDates = numPrevDays + lastDate;
-    const nextDays = 42 - totalDates;
+    for (let date = 1; date <= lastDate; date++) {
+      expect(datesContainer.children[dateCounter].firstChild.innerText).toBe(date.toString());
+      dateCounter++;
+    }
 
-    expect(datesContainer.children.length).toBeGreaterThan(0);
-    for (let i = totalDates; i < totalDates + nextDays; i++) {
-      expect(datesContainer.children[i].classList).toContain("light");
+    const nextDays = 42 - dateCounter;
+    for (let date = 1; date <= nextDays; date++) {
+      expect(datesContainer.children[dateCounter].firstChild.innerText).toBe(date.toString());
+      dateCounter++;
     }
   });
 });
