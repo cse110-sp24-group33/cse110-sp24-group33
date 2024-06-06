@@ -3,5 +3,6 @@ module.exports = {
         "^.+\\.[t|j]sx?$": "babel-jest"
     },
     preset: 'jest-puppeteer',
-    verbose: true
+    verbose: true,
+    testEnvironment: "jest-environment-jsdom"
 };
