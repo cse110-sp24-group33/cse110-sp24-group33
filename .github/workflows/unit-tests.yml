@@ -3,7 +3,7 @@ name: Unit Tests
 on: 
   push:
      paths:
-       - 'source/__tests__/**.js'
+       - 'source/__tests__/unit/**.js'
        - 'source/public/**.js'
 jobs:
   test:
