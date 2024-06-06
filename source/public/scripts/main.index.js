@@ -172,7 +172,7 @@ function renderCalendar(month, year, datesContainer, monthYear) {
 		if (isInFuture(year, month + 1, date)) {
 			day.classList.add("light");
 		} else {
-			day.firstChild.classList.add("light"); 
+			day.firstChild.classList.add("light");
 		}
 		row.append(day);
 		dateCounter++;
@@ -191,3 +191,5 @@ function renderCalendar(month, year, datesContainer, monthYear) {
 function entryIsEmpty(entry) {
 	return entry.text_entry === "" && entry.tasks.length === 0 && entry.sentiment === "";
 }
+
+export { createRow, createDay, entryIsEmpty };
