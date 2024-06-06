@@ -1,21 +1,22 @@
-name: Unit Tests
+name: E2E Tests
 
 on: 
   push:
      paths:
-       - '.github/workflows/unit-tests.yml'
-       - 'source/__tests__/unit/**.js'
+       - '.github/workflows/e2e-tests.yml'
        - 'source/public/**.js'
+       - 'source/__tests__/e2e/**.js'
+
 jobs:
   test:
-    name: Jest
+    name: Jest E2E
     runs-on: ubuntu-latest
     defaults:
       run:
-          working-directory: source
+        working-directory: source
     steps:
       - uses: actions/checkout@v4
       - name: Install Dependencies
         run: npm install
-      - name: Unit Test
-        run: npm run test:unit
+      - name: Run E2E Tests
+        run: npm run test:e2e
