@@ -1,6 +1,6 @@
 import { 
     formatDateToYYYYMMDD 
-} from '../public/scripts/date.util.js';
+} from '../../public/scripts/date.util.js';
 
 describe('Basic user flow for Website', () => {
 

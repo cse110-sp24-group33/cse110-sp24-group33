@@ -3,7 +3,7 @@
 import { 
     getCurrentDate, 
     formatDateToYYYYMMDD 
-} from '../public/scripts/date.util.js';
+} from '../../public/scripts/date.util.js';
 
 describe('Date Utility Functions', () => {
   test('getCurrentDate should return the current date in "Month Day, Year" format', () => {
