@@ -1,4 +1,4 @@
-import { createRow, createDay, changeMonth, renderCalendar } from "./main.index.js";
+import { createRow, createDay, changeMonth, renderCalendar } from "../scripts/main.index.js";
 
 describe("Calendar Functions", () => {
   let currentMonth;
