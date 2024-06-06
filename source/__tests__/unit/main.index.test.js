@@ -1,5 +1,8 @@
 import { createRow, createDay, entryIsEmpty } from '../../public/scripts/main.index.js';
 
+/**
+ * @jest-environment jsdom
+ */
 describe("Calendar Functions", () => {
 
   test("createRow creates a new row element", () => {
