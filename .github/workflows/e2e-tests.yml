@@ -3,6 +3,7 @@ name: E2E Tests
 on: 
   push:
      paths:
+       - '.github/workflows/e2e-tests.yml'
        - 'source/public/**.js'
        - 'source/__tests__/e2e/**.js'
 
