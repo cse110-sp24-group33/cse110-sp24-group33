@@ -1,4 +1,4 @@
-//date.util.test.js
+// date.util.test.js
 
 import { 
     getCurrentDate, 
