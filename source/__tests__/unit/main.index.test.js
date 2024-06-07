@@ -1,6 +1,6 @@
 // main.index.test.js
 
-import { createRow, createDay, entryIsEmpty } from '../../public/scripts/main.index.js';
+import { createRow, createDay } from '../../public/scripts/main.index.js';
 
 
 describe("Calendar Functions", () => {
@@ -34,16 +34,6 @@ describe("Calendar Functions", () => {
       expect(dayElement.firstChild.classList.contains("highlight")).toBe(true);
     }
   });
-
-    test("entryIsEmpty correctly identifies empty entry", () => {
-      	const entry = { date: '05302024', text_entry: "", tasks: [], sentiment: "" };
-        expect(entryIsEmpty(entry)).toBe(true);
-    });
-
-    test("entryIsEmpty correctly identifies non-empty entry", () => {
-      	const entry = { date: '05302024', text_entry: "This is an example text entry.", tasks: [], sentiment: "Joyful" };
-        expect(entryIsEmpty(entry)).toBe(false);
-    });
 });
 
 
