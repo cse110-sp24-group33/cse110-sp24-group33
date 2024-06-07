@@ -8,8 +8,8 @@
  * @param {string} entryDate - The date of the entry to update.
  */
 function updateTasks(entry, tasks, entryDate) {
-    entry.tasks = tasks;
-    updateEntry(entry, entryDate);
+	entry.tasks = tasks;
+	updateEntry(entry, entryDate);
 }
 
 /**
@@ -20,7 +20,7 @@ function updateTasks(entry, tasks, entryDate) {
  * @returns {Object} The entry object containing date, text entry, tasks, and sentiment.
  */
 function getEntry(entryDate) {
-    return JSON.parse(localStorage.getItem(`entry-${entryDate}`)) || { date: entryDate, text_entry: "", tasks: [], sentiment: "" };
+	return JSON.parse(localStorage.getItem(`entry-${entryDate}`)) || { date: entryDate, text_entry: "", tasks: [], sentiment: "" };
 }
 
 /**
@@ -30,7 +30,7 @@ function getEntry(entryDate) {
  * @param {Object} entry - The entry object to update.
  */
 function updateEntry(entry, entryDate) {
-    localStorage.setItem(`entry-${entryDate}`, JSON.stringify(entry));
+	localStorage.setItem(`entry-${entryDate}`, JSON.stringify(entry));
 }
 
 /**
@@ -38,8 +38,8 @@ function updateEntry(entry, entryDate) {
  * @param {string} entryDate - The date of the entry to clear.
  */
 function clearEntryData(entryDate) {
-    const entry = { date: entryDate, text_entry: "", tasks: [], sentiment: "" };
-    localStorage.setItem(`entry-${entryDate}`, JSON.stringify(entry));
+	const entry = { date: entryDate, text_entry: "", tasks: [], sentiment: "" };
+	localStorage.setItem(`entry-${entryDate}`, JSON.stringify(entry));
 }
 
 /**
@@ -48,7 +48,7 @@ function clearEntryData(entryDate) {
  * @returns {boolean} True if the entry is empty; otherwise, false.
  */
 function entryIsEmpty(entry) {
-    return entry.text_entry === "" && entry.tasks.length === 0 && entry.sentiment === "";
+	return entry.text_entry === "" && entry.tasks.length === 0 && entry.sentiment === "";
 }
 
 export { updateTasks, getEntry, updateEntry, clearEntryData, entryIsEmpty }; 

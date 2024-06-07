@@ -7,7 +7,7 @@
     "test": "jest",
     "test:unit": "jest __tests__/unit",
     "test:e2e": "jest __tests__/e2e",
-    "lint": "eslint --fix public/**/*.js",
+    "lint": "eslint --fix __tests__/**/*.js public/**/*.js",
     "doc": "jsdoc public -r -d docs"
   },
   "keywords": [],
