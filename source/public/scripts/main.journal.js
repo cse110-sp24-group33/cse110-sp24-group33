@@ -1,6 +1,7 @@
 // main.journal.js
 
 import { getCurrentDate, formatDateToYYYYMMDD } from "./date.util.js";
+import {updateTasks, getEntry, updateEntry,  clearEntryData} from "./localstorage.util.js";
 
 // The date of the currently displayed entry in YYYYMMDD format
 let entryDate = null;
@@ -55,9 +56,9 @@ function initEntry() {
 	// Detect changes to text editor and update entry
 	entryTxt.codemirror.on("change", () => {
 		const text = entryTxt.value();
-		const entry = getEntry();
+		const entry = getEntry(entryDate);
 		entry.text_entry = text;
-		updateEntry(entry);
+		updateEntry(entry, entryDate);
 		// Indicate autosaved if there is text
 		if (text) {
 			autosave.classList.remove("hide");
@@ -70,7 +71,7 @@ function initEntry() {
 	clearBtn.addEventListener("click", () => {
 		const clear = confirm("Are you sure you want to clear this entry? This action will delete all data for this date.");
 		if (clear) {
-			clearEntryData();
+			clearEntryData(entryDate);
 			updateDisplay();
 		}
 	});
@@ -103,7 +104,7 @@ function initEntry() {
 		const taskType = document.getElementById("task-type").value;
 		const taskProject = document.getElementById("task-project").value;
 
-		const entry = getEntry();
+		const entry = getEntry(entryDate);
 		const tasks = entry.tasks || [];
 
 		// Update details of existing task
@@ -126,7 +127,7 @@ function initEntry() {
 			tasks.push(task);
 		}
 
-		updateTasks(entry, tasks);
+		updateTasks(entry, tasks, entryDate);
 		displayTasks(taskContainer, taskModal);
 		taskModal.classList.add("hide");
 		deleteTaskBtn.classList.remove("hide");
@@ -140,11 +141,11 @@ function initEntry() {
 
 	// Delete the current task when the "Delete" button in the modal is clicked
 	deleteTaskBtn.addEventListener("click", () => {
-		const entry = getEntry();
+		const entry = getEntry(entryDate);
 		const tasks = entry.tasks || [];
 		if (editingIndex >= 0) {
 			tasks.splice(editingIndex, 1);
-			updateTasks(entry, tasks);
+			updateTasks(entry, tasks, entryDate);
 			displayTasks(taskContainer, taskModal);
 			taskModal.classList.add("hide");
 		}
@@ -162,11 +163,11 @@ function initEntry() {
 		// Updates sentiment in storage when changed
 		sentimentRadios.forEach((radio) => {
 			radio.addEventListener("change", function () {
-				const entry = getEntry();
+				const entry = getEntry(entryDate);
 				if (radio.checked) {
 					entry.sentiment = radio.value;
 				}
-				updateEntry(entry);
+				updateEntry(entry, entryDate);
 			});
 		});
 		updateDisplay();
@@ -176,7 +177,7 @@ function initEntry() {
 	 * Updates the page display for "Next Day" button, text entry, tasks, projects
 	 */
 	function updateDisplay() {
-		const entry = getEntry();
+		const entry = getEntry(entryDate);
 		// Disable "next day" button if the entry date is the current date
 		if (dateDisplay.textContent === getCurrentDate()) {
 			nextDayBtn.disabled = true;
@@ -225,7 +226,7 @@ function changeDate(offset, dateDisplay) {
  * @param {HTMLElement} taskModal - The HTML element representing the modal for editing tasks.
  */
 function displayTasks(taskContainer, taskModal) {
-	const entry = getEntry();
+	const entry = getEntry(entryDate);
 	const tasks = entry.tasks || [];
 	taskContainer.innerHTML = ""; // Clear the current task display
 
@@ -318,7 +319,7 @@ function displayTasks(taskContainer, taskModal) {
 			// Update entry
 			tasks[index].completed = this.checked;
 			entry.tasks = tasks;
-			updateEntry(entry);
+			updateEntry(entry, entryDate);
 		});
 
 		// Add event listener to the edit button to edit the task
@@ -356,42 +357,4 @@ function displayTasks(taskContainer, taskModal) {
 			projTagLabel.classList.remove("hide");
 		}
 	});
-}
-
-/**
- * Updates the tasks of the entry, saves the updated entry to local storage.
- *
- * @param {Object} entry - The entry object to update.
- * @param {Array} tasks - The array of tasks to assign to the entry.
- */
-function updateTasks(entry, tasks) {
-	entry.tasks = tasks;
-	updateEntry(entry);
-}
-
-/**
- * Retrieves existing entry data for the current date from local storage,
- * or initializes a new entry object with default values if no data is found.
- *
- * @returns {Object} The entry object containing date, text entry, tasks, and sentiment.
- */
-function getEntry() {
-	return JSON.parse(localStorage.getItem(`entry-${entryDate}`)) || { date: entryDate, text_entry: "", tasks: [], sentiment: "" };
-}
-
-/**
- * Updates the entry data for the current entry date in local storage.
- *
- * @param {Object} entry - The entry object to update.
- */
-function updateEntry(entry) {
-	localStorage.setItem(`entry-${entryDate}`, JSON.stringify(entry));
-}
-
-/**
-* Clears the entry data for the current entry date in local storage.
-*/
-function clearEntryData() {
-	const entry = { date: entryDate, text_entry: "", tasks: [], sentiment: "" };
-	localStorage.setItem(`entry-${entryDate}`, JSON.stringify(entry));
 }

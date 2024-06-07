@@ -1,6 +1,7 @@
 // main.index.js
 
 import { getCurrentDate, formatDateToMonthDayYear, getMonthYear, formatDateToYYYYMMDD, isCurrentDate, isCurrentMonth, isInFuture } from "./date.util.js";
+import { entryIsEmpty } from "./localstorage.util.js";
 
 const NUM_DATES = 42; // 42 open spots on the calendar
 
@@ -183,13 +184,5 @@ function renderCalendar(month, year, datesContainer, monthYear) {
 	}
 }
 
-/**
- * Checks if an entry is empty (no stored content).
- * @param {object} entry - The entry object to check.
- * @returns {boolean} True if the entry is empty; otherwise, false.
- */
-function entryIsEmpty(entry) {
-	return entry.text_entry === "" && entry.tasks.length === 0 && entry.sentiment === "";
-}
 
-export { createRow, createDay, entryIsEmpty };
+export { createRow, createDay };
