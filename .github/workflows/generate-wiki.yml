@@ -37,6 +37,7 @@ jobs:
                   npm init -y
                   npm install --save-dev jsdoc-to-markdown
                   npx -c 'jsdoc2md source/public/scripts/date.util.js' > wiki/JSDoc:-date.util.js.md
+                  npx -c 'jsdoc2md source/public/scripts/localstorage.util.js' > wiki/JSDoc:-localstorage.util.js.md
                   npx -c 'jsdoc2md source/public/scripts/main.index.js' > wiki/JSDoc:-main.index.js.md
                   npx -c 'jsdoc2md source/public/scripts/main.journal.js' > wiki/JSDoc:-main.journal.js.md
 
