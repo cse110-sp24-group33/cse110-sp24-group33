@@ -10,6 +10,7 @@ on:
             - 'admin/cipipeline/phase1.md'
             - 'README.md'
             - 'source/public/scripts/'
+            - 'source/docs/'
 
 jobs:
     generate:
