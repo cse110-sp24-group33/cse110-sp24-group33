@@ -3,10 +3,16 @@ import { initEntry, getEntry, updateEntry, clearEntryData, displayTasks } from '
 describe('Journal Entry Functions', () => {
   beforeEach(() => {
     localStorage.clear();
+    document.body.innerHTML = `
+      <textarea id="entry-text"></textarea>
+      <div id="autosave"></div>
+      <div id="task-container"></div>
+      <div id="task-modal"></div>
+    `;
   });
 
   test('initEntry initializes page correctly', () => {
-    // Check if elements are initialized
+    initEntry();
     expect(document.getElementById('entry-text').value).toBe('');
     expect(document.getElementById('autosave').classList).toContain('hide');
   });
