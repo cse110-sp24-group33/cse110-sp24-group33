@@ -1,4 +1,4 @@
-import { initEntry, getEntry, updateEntry, clearEntryData, displayTasks } from '../public/scripts/main.journal';
+import { initEntry, getEntry, updateEntry, clearEntryData, displayTasks } from '../../public/scripts/main.journal.js';
 
 describe('Journal Entry Functions', () => {
   beforeEach(() => {
