@@ -678,6 +678,7 @@ button:disabled:hover {
 
 .project-item-delete {
   background-color: transparent;
+  color: red;
   border: none;
 }
 
@@ -687,7 +688,6 @@ button:disabled:hover {
 }
 
 .fa-trash {
-  color: red;
   font-size: 1.25rem;
 }
 

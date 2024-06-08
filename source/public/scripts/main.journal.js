@@ -1,7 +1,7 @@
 // main.journal.js
 
 import { getCurrentDate, formatDateToYYYYMMDD } from "./date.util.js";
-import {updateTasks, getEntry, updateEntry,  clearEntryData} from "./localstorage.util.js";
+import { updateTasks, getEntry, updateEntry, clearEntryData } from "./localstorage.util.js";
 
 // The date of the currently displayed entry in YYYYMMDD format
 let entryDate = null;
@@ -37,6 +37,7 @@ function initEntry() {
 	const dateDisplay = document.querySelector("#date h2");
 	const todayBtn = document.getElementById("entry-today");
 	const sentimentRadios = document.querySelectorAll("input[name=\"feeling\"]");
+	const projectSelect = document.getElementById("task-project");
 
 	// Event listeners for the previous and next day buttons
 	prevDayBtn.addEventListener("click", () => {
@@ -81,6 +82,8 @@ function initEntry() {
 		editingIndex = -1;
 		deleteTaskBtn.classList.add("hide");
 		taskModal.classList.remove("hide");
+
+		populateProjects();
 
 		// Clear modal fields
 		document.getElementById("task-desc").value = "";
@@ -151,7 +154,26 @@ function initEntry() {
 		}
 	});
 
+	populateProjects();
+
 	displayDate();
+
+
+	/**
+	 * Populates the list of projects from localStorage for selection
+	 */
+	function populateProjects() {
+		const projects = JSON.parse(localStorage.getItem("projects"));
+		while (projectSelect.children.length > 1) {
+			projectSelect.removeChild(projectSelect.lastChild);
+		}
+		for (let i = 0; i < projects.length; i++) {
+			const option = document.createElement("option");
+			option.textContent = projects[i].name;
+			option.value = projects[i].name;
+			projectSelect.appendChild(option);
+		}
+	}
 
 	/**
 	 * Updates the page to display the entry for the display date in localStorage
@@ -185,12 +207,11 @@ function initEntry() {
 			nextDayBtn.disabled = false;
 		}
 		entryTxt.value(entry.text_entry);
+		populateProjects();
 		displayTasks(taskContainer, taskModal);
 
 		// Reset sentiment display
 		sentimentRadios.forEach((radio) => {
-			console.log(radio.value);
-			console.log(entry.sentiment);
 			if (entry.sentiment === radio.value) {
 				radio.checked = true;
 			} else {
@@ -198,7 +219,6 @@ function initEntry() {
 			}
 		});
 	}
-}
 
 /**
  * Changes the displayed date by a given offset.
@@ -326,9 +346,21 @@ function displayTasks(taskContainer, taskModal) {
 		editButton.addEventListener("click", function () {
 			editingIndex = Number.parseInt(this.getAttribute("data-index")); // Set editing index to the task's index
 			const task = tasks[editingIndex]; // Retrieve task details
+
+			const projectSelect = document.getElementById("task-project");
+			const projects = JSON.parse(localStorage.getItem("projects"));
+			if (!projects.some(project => project.name === task.project_tag) && task.project_tag != "") {
+				const option = document.createElement("option");
+				option.text = task.project_tag;
+				option.value = task.project_tag;
+				option.disabled = true;
+				projectSelect.append(option);
+			}
+
 			document.getElementById("task-desc").value = task.name;
 			document.getElementById("task-type").value = task.type_tag;
 			document.getElementById("task-project").value = task.project_tag;
+
 			taskModal.classList.remove("hide");
 		});
 
