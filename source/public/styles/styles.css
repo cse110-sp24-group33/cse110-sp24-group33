@@ -644,6 +644,12 @@ button:disabled:hover {
 
 .project-priority {
   display: flex;
+  text-align: center;
+  font-weight: bold;
+  padding-top: 5px;
+  font-size: 0.8rem;
+  gap: 4px;
+  width: 50%;
 }
 
 .project-priority p {
@@ -755,16 +761,6 @@ button:disabled:hover {
   display: flex;
   flex-direction: column;
   padding: 5% 8%;
-}
-
-.project-priority {
-  display: flex;
-  text-align: center;
-  font-weight: bold;
-  padding-top: 5px;
-  font-size: 0.8rem;
-  gap: 4px;
-  width: 50%;
 }
 
 .project-date {
