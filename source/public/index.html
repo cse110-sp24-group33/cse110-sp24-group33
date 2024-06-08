@@ -6,29 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="images/favicon.ico">
 
-    <link rel="stylesheet" href="styles/styles2.css">
+    <link rel="stylesheet" href="styles/styles.css">
     <title> Home</title>
 </head>
 
 <body>
-    <header id="homepage"> 
+    <header id="homepage">
         <h1>Welcome back to your developer journal!</h1>
     </header>
 
-    <main>
+    <main id="home-main">
         <!-- Calendar -->
-        <section id="calendarContainer">
+        <section id="calendar-container">
             <div class="calendar">
                 <div class="header">
                     <div class="spacing-container"> </div>
-                    <div class="head-buttons"><button class="buttons" type="button" title="Previous month">
-                        <i class="fa-solid fa-chevron-left"></i>
-                    </button>
-                    <div class="month-year" id="month-year"></div>
-                    <button class="buttons" type="button" title="Next month">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </button></div>
-                    <button class="buttons" type="button" class="today" id="home-today" title="Today">
+                    <div class="head-buttons"><button class="month-nav-buttons" type="button" title="Previous month">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <div class="month-year" id="month-year"></div>
+                        <button class="month-nav-buttons" type="button" title="Next month">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <button type="button" class="today" id="home-today" title="Today">
                         Today
                     </button>
                 </div>
@@ -47,39 +48,31 @@
 
         <section id="projects">
             <h2>Projects</h2>
-                 <button class="newProjectButton" title="new project">
-                    <i class="fa-solid fa-plus"></i>  New Project
-                </button>
-            <ul id="project-list">
-                <!--li--><ul class="project-item">
+            <button class="new-project-button" title="new project">
+                <i class="fa-solid fa-plus"></i> New Project
+            </button>
+            <ul id="project-list" class="scrollable">
+                <li class="project-item">
                     <div class="project-details">
                         <label class="project-name">Project Name</label>
-                         <div class="project-btns">
-                        <button class="edit-project">
-                            <i class="fa-solid fa-pencil"></i>
-                        </button>
-                        <button class="project-item-delete" title="Delete project">
-                            <i class="fa-solid fa-trash"></i>
-                        </button> 
-                    </div> 
                         <p class="project-date">Deadline: May 30, 2024</p>
-                        <label class="project-priority">Priority: <span class="high">High</span></label>
+                        <label class="project-priority">Priority: <p class="high">High</p></label>
                     </div>
-                  <!-- <div class="project-btns">
+                    <div class="project-btns">
                         <button class="edit-project">
                             <i class="fa-solid fa-pencil"></i>
                         </button>
                         <button class="project-item-delete" title="Delete project">
                             <i class="fa-solid fa-trash"></i>
-                        </button> 
-                    </div> -->
+                        </button>
+                    </div>
                 </li>
             </ul>
         </section>
 
         <!-- Project modal -->
         <!-- Hidden until user adds/edits a project -->
-        
+
         <section id="project-modal" class="modal hide">
             <div class="modal-content">
                 <form class="project" id="project-form">
@@ -87,7 +80,7 @@
                         <label for="project-name">Project Name</label>
                         <input type="text" id="project-name" name="project-name" required>
                     </div>
-                    <div id="tag-select">
+                    <div id="project-details-input">
                         <div class="input-group">
                             <label for="deadline">Deadline</label>
                             <input type="date" id="deadline" name="deadline">
@@ -103,9 +96,9 @@
                         </div>
                     </div>
                     <div class="button-group">
-                        
                         <div class="sub-button-group"><button class="save" type="submit">Save</button>
-                            <button class="cancel" id="cancel-project" type="button">Cancel</button></div>
+                            <button class="cancel" id="cancel-project" type="button">Cancel</button>
+                        </div>
                         <button class="delete" id="delete-project" type="button">Delete</button>
                     </div>
                 </form>
