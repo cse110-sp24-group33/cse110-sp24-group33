@@ -186,3 +186,164 @@ function renderCalendar(month, year, datesContainer, monthYear) {
 
 
 export { createRow, createDay };
+
+
+// Function to save projects to local storage
+function saveProjectsToLocalStorage() {
+    const projects = [];
+    document.querySelectorAll('.project-item').forEach(item => {
+        const name = item.querySelector('.project-name').textContent;
+        const deadline = item.querySelector('.project-date').textContent.replace('Deadline: ', '');
+        const priority = item.querySelector('.project-priority').textContent;
+        projects.push({ name, deadline, priority });
+    });
+    localStorage.setItem('projects', JSON.stringify(projects));
+}
+
+// Function to load projects from local storage
+function loadProjectsFromLocalStorage() {
+    const projects = JSON.parse(localStorage.getItem('projects')) || [];
+    const projectList = document.getElementById('project-list');
+    projects.forEach(project => {
+        const projectItem = document.createElement('li');
+        projectItem.className = 'project-item';
+        projectItem.innerHTML = `
+            <div class="project-details">
+                <label class="project-name">${project.name}</label>
+                <p class="project-date">Deadline: ${project.deadline}</p>
+                <label class="project-priority">${project.priority}</label>
+            </div>
+            <div class="project-btns">
+                <button class="edit-project">
+                    <i class="fa-solid fa-pencil"></i>
+                </button>
+                <button class="project-item-delete" title="Delete project">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </div>
+        `;
+        projectList.appendChild(projectItem);
+    });
+}
+
+// Event listener for the add project button
+document.querySelector('.add-project').addEventListener('click', function() {
+    const projectModal = document.getElementById('project-modal');
+    const projectNameInput = document.getElementById('project-name');
+    const projectDeadlineInput = document.getElementById('deadline');
+    const projectPrioritySelect = document.getElementById('priority-level');
+    
+    // Clear existing inputs
+    projectNameInput.value = '';
+    projectDeadlineInput.value = '';
+    projectPrioritySelect.selectedIndex = 0; // Reset to default or 'Select a priority level'
+
+    // Display the modal for adding a new project
+    projectModal.classList.remove('hide');
+
+    // Focus on the project name input
+    projectNameInput.focus();
+
+    // Update form submission handler
+    const projectForm = document.getElementById('project-form');
+    projectForm.onsubmit = function(event) {
+        event.preventDefault();
+        // Create a new project item in the list
+        const projectList = document.getElementById('project-list');
+        const newProjectItem = document.createElement('li');
+        newProjectItem.className = 'project-item';
+
+        // HTML structure of the new project item
+        newProjectItem.innerHTML = `
+            <div class="project-details">
+                <label class="project-name">${projectNameInput.value}</label>
+                <p class="project-date">Deadline: ${projectDeadlineInput.value}</p>
+                <label class="project-priority">${projectPrioritySelect.value}</label>
+            </div>
+            <div class="project-btns">
+                <button class="edit-project">
+                    <i class="fa-solid fa-pencil"></i>
+                </button>
+                <button class="project-item-delete" title="Delete project">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </div>
+        `;
+
+        // Append the new project item to the list
+        projectList.appendChild(newProjectItem);
+        
+        // Save to local storage
+        saveProjectsToLocalStorage();
+
+        // Hide the modal after adding the new project
+        projectModal.classList.add('hide');
+    };
+});
+
+// Load projects on page load
+document.addEventListener('DOMContentLoaded', loadProjectsFromLocalStorage);
+
+
+// Function to edit a project
+function editProject(event) {
+    if (!event.target.classList.contains('edit-project')) return;
+
+    const projectItem = event.target.closest('.project-item');
+    const projectNameLabel = projectItem.querySelector('.project-name');
+    const projectNameInput = document.getElementById('project-name');
+    const projectDeadlineInput = document.getElementById('deadline');
+    const projectPrioritySelect = document.getElementById('priority-level');
+    
+    // Set the form inputs to match the existing project details
+    projectNameInput.value = projectNameLabel.textContent;
+    projectDeadlineInput.value = projectItem.querySelector('.project-date').textContent.replace('Deadline: ', '');
+    projectPrioritySelect.value = projectItem.querySelector('.project-priority').textContent;
+
+    // Show the project modal
+    const projectModal = document.getElementById('project-modal');
+    projectModal.classList.remove('hide');
+
+    // Focus on the project name input for immediate editing
+    projectNameInput.focus();
+
+    // Update the form to handle project updating
+    const projectForm = document.getElementById('project-form');
+    projectForm.onsubmit = function(event) {
+        event.preventDefault();
+        // Update project details in the DOM
+        projectNameLabel.textContent = projectNameInput.value;
+        projectItem.querySelector('.project-date').textContent = 'Deadline: ' + projectDeadlineInput.value;
+        projectItem.querySelector('.project-priority').textContent = projectPrioritySelect.value;
+
+        // Save updated projects to local storage
+        saveProjectsToLocalStorage();
+
+        // Hide the modal after update
+        projectModal.classList.add('hide');
+    }
+}
+
+// Function to delete a project
+function deleteProject(event) {
+    if (!event.target.classList.contains('project-item-delete')) return;
+
+    const projectItem = event.target.closest('.project-item');
+    if (confirm('Are you sure you want to delete this project?')) {
+        projectList.removeChild(projectItem);
+        // Update local storage after deletion
+        saveProjectsToLocalStorage();
+    }
+}
+
+// Event listeners for edit and delete actions
+const projectList = document.getElementById('project-list');
+projectList.addEventListener('click', editProject);
+projectList.addEventListener('click', deleteProject);
+
+// Event listener to close the modal if the cancel button is clicked
+document.getElementById('cancel-project').addEventListener('click', function() {
+    document.getElementById('project-modal').classList.add('hide');
+});
+
+
