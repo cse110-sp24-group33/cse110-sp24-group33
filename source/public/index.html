@@ -52,27 +52,11 @@
                 <i class="fa-solid fa-plus"></i> New Project
             </button>
             <ul id="project-list" class="scrollable">
-                <!-- <li class="project-item">
-                    <div class="project-details">
-                        <label class="project-name">Project Name</label>
-                        <p class="project-date">Deadline: May 30, 2024</p>
-                        <label class="project-priority">Priority: <p class="high">High</p></label>
-                    </div>
-                    <div class="project-btns">
-                        <button class="edit-project">
-                            <i class="fa-solid fa-pencil"></i>
-                        </button>
-                        <button class="project-item-delete" title="Delete project">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                </li> -->
             </ul>
         </section>
 
         <!-- Project modal -->
         <!-- Hidden until user adds/edits a project -->
-
         <section id="project-modal" class="modal hide">
             <div class="modal-content">
                 <form class="project" id="project-form">
@@ -89,9 +73,9 @@
                             <label for="priority-level">Priority</label>
                             <select name="priority-level" id="priority-level">
                                 <option value="" disabled selected>Select a priority level</option>
-                                <option value="Low">Low</option>
-                                <option value="Medium">Medium</option>
                                 <option value="High">High</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Low">Low</option>
                             </select>
                         </div>
                     </div>
@@ -99,7 +83,8 @@
                         <div class="sub-button-group"><button class="save" type="submit">Save</button>
                             <button class="cancel" id="cancel-project" type="button">Cancel</button>
                         </div>
-                        <button class="delete" id="delete-project" type="button">Delete</button>
+                        <!-- TODO: implement deletion functionality within modal -->
+                        <!-- <button class="delete" id="delete-project" type="button">Delete</button> -->
                     </div>
                 </form>
             </div>
