@@ -87,6 +87,8 @@ main{
         justify-content: center;
         align-items: center;
         text-decoration: none;
+        cursor:default;
+
     }
 }
 
@@ -99,11 +101,10 @@ main{
     justify-content: center;
     padding: 20px;
     font-size: 1.2rem;
-    width: 50%;
-    height:50%;
+    width: 50px;
+    height:50px;
     margin:auto;
-    
-
+    cursor:pointer;
 }
 
 body{
@@ -113,12 +114,15 @@ body{
     background: #FFF7EC;
 }
 
-/*.header{
-    display:flex;
-    width:100%;
-    justify-content: center;
-    
-}*/
+.has-entry{
+    background-color: #FFEEB3;
+
+}
+
+.light{
+    color: #D3D3D3;
+}
+
 .header {
     
     height:10%;
@@ -132,14 +136,14 @@ body{
 
 }
 
-.headbuttons{
+.head-buttons{
     display: flex;
     width:50%;
     justify-content: space-between;
     align-items: center;
     
 }
-.dummyy{
+.spacing-container{
     display: flex;
     flex-shrink:1;
     
@@ -159,13 +163,14 @@ body{
     border:0.5px solid black;
     border-radius: 5px;
     width:12%;
-    height:2.5vh;
+    height:1.5rem;
     background-color: white;
+    cursor:pointer;
    
     
 }
 
-.Buttons{
+.buttons{
     border: none; /*gets rid of border around each arrow direction button*/
     scale: 1.5; /*Sizes the left and right button for the date*/
     background-color: transparent;
@@ -189,13 +194,30 @@ body{
 
 }
 
-.prioritytype{
+.high{
     width:75%;
     background-color:white;
     border-radius: 32px;
     color:#FF5353;
 
 }
+
+.medium{
+    width:75%;
+    background-color:white;
+    border-radius: 32px;
+    color:#FF8C00;
+
+}
+
+.low{
+    width:75%;
+    background-color:white;
+    border-radius: 32px;
+    color:#37AB00;
+
+}
+
 
 .edit-project{
     background-color: transparent;
@@ -209,6 +231,13 @@ body{
     background-color: transparent;
     border:none;
 }
+
+.fa-chevron-left ,.fa-chevron-right{
+    cursor:pointer;
+}
+
+
+
 .fa-trash{
     color:red;
     font-size:1.25rem;
@@ -342,6 +371,7 @@ body{
 
 .newProjectButton{
     display: flex;
+    gap:5px;
     justify-content: center;
     font-size: medium;
     width: 80%;
@@ -352,6 +382,7 @@ body{
     background-color: #976393;
     border-radius: 5px;
     border:none;
+    cursor:pointer;
 }
 
 h2{
@@ -405,7 +436,6 @@ h2{
 
 /*Styling for footer*/
 footer{
-   
     text-align: center; /* Centers the text */
     padding: 1% 0; /* Adds space between footer box and calendar/ongoing projects */
     vertical-align: center; /* Centers the content vertically */
