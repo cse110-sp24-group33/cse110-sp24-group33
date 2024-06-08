@@ -29,9 +29,12 @@
             <pre class="prettyprint source linenums"><code>// main.index.js
 
 import { getCurrentDate, formatDateToMonthDayYear, getMonthYear, formatDateToYYYYMMDD, isCurrentDate, isCurrentMonth, isInFuture } from "./date.util.js";
-import { entryIsEmpty } from "./localstorage.util.js";
+import { entryIsEmpty, addProject, updateProjects } from "./localstorage.util.js";
 
 const NUM_DATES = 42; // 42 open spots on the calendar
+
+// Initialize editingIndex to -1 to indicate no project is being edited
+let editingIndex = -1;
 
 // Initialize month, year based on current date
 const today = new Date();
@@ -46,6 +49,10 @@ document.addEventListener("DOMContentLoaded", () => {
 	const prevMonthBtn = document.querySelector("button[title=\"Previous month\"]");
 	const nextMonthBtn = document.querySelector("button[title=\"Next month\"]");
 	const todayBtn = document.getElementById("home-today");
+	const projectModal = document.getElementById("project-modal");
+	const projectNameInput = document.getElementById("project-name");
+	const projectDeadlineInput = document.getElementById("deadline");
+	const projectPrioritySelect = document.getElementById("priority-level");
 
 	// Set default entry display to today
 	localStorage.setItem("entry-display", getCurrentDate());
@@ -69,6 +76,147 @@ document.addEventListener("DOMContentLoaded", () => {
 		currentYear = today.getFullYear();
 		updateDisplay();
 	});
+
+	// Event listener to close the modal if the cancel button is clicked
+	document.getElementById("cancel-project").addEventListener("click", function () {
+		document.getElementById("project-modal").classList.add("hide");
+	});
+
+	// Event listener for the add project button
+	document.querySelector(".add-project").addEventListener("click", function () {
+		const projectModal = document.getElementById("project-modal");
+		const projectNameInput = document.getElementById("project-name");
+		const projectDeadlineInput = document.getElementById("deadline");
+		const projectPrioritySelect = document.getElementById("priority-level");
+
+		// Clear existing inputs
+		projectNameInput.value = "";
+		projectDeadlineInput.value = "";
+		projectPrioritySelect.selectedIndex = 0; // Reset to default or 'Select a priority level'
+
+		// Display the modal for adding a new project
+		projectModal.classList.remove("hide");
+
+		// Focus on the project name input
+		projectNameInput.focus();
+
+		// Update form submission handler
+		const projectForm = document.getElementById("project-form");
+		projectForm.onsubmit = function (event) {
+			event.preventDefault();
+
+			const project = { "name": projectNameInput.value, "deadline": projectDeadlineInput.value, "priority": projectPrioritySelect.value };
+			addProject(project);
+
+			loadProjectsFromLocalStorage();
+
+			// Hide the modal after adding the new project
+			projectModal.classList.add("hide");
+		};
+	});
+
+	// Function to load projects from local storage
+	function loadProjectsFromLocalStorage() {
+		const projects = JSON.parse(localStorage.getItem("projects")) || [];
+		const projectList = document.getElementById("project-list");
+		while (projectList.firstChild) {
+			projectList.removeChild(projectList.firstChild);
+		}
+		projects.forEach((project, index) => {
+			const projectItem = document.createElement("li");
+			projectItem.className = "project-item";
+			const projectDetails = document.createElement("div");
+			projectDetails.className = "project-details";
+
+			const projectName = document.createElement("label");
+			projectName.className = "project-name";
+			projectName.innerText = project.name;
+
+			const projectDate = document.createElement("p");
+			projectDate.className = "project-date";
+			const date = project.deadline.split("-");
+			projectDate.innerText = `Deadline: ${formatDateToMonthDayYear(date[0], date[1], date[2])}`;
+
+			const projectPriorityLabel = document.createElement("label");
+			projectPriorityLabel.className = "project-priority";
+			projectPriorityLabel.innerText = "Priority: ";
+			const projectPriority = document.createElement("p");
+			projectPriority.className = project.priority.toLowerCase();
+			projectPriority.innerText = project.priority;
+			projectPriorityLabel.append(projectPriority);
+			if (project.priority === "") {
+				projectPriority.classList.add("hide");
+			} else {
+				projectPriority.classList.remove("hide");
+			}
+			projectDetails.append(projectName, projectDate, projectPriorityLabel);
+
+			const projectBtns = document.createElement("div");
+			projectBtns.className = "project-btns";
+
+			// Create the edit button
+			const editButton = document.createElement("button");
+			editButton.className = "edit-project";
+			editButton.innerHTML = "&lt;i class=\"fa-solid fa-pencil\">&lt;/i>";
+			editButton.setAttribute("data-index", index);
+			editButton.setAttribute("title", "Edit project");
+
+
+			// Create the delete button
+			const deleteButton = document.createElement("button");
+			deleteButton.className = "project-item-delete";
+			deleteButton.innerHTML = "&lt;i class=\"fa-solid fa-trash\">&lt;/i>";
+			deleteButton.setAttribute("data-index", index);
+			deleteButton.setAttribute("title", "Delete project");
+
+			projectBtns.append(editButton, deleteButton);
+			projectItem.append(projectDetails, projectBtns);
+			projectList.appendChild(projectItem);
+
+			// Event listeners for edit and delete actions
+			editButton.addEventListener("click", function () {
+				editingIndex = Number.parseInt(this.getAttribute("data-index")); // Set editing index to the project's index
+				const project = projects[editingIndex];
+
+				// Set the form inputs to match the existing project details
+				projectNameInput.value = project.name;
+				projectDeadlineInput.value = project.deadline;
+				projectPrioritySelect.value = project.priority;
+
+				// Show the project modal
+				projectModal.classList.remove("hide");
+
+				// Focus on the project name input for immediate editing
+				projectNameInput.focus();
+
+				// Update the form to handle project updating
+				const projectForm = document.getElementById("project-form");
+				projectForm.onsubmit = function (event) {
+					event.preventDefault();
+
+					// Save updated projects to local storage
+					project.name = projectNameInput.value;
+					project.deadline = projectDeadlineInput.value;
+					project.priority = projectPrioritySelect.value;
+					updateProjects(projects);
+
+					loadProjectsFromLocalStorage();
+
+					// Hide the modal after update
+					projectModal.classList.add("hide");
+				};
+			});
+			deleteButton.addEventListener("click", function () {
+				editingIndex = Number.parseInt(this.getAttribute("data-index"));
+				projects.splice(editingIndex, 1);
+				updateProjects(projects);
+				loadProjectsFromLocalStorage();
+			});
+		});
+	}
+
+	loadProjectsFromLocalStorage();
+
 
 	/**
 	 * Updates the page display for "Next Day" button and calendar
@@ -212,7 +360,6 @@ function renderCalendar(month, year, datesContainer, monthYear) {
 	}
 }
 
-
 export { createRow, createDay };</code></pre>
         </article>
     </section>
@@ -223,13 +370,13 @@ export { createRow, createDay };</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#changeDate">changeDate</a></li><li><a href="global.html#changeMonth">changeMonth</a></li><li><a href="global.html#clearEntryData">clearEntryData</a></li><li><a href="global.html#createDay">createDay</a></li><li><a href="global.html#createRow">createRow</a></li><li><a href="global.html#displayTasks">displayTasks</a></li><li><a href="global.html#entryIsEmpty">entryIsEmpty</a></li><li><a href="global.html#formatDateToMonthDayYear">formatDateToMonthDayYear</a></li><li><a href="global.html#formatDateToYYYYMMDD">formatDateToYYYYMMDD</a></li><li><a href="global.html#getCurrentDate">getCurrentDate</a></li><li><a href="global.html#getEntry">getEntry</a></li><li><a href="global.html#getMonthYear">getMonthYear</a></li><li><a href="global.html#initEntry">initEntry</a></li><li><a href="global.html#isCurrentDate">isCurrentDate</a></li><li><a href="global.html#isCurrentMonth">isCurrentMonth</a></li><li><a href="global.html#isInFuture">isInFuture</a></li><li><a href="global.html#renderCalendar">renderCalendar</a></li><li><a href="global.html#updateEntry">updateEntry</a></li><li><a href="global.html#updateTasks">updateTasks</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addProject">addProject</a></li><li><a href="global.html#changeDate">changeDate</a></li><li><a href="global.html#changeMonth">changeMonth</a></li><li><a href="global.html#clearEntryData">clearEntryData</a></li><li><a href="global.html#createDay">createDay</a></li><li><a href="global.html#createRow">createRow</a></li><li><a href="global.html#displayTasks">displayTasks</a></li><li><a href="global.html#entryIsEmpty">entryIsEmpty</a></li><li><a href="global.html#formatDateToMonthDayYear">formatDateToMonthDayYear</a></li><li><a href="global.html#formatDateToYYYYMMDD">formatDateToYYYYMMDD</a></li><li><a href="global.html#getCurrentDate">getCurrentDate</a></li><li><a href="global.html#getEntry">getEntry</a></li><li><a href="global.html#getMonthYear">getMonthYear</a></li><li><a href="global.html#initEntry">initEntry</a></li><li><a href="global.html#isCurrentDate">isCurrentDate</a></li><li><a href="global.html#isCurrentMonth">isCurrentMonth</a></li><li><a href="global.html#isInFuture">isInFuture</a></li><li><a href="global.html#renderCalendar">renderCalendar</a></li><li><a href="global.html#updateEntry">updateEntry</a></li><li><a href="global.html#updateProjects">updateProjects</a></li><li><a href="global.html#updateTasks">updateTasks</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Fri Jun 07 2024 08:46:14 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sat Jun 08 2024 10:12:25 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
