@@ -368,7 +368,8 @@ function displayTasks(taskContainer, taskModal) {
 		deleteButton.addEventListener("click", function () {
 			editingIndex = Number.parseInt(this.getAttribute("data-index"));
 			tasks.splice(editingIndex, 1);
-			updateTasks(entry, tasks);
+			console.log(tasks)
+			updateTasks(entry, tasks, entryDate);
 			displayTasks(taskContainer, taskModal);
 		});
 
