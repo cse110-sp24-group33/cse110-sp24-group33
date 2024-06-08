@@ -90,7 +90,7 @@ describe("Date Utility Functions", () => {
 
 		const today = new Date();
 		const thisYear = today.getFullYear();
-		const thisMonth = today.getMonth
+		const thisMonth = today.getMonth();
 		expect(isCurrentMonth(thisYear, thisMonth)).toBe(true);
 	});
 
