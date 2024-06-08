@@ -287,9 +287,22 @@ document.addEventListener('DOMContentLoaded', loadProjectsFromLocalStorage);
 
 // Function to edit a project
 function editProject(event) {
-    if (!event.target.classList.contains('edit-project')) return;
+	if (!event.target.classList.contains('edit-project')) return;
+
+    // Check if there are any projects before attempting to edit
+    const projectItems = document.querySelectorAll('.project-item');
+    if (projectItems.length === 0) {
+        alert('No projects to edit.');
+        return;
+    }
 
     const projectItem = event.target.closest('.project-item');
+
+    if (!projectItem) {
+        alert('No project selected.');
+        return;
+    }
+
     const projectNameLabel = projectItem.querySelector('.project-name');
     const projectNameInput = document.getElementById('project-name');
     const projectDeadlineInput = document.getElementById('deadline');
@@ -326,7 +339,14 @@ function editProject(event) {
 
 // Function to delete a project
 function deleteProject(event) {
-    if (!event.target.classList.contains('project-item-delete')) return;
+	if (!event.target.classList.contains('project-item-delete')) return;
+
+    // Check if there are any projects before attempting to delete
+    const projectItems = document.querySelectorAll('.project-item');
+    if (projectItems.length === 0) {
+        alert('No projects to delete.');
+        return;
+    }
 
     const projectItem = event.target.closest('.project-item');
     if (confirm('Are you sure you want to delete this project?')) {
