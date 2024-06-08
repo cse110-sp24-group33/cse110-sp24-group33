@@ -219,6 +219,7 @@ function initEntry() {
 			}
 		});
 	}
+}
 
 /**
  * Changes the displayed date by a given offset.
@@ -349,7 +350,7 @@ function displayTasks(taskContainer, taskModal) {
 
 			const projectSelect = document.getElementById("task-project");
 			const projects = JSON.parse(localStorage.getItem("projects"));
-			if (!projects.some(project => project.name === task.project_tag) && task.project_tag != "") {
+			if (!projects.some((project) => project.name === task.project_tag) && task.project_tag != "") {
 				const option = document.createElement("option");
 				option.text = task.project_tag;
 				option.value = task.project_tag;
