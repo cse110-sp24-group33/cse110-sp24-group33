@@ -715,7 +715,7 @@ button:disabled:hover {
   padding: 10%;
 }
 
-.new-project-button {
+.add-project {
   display: flex;
   gap: 5px;
   justify-content: center;

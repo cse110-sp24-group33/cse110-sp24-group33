@@ -51,4 +51,26 @@ function entryIsEmpty(entry) {
 	return entry.text_entry === "" && entry.tasks.length === 0 && entry.sentiment === "";
 }
 
-export { updateTasks, getEntry, updateEntry, clearEntryData, entryIsEmpty }; 
+/**
+ * Adds a project to local storage.
+ * @param {Object} project - The project object to be added.
+ */
+function addProject(project) {
+	/**
+     * @type {Array<Object>} projects - Array of project objects stored in local storage.
+     */
+	const projects = JSON.parse(localStorage.getItem("projects"));
+	projects.push(project);
+	localStorage.setItem("projects", JSON.stringify(projects));
+}
+
+/**
+ * Updates the projects in local storage.
+ * @param {Array<Object>} projects - The updated array of project objects.
+ */
+function updateProjects(projects) {
+	localStorage.setItem("projects", JSON.stringify(projects));
+}
+
+
+export { updateTasks, getEntry, updateEntry, clearEntryData, entryIsEmpty, addProject, updateProjects }; 
