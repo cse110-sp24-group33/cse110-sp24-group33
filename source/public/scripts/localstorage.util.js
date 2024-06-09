@@ -59,7 +59,7 @@ function addProject(project) {
 	/**
      * @type {Array<Object>} projects - Array of project objects stored in local storage.
      */
-	const projects = JSON.parse(localStorage.getItem("projects"));
+	const projects = JSON.parse(localStorage.getItem("projects")) || [];
 	projects.push(project);
 	localStorage.setItem("projects", JSON.stringify(projects));
 }
