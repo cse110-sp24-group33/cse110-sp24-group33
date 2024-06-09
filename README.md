@@ -3,6 +3,9 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8eb2e860-d862-45ff-9f48-6e970354c312/deploy-status)](https://app.netlify.com/sites/digitaldr3amt3am-journal/deploys)
 [![Unit Tests](https://github.com/cse110-sp24-group33/cse110-sp24-group33/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/cse110-sp24-group33/cse110-sp24-group33/actions/workflows/unit-tests.yml)
 [![E2E Tests](https://github.com/cse110-sp24-group33/cse110-sp24-group33/actions/workflows/e2e-tests.yml/badge.svg)](https://github.com/cse110-sp24-group33/cse110-sp24-group33/actions/workflows/e2e-tests.yml)
+
+**Final Product:** https://digitaldr3amt3am-journal.netlify.app/
+
 ## Summary/Abstract
 
 Software developers often face challenges in effectively documenting their daily work activities, reflections, and insights. Existing solutions lack the tailored features and flexibility needed to meet the specific needs of developers. They need a dedicated platform designed specifically for developers to record their tasks, challenges, solutions, and learnings over time in a centralized and organized manner. **Our project aims to develop a streamlined and user-friendly journaling tool tailored for developers, enabling them to efficiently manage deadlines and daily tasks. Through a simple and intuitive design, developers will be empowered to improve their productivity and time management for professional growth and success.**
