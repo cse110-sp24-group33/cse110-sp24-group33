@@ -26,7 +26,7 @@ describe("Date Utility Functions", () => {
 	// test for getMonthYear();
 	test("getMonthYear should return a given date in \"Month Year\" format", () => {
 		const date = new Date(2024, 3, 1);
-		const expectedDate = "April 2024"
+		const expectedDate = "April 2024";
 
 		expect(getMonthYear(3, 2024)).toBe(expectedDate);
 
@@ -44,7 +44,7 @@ describe("Date Utility Functions", () => {
 	// test for formatDateToMonthDayYear(year, month, day);
 	test("formatDateToMonthDayYear should return a given date in \"Month Day, Year\" format", () => {
 		const date = new Date(2024, 3, 5);
-		const expectedDate = "April 5, 2024"
+		const expectedDate = "April 5, 2024";
 
 		expect(formatDateToMonthDayYear(2024, 3, 5)).toBe(expectedDate);
 

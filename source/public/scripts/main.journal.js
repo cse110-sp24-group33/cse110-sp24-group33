@@ -1,7 +1,7 @@
 // main.journal.js
 
 import { getCurrentDate, formatDateToYYYYMMDD } from "./date.util.js";
-import { updateTasks, getEntry, updateEntry, clearEntryData } from "./localstorage.util.js";
+import { updateTasks, getEntry, updateEntry, clearEntryData, getProjects } from "./localstorage.util.js";
 
 // The date of the currently displayed entry in YYYYMMDD format
 let entryDate = null;
@@ -163,7 +163,7 @@ function initEntry() {
 	 * Populates the list of projects from localStorage for selection
 	 */
 	function populateProjects() {
-		const projects = JSON.parse(localStorage.getItem("projects"));
+		const projects = getProjects();
 		while (projectSelect.children.length > 1) {
 			projectSelect.removeChild(projectSelect.lastChild);
 		}
@@ -349,7 +349,7 @@ function displayTasks(taskContainer, taskModal) {
 			const task = tasks[editingIndex]; // Retrieve task details
 
 			const projectSelect = document.getElementById("task-project");
-			const projects = JSON.parse(localStorage.getItem("projects"));
+			const projects = getProjects();
 			if (!projects.some((project) => project.name === task.project_tag) && task.project_tag != "") {
 				const option = document.createElement("option");
 				option.text = task.project_tag;

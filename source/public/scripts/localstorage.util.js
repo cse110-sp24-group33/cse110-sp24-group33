@@ -52,6 +52,14 @@ function entryIsEmpty(entry) {
 }
 
 /**
+ * Retrieves the list of projects from localStorage or initializes to empty array.
+ * @returns {Array<Object>} projects - Array of project objects stored in local storage.
+ */
+function getProjects() {
+	return JSON.parse(localStorage.getItem("projects")) || [];
+}
+
+/**
  * Adds a project to local storage.
  * @param {Object} project - The project object to be added.
  */
@@ -59,7 +67,7 @@ function addProject(project) {
 	/**
      * @type {Array<Object>} projects - Array of project objects stored in local storage.
      */
-	const projects = JSON.parse(localStorage.getItem("projects")) || [];
+	const projects = getProjects();
 	projects.push(project);
 	localStorage.setItem("projects", JSON.stringify(projects));
 }
@@ -73,4 +81,4 @@ function updateProjects(projects) {
 }
 
 
-export { updateTasks, getEntry, updateEntry, clearEntryData, entryIsEmpty, addProject, updateProjects }; 
+export { updateTasks, getEntry, updateEntry, clearEntryData, entryIsEmpty, getProjects, addProject, updateProjects }; 

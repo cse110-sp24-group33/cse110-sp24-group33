@@ -228,6 +228,7 @@ function createDay(year, month, day) {
 	const dateBtn = document.createElement("button");
 	dateBtn.classList.add("date");
 	dateBtn.innerText = day;
+	dateBtn.title = `Entry for ${formatDateToMonthDayYear(year, month, day)}`;
 	// Disable buttons for the future, otherwise link to journal
 	if (isInFuture(year, month, day)) {
 		dateBtn.disabled = true;
