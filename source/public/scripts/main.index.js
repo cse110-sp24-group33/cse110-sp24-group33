@@ -14,6 +14,7 @@ let currentMonth = today.getMonth();
 let currentYear = today.getFullYear();
 
 document.addEventListener("DOMContentLoaded", () => {
+	console.log("testing");
 
 	// Select elements from the DOM
 	const monthYear = document.getElementById("month-year");
